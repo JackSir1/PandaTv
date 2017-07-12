@@ -19,17 +19,17 @@
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
+                android:paddingLeft="@dimen/x10"
+                android:paddingTop="@dimen/y15"
                 android:src="@drawable/about_sign" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/y15"
                 android:text="熊猫频道"
                 android:textColor="@color/colorWhite"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -42,14 +42,14 @@
             android:gravity="center"
             android:text="熊猫直播"
             android:textColor="@color/colorWhite"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/main_imagehudong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingRight="10dp"
+            android:paddingRight="@dimen/x10"
             android:src="@drawable/hudong_sign" />
 
         <ImageView
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingRight="10dp"
+            android:paddingRight="@dimen/x10"
             android:src="@drawable/person_sign" />
     </LinearLayout>
 
