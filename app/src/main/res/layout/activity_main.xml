@@ -82,6 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
+            android:checked="true"
             android:drawableTop="@drawable/tab_home_normal"
             android:gravity="center"
             android:textSize="10sp"
