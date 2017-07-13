@@ -12,26 +12,12 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:padding="5dp">
-        <LinearLayout
-            android:id="@+id/main_linearlayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:src="@drawable/about_sign" />
-
-            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="熊猫频道"
-                android:textColor="@color/colorWhite"
-                android:textSize="15dp" />
+                android:layout_height="50dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/panda_sign" />
 
-        </LinearLayout>
 
         <TextView
             android:id="@+id/main_titlebar"
@@ -65,6 +51,7 @@
         android:id="@+id/main_fragment"
         android:layout_weight="1"
         android:layout_width="match_parent"
+        android:background="@drawable/_no_net"
         android:layout_height="match_parent">
 
     </FrameLayout>

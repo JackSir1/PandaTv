@@ -1,6 +1,7 @@
 package com.example.administrator.pandatv.app;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.example.administrator.pandatv.base.BaseActivity;
 import com.example.administrator.pandatv.net.IHttp;

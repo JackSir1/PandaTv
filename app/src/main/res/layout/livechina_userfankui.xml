@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorHui">
+    <RadioGroup
+        android:id="@+id/userfankui_radiogroup"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/userfankui_left"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="遇到的问题"
+            android:textColor="#1E539C"
+            android:textSize="15dp" />
+        <RadioButton
+            android:id="@+id/userfankui_right"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:button="@null"
+            android:text="常见问题"
+            android:background="@color/colorWhite"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:layout_weight="1" />
+    </RadioGroup>
+
+
+    <android.support.v4.view.ViewPager
+        android:layout_marginTop="30px"
+        android:id="@+id/userfankui_viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

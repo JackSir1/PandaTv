@@ -13,6 +13,7 @@ import java.util.List;
  */
 
 public class HomeFragment extends BaseFragment implements HomeContract.View{
+    HomeContract.Presenter presenter;
     @Override
     protected int getViweId() {
         return R.layout.home_fragment;
@@ -25,7 +26,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
 
     @Override
     protected void loadDate() {
-
+            presenter.start();
     }
 
     @Override
@@ -35,7 +36,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
 
     @Override
     public void setPresenter(HomeContract.Presenter presenter) {
-
+            this.presenter=presenter;
 
     }
 
@@ -52,6 +53,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
     @Override
     public void setResult(HomeBean homeBean) {
         List<HomeBean.DataBean.BigImgBean> bigImgBeanList = homeBean.getData().getBigImg();
+
     }
 
     @Override

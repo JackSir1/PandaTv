@@ -5,11 +5,11 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:background="@color/colorPrimaryDark"
-    android:padding="15dp"
+    android:padding="10dp"
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/personal_return_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -19,7 +19,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
         android:textSize="20dp"
         android:gravity="center"
         android:layout_gravity="center_vertical"
@@ -81,7 +80,7 @@
             android:paddingLeft="15dp"
             android:layout_gravity="center_vertical"
             android:textSize="18dp"
-            android:id="@+id/textView" />
+          />
 
         <ImageView
             android:layout_width="wrap_content"
