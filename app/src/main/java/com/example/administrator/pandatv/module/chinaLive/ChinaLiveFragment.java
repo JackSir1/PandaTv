@@ -1,6 +1,5 @@
 package com.example.administrator.pandatv.module.chinaLive;
 
-import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -10,7 +9,6 @@ import android.widget.ImageView;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.LivechinaTSBean;
-import com.example.administrator.pandatv.module.chinaLive.activity.LiveChinaAdd;
 import com.example.administrator.pandatv.module.chinaLive.adapter.MyLivechinaAdapter;
 import com.example.administrator.pandatv.module.chinaLive.fragment.BDLFragment;
 
@@ -103,8 +101,8 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
 
     @Override
     public void onClick(View v) {
-        Intent intent=new Intent(getContext(),LiveChinaAdd.class);
-        startActivity(intent);
+//        Intent intent=new Intent(getContext(),LiveChinaAdd.class);
+//        startActivity(intent);
 
     }
 }
