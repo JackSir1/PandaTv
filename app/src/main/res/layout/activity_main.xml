@@ -11,27 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
-        android:padding="5dp">
-        <LinearLayout
-            android:id="@+id/main_linearlayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:paddingLeft="@dimen/x10"
-                android:paddingTop="@dimen/y15"
-                android:src="@drawable/about_sign" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y15"
-                android:text="熊猫频道"
-                android:textColor="@color/colorWhite"
-                android:textSize="15sp" />
-
-        </LinearLayout>
+        android:paddingLeft="@dimen/x20"
+        >
+        <ImageView
+            android:layout_gravity="top"
+            android:id="@+id/main_image"
+            android:layout_marginTop="@dimen/y8"
+            android:src="@drawable/panda_sign"
+            android:layout_width="@dimen/x205"
+            android:layout_height="@dimen/y80" />
 
         <TextView
             android:id="@+id/main_titlebar"
@@ -45,11 +33,12 @@
             android:textSize="18sp" />
 
         <ImageView
+
             android:id="@+id/main_imagehudong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingRight="@dimen/x10"
+            android:paddingRight="@dimen/x20"
             android:src="@drawable/hudong_sign" />
 
         <ImageView
@@ -57,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingRight="@dimen/x10"
+            android:paddingRight="@dimen/x20"
             android:src="@drawable/person_sign" />
     </LinearLayout>
 
@@ -68,6 +57,7 @@
         android:layout_height="match_parent">
 
     </FrameLayout>
+
     <RadioGroup
         android:id="@+id/main_radiogroup"
         android:layout_width="match_parent"
