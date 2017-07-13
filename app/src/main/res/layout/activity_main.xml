@@ -49,6 +49,10 @@
             android:paddingRight="@dimen/x20"
             android:src="@drawable/person_sign" />
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:background="@color/colorWhite"
+        android:layout_height="@dimen/y10" />
 
     <FrameLayout
         android:id="@+id/main_fragment"
