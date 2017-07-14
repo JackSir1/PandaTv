@@ -66,6 +66,7 @@ public class MoreSightFragment extends BaseFragment implements MorSightContract.
         adapter = new MoreLiveAdapter(getContext(), arraylist);
         mRecyclerview.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         mRecyclerview.setAdapter(adapter);
+
     }
 
     @Override
