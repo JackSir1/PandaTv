@@ -27,7 +27,7 @@ public interface PandaLiveContract {
         //tablayout
         void pageradapter(String[] strings, ViewPager viewPager, TabLayout tab, List<Fragment> list);
 
-        //
+
 
 
 

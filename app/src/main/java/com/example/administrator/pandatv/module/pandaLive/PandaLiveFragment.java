@@ -84,6 +84,7 @@ public class PandaLiveFragment extends BaseFragment implements PandaLiveContract
         new LivePresenter(liveFragment);
         pageradapter(str,pandaLivePager,tabLive,arraylist);
 
+
     }
 
     @Override

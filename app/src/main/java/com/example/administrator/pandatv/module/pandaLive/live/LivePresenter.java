@@ -16,6 +16,7 @@ public class LivePresenter implements LiveContract.Presenter {
         this.iPandaLiveModel= new PandaLiveModel();
     }
 
+
     @Override
     public void start() {
            iPandaLiveModel.getPandaLive(new MyNetCallBack<PandaLiveBean>() {
