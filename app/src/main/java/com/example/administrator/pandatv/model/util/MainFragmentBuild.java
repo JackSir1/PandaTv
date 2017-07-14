@@ -3,7 +3,6 @@ package com.example.administrator.pandatv.model.util;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.app.App;
 import com.example.administrator.pandatv.base.BaseFragment;
 

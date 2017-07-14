@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:background="@drawable/panda"
+       android:id="@+id/image_gg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y300" />
+    <LinearLayout
+      android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/y280"
+        android:background="@color/colorHuiHei"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y50">
+        <TextView
+            android:textColor="@color/colorWhite"
+            android:layout_marginLeft="15dp"
+            android:text="旅日大熊猫“仙女产下2017首胎海外熊猫幼仔”"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</RelativeLayout>
