@@ -2,7 +2,6 @@ package com.example.administrator.pandatv;
 
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -48,7 +47,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     protected void setIntent() {
-        isShowTitle(true,"");
         showHome();
     }
 
@@ -57,22 +55,26 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         switch (checkedId){
             case R.id.main_home:
                 showHome();
+
                 break;
             case R.id.main_pandaLive:
                 showPandaLive();
+
                 break;
             case R.id.main_ggVideo:
                 showGGVideo();
+
                 break;
             case R.id.main_pandaObserver:
                 showPandaObserver();
+
                 break;
             case R.id.mian_chinaLive:
                 showChinaLive();
+
                 break;
         }
     }
-
     public void showHome(){
         isShowTitle(true,"");
         HomeFragment homFragment = (HomeFragment) MainFragmentBuild.getInsenter().setFragmentView(viewID, HomeFragment.class).builder().getFragmentContext();

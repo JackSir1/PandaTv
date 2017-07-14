@@ -24,8 +24,9 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
     compile 'com.jakewharton:butterknife:8.7.0'
     compile 'com.jakewharton:butterknife-compiler:8.7.0'
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
@@ -33,7 +34,6 @@ dependencies {
     compile 'io.github.openfeign:feign-gson:9.5.0'
     compile 'com.android.support:recyclerview-v7:25.2.0'
     compile 'com.androidkun:pulltorefreshrecyclerview:1.0.6'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-
+    compile 'com.github.bumptech.glide:glide:3.8.0'
 
 }

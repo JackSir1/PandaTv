@@ -5,7 +5,8 @@ package com.example.administrator.pandatv.net;
  */
 
 public class HttpFactory {
-    public IHttp create(){
+    public static IHttp create(){
+
         return OkHttpUtils.getInsent();
     }
 }
