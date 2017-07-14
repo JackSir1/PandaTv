@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <com.example.administrator.pandatv.module.chinaLive.MyGridLayout
+        android:id="@+id/dragable_myGridLayoutt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.example.administrator.pandatv.module.chinaLive.MyGridLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/button_bg_blue"
+        android:gravity="center"
+        android:text="点击添加条目" />
+
+    <com.example.administrator.pandatv.module.chinaLive.MyGridLayout
+        android:id="@+id/dis_dragable_myGridLa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.example.administrator.pandatv.module.chinaLive.MyGridLayout>
+
+</LinearLayout>
