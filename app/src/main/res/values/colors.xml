@@ -5,5 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorHui">#D6D8DB</color>
+    <color name="colorHui">#f2f3f4</color>
+    <color name="colorBlue">#3a60b9</color>
+    <color name="colorRed">#f23f17</color>
 </resources>
