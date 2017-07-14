@@ -11,12 +11,29 @@
         android:background="@color/colorHui"
         android:orientation="vertical">
 
+<RelativeLayout
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/home_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y400">
 
-        <android.support.v4.view.ViewPager
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y400">
+    </android.support.v4.view.ViewPager>
+    <LinearLayout
+        android:id="@+id/home_viewpager_linearLayout"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/y20"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:paddingRight="@dimen/x20"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y40">
 
-        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+</RelativeLayout>
+
 
         <TextView
             android:id="@+id/home_observer"
@@ -40,6 +57,7 @@
             android:orientation="horizontal"
             android:background="@color/colorWhite">
             <ImageView
+                android:id="@+id/home_pandaObserver_image"
                 android:layout_margin="20dp"
                 android:layout_width="@dimen/x200"
                 android:layout_marginLeft="@dimen/x40"
@@ -83,6 +101,7 @@
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <TextView
                         android:id="@+id/home_observer_btn2"
                         android:text="haha"
@@ -95,6 +114,7 @@
                         android:background="@drawable/home_observer_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
+
                     <TextView
                         android:id="@+id/home_observer_title2"
                         android:textColor="@color/colorBlack"
