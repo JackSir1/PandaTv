@@ -50,6 +50,7 @@ public class MainFragmentBuild {
         if (lastFragment!=null)
             transaction.hide(lastFragment);
         transaction.show(fragment);
+        lastFragment=fragment;
         transaction.addToBackStack(simpleName);
         return this;
 

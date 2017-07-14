@@ -46,7 +46,7 @@ public class HomeSplendidAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         HolderView holderView=null;
         if (convertView==null){
-            convertView=inflater.inflate(R.layout.homepandalive_item,null);
+            convertView=inflater.inflate(R.layout.home_splendid_item,null);
             holderView=new HolderView(convertView);
             convertView.setTag(holderView);
         }else {
@@ -59,12 +59,13 @@ public class HomeSplendidAdapter extends BaseAdapter {
         ImageView imageView;
         TextView title;
         public HolderView(View view){
-            imageView= (ImageView) view.findViewById(R.id.homepandalive_image);
-            title= (TextView) view.findViewById(R.id.homepandalive_title);
+            imageView= (ImageView) view.findViewById(R.id.homesplendid_image);
+            title= (TextView) view.findViewById(R.id.homesplendid_title);
         }
         public void setDate(HomeBean.DataBean.AreaBean.ListscrollBean bean){
             String image = bean.getImage();
             String title = bean.getTitle();
+
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             Glide.with(context).load(image).asBitmap().into(imageView);
             this.title.setText(title);

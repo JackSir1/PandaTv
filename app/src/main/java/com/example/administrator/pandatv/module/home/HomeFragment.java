@@ -238,7 +238,12 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     //精彩一刻
     public void showSplendid(HomeBean.DataBean.AreaBean area) {
-        listscrollBeens.addAll(area.getListscroll());
+        if (listscrollBeens.size()>0){
+            listscrollBeens.clear();
+        }
+        for (int i=0;i<4;i++){
+            listscrollBeens.add(area.getListscroll().get(i));
+        }
         splendidAdapter=new HomeSplendidAdapter(getContext(),listscrollBeens);
         homeSplendidGridView.setAdapter(splendidAdapter);
 
