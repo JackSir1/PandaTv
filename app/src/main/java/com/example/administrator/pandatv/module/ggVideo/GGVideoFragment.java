@@ -5,11 +5,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.androidkun.PullToRefreshRecyclerView;
 import com.androidkun.callback.PullToRefreshListener;
-import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.GGBean;
@@ -40,7 +38,13 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
 
     @Override
     protected void initView(View view) {
+        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.ggimage, null, false);
+        recyGg.addHeaderView(inflate);
+        recyGg.setPullRefreshEnabled(true);
+        recyGg.setLoadingMoreEnabled(true);
 
+
+        recyGg.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
@@ -83,14 +87,7 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
         }
 
         GGViedoAdapter adapter = new GGViedoAdapter(getContext(), arraylist);
-        recyGg.setPullRefreshEnabled(true);
-        recyGg.setLoadingMoreEnabled(true);
-        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.ggimage, null, false);
-        ImageView viewById = (ImageView) inflate.findViewById(R.id.image_gg);
-        String i="http://p1.img.cctvpic.com/photoAlbum/page/performance/img/2017/6/13/1497337653079_517.jpg";
-        Glide.with(getActivity()).load(i).into(viewById);
-        recyGg.addHeaderView(inflate);
-        recyGg.setLayoutManager(new LinearLayoutManager(getContext()));
+
         recyGg.setAdapter(adapter);
         recyGg.setPullToRefreshListener(new PullToRefreshListener() {
             @Override
