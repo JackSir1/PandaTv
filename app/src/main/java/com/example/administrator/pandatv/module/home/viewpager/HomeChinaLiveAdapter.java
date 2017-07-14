@@ -48,6 +48,8 @@ public class HomeChinaLiveAdapter extends BaseAdapter {
         if (convertView==null){
             convertView=inflater.inflate(R.layout.homepandalive_item,null);
             holderView=new HolderView(convertView);
+
+
             convertView.setTag(holderView);
         }else {
             holderView= (HolderView) convertView.getTag();
