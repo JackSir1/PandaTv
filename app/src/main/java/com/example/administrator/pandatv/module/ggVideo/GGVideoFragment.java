@@ -30,8 +30,6 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
     GGVideoContract.Presenter presenter;
     private int index = 0;
 
-
-
     @Override
     protected int getViweId() {
         return R.layout.ggviedo;
