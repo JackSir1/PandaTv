@@ -1,5 +1,7 @@
 package com.example.administrator.pandatv.module.chinaLive;
 
+import com.example.administrator.pandatv.module.chinaLive.bdl.ChinaLiveContract;
+
 /**
  * Created by Administrator on 2017/7/12.
  */

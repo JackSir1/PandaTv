@@ -1,12 +1,33 @@
 package com.example.administrator.pandatv.module.home;
 
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.HomeBean;
+import com.example.administrator.pandatv.module.home.viewpager.HomeChinaLiveAdapter;
+import com.example.administrator.pandatv.module.home.viewpager.HomePandaLiveAdapter;
+import com.example.administrator.pandatv.module.home.viewpager.HomeSplendidAdapter;
+import com.example.administrator.pandatv.module.home.viewpager.HomeViewPagerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2017/7/12.

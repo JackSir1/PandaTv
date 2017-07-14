@@ -35,7 +35,6 @@
     <LinearLayout
         android:id="@+id/livechina_ada_linear_jianjie"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:paddingLeft="5dp"
         android:background="@color/colorWhite"
         android:layout_height="wrap_content">
@@ -44,15 +43,16 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:textSize="15dp"
-
+            android:paddingRight="150dp"
             android:text="简介"/>
-        <ImageView
+        <CheckBox
             android:id="@+id/livechina_adapter_conimag"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
+            android:button="@null"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/livechina_jianjie"
+            android:background="@drawable/livechina_jianjie"
             />
     </LinearLayout>
     <TextView

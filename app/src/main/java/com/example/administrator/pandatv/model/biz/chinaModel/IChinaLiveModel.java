@@ -1,6 +1,7 @@
 package com.example.administrator.pandatv.model.biz.chinaModel;
 
-import com.example.administrator.pandatv.model.entity.LivechinaTSBean;
+import com.example.administrator.pandatv.model.entity.LiveBDLBean;
+import com.example.administrator.pandatv.model.entity.LiveFHGCBean;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 
 /**
@@ -8,5 +9,6 @@ import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
  */
 
 public interface IChinaLiveModel {
-    void getLivechina(MyNetCallBack<LivechinaTSBean> myNetCallBack);
+    void getLivechina(MyNetCallBack<LiveBDLBean> myNetCallBack);
+    void getLivechinafhgc(MyNetCallBack<LiveFHGCBean> myNetCallBack);
 }

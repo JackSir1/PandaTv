@@ -1,8 +1,8 @@
-package com.example.administrator.pandatv.module.chinaLive;
+package com.example.administrator.pandatv.module.chinaLive.bdl;
 
 import com.example.administrator.pandatv.base.BasePresenter;
 import com.example.administrator.pandatv.base.BaseView;
-import com.example.administrator.pandatv.model.entity.LivechinaTSBean;
+import com.example.administrator.pandatv.model.entity.LiveBDLBean;
 
 /**
  * Created by Administrator on 2017/7/12.
@@ -14,7 +14,7 @@ public interface ChinaLiveContract {
         void onRefresh();
         void onLoadMore();
         void showError(String msg);
-        void setResult(LivechinaTSBean livechinaTSBean);
+        void setResult(LiveBDLBean tablistBean);
 
     }
     interface Presenter extends BasePresenter {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/colorHui"
     android:layout_width="match_parent"
@@ -8,7 +9,7 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_marginTop="5dp"
-        android:padding="10dp"
+        android:padding="5dp"
         android:background="@color/colorWhite"
         android:layout_height="wrap_content">
 
@@ -16,6 +17,9 @@
     android:id="@+id/livechina_fragment_tablayout"
     android:layout_width="0dp"
     android:layout_weight="1"
+    app:tabSelectedTextColor="@color/colorPrimary"
+    app:tabIndicatorHeight="3dp"
+    app:tabIndicatorColor="@color/colorPrimary"
     android:layout_height="match_parent">
 
 </android.support.design.widget.TabLayout>

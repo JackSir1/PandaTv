@@ -1,7 +1,8 @@
 package com.example.administrator.pandatv.model.biz.chinaModel;
 
 import com.example.administrator.pandatv.config.Url;
-import com.example.administrator.pandatv.model.entity.LivechinaTSBean;
+import com.example.administrator.pandatv.model.entity.LiveBDLBean;
+import com.example.administrator.pandatv.model.entity.LiveFHGCBean;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 import com.example.administrator.pandatv.net.HttpFactory;
 
@@ -12,7 +13,12 @@ import com.example.administrator.pandatv.net.HttpFactory;
 
 public class ChinaLiveModel implements IChinaLiveModel {
     @Override
-    public void getLivechina(MyNetCallBack<LivechinaTSBean> myNetCallBack) {
-        HttpFactory.create().get(Url.LIVECHINA,null,myNetCallBack);
+    public void getLivechina(MyNetCallBack<LiveBDLBean> myNetCallBack) {
+        HttpFactory.create().get(Url.BADALING,null,myNetCallBack);
+    }
+
+    @Override
+    public void getLivechinafhgc(MyNetCallBack<LiveFHGCBean> myNetCallBack) {
+        HttpFactory.create().get(Url.FHGC,null,myNetCallBack);
     }
 }

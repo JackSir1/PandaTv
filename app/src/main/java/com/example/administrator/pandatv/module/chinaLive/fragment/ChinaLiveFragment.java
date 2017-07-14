@@ -1,4 +1,4 @@
-package com.example.administrator.pandatv.module.chinaLive;
+package com.example.administrator.pandatv.module.chinaLive.fragment;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -9,10 +9,12 @@ import android.widget.ImageView;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
-import com.example.administrator.pandatv.model.entity.LivechinaTSBean;
+import com.example.administrator.pandatv.model.entity.LiveBDLBean;
 import com.example.administrator.pandatv.module.chinaLive.activity.LiveChinaAdd;
 import com.example.administrator.pandatv.module.chinaLive.adapter.MyLivechinaAdapter;
-import com.example.administrator.pandatv.module.chinaLive.fragment.BDLFragment;
+import com.example.administrator.pandatv.module.chinaLive.bdl.ChinaLiveContract;
+import com.example.administrator.pandatv.module.chinaLive.bdl.BDLFragment;
+import com.example.administrator.pandatv.module.chinaLive.fhgc.FHGCFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +25,8 @@ import java.util.List;
 
 public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract.View,View.OnClickListener {
 
-//    @BindView(R.id.livechina_fragment_add)
     ImageView livechinaFragmentAdd;
     ViewPager myLiveviewpager;
-//    ChinaLiveContract.Presenter presenter;
     TabLayout myLivetablayout;
     private MyLivechinaAdapter myLivechinaAdapter;
     private List<String> mListName;
@@ -51,18 +51,17 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
         fragments = new ArrayList<>();
 
         mListName.add("八达岭");
-        mListName.add("泰山");
+        mListName.add("凤凰古城");
         mListName.add("嵩山");
 
         fragments.add(new BDLFragment());
-        fragments.add(new BDLFragment());
+        fragments.add(new FHGCFragment());
         fragments.add(new BDLFragment());
 
         myLivetablayout.setTabMode(TabLayout.MODE_FIXED);
         myLivechinaAdapter = new MyLivechinaAdapter(getChildFragmentManager(), mListName, fragments);
         myLiveviewpager.setAdapter(myLivechinaAdapter);
         myLivetablayout.setupWithViewPager(myLiveviewpager);
-//        presenter.start();
     }
 
     @Override
@@ -72,7 +71,6 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
 
     @Override
     public void setPresenter(ChinaLiveContract.Presenter presenter) {
-//        this.presenter = presenter;
     }
 
     @Override
@@ -96,7 +94,7 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
     }
 
     @Override
-    public void setResult(LivechinaTSBean livechinaTSBean) {
+    public void setResult(LiveBDLBean tablistBean) {
 
     }
 
