@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.administrator.pandatv.R;
@@ -29,6 +30,7 @@ public class LiveChinaAdd extends BaseActivity implements ChinaLiveContract.View
     private DragAdapter dragAdapter;
     private DragAdapter other_adapter;
     private CheckBox button;
+    private ImageView mImae;
     @Override
     protected int getViewID() {
         return R.layout.activity_popup_columns;
@@ -39,6 +41,7 @@ public class LiveChinaAdd extends BaseActivity implements ChinaLiveContract.View
         gridView = (DragGridView) findViewById(R.id.gridView_channel);
         gridView_other = (DragGridView) findViewById(R.id.gridView_channel_other);
         button= (CheckBox) findViewById(R.id.licechina_add_button);
+        mImae= (ImageView) findViewById(R.id.catefpry_item_image);
         initData();
         initDataOther();
     }
@@ -53,6 +56,39 @@ public class LiveChinaAdd extends BaseActivity implements ChinaLiveContract.View
         gridView_other.setAdapter(other_adapter);
         gridView_other.setNumColumns(3);
 
+        button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    button.setText("完成");
+                    mImae.setVisibility(View.VISIBLE);
+                    gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String channel = channels.get(position);
+//                            channels.remove(position);
+//                            channels_other.add(channel);
+                            dragAdapter.notifyDataSetChanged();
+                            other_adapter.notifyDataSetChanged();
+                        }
+                    });
+                    gridView_other.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String channel = channels_other.get(position);
+                            channels_other.remove(position);
+                            channels.add(channel);
+                            dragAdapter.notifyDataSetChanged();
+                            other_adapter.notifyDataSetChanged();
+                        }
+                    });
+                }else{
+                    button.setText("编辑");
+                    mImae.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override
@@ -129,40 +165,4 @@ public class LiveChinaAdd extends BaseActivity implements ChinaLiveContract.View
 
     }
 
-
-
-    private void setListeren(){
-        button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    button.setText("完成");
-                    gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String channel = channels.get(position);
-                            channels.remove(position);
-                            channels_other.add(channel);
-                            dragAdapter.notifyDataSetChanged();
-                            other_adapter.notifyDataSetChanged();
-                        }
-                    });
-                    gridView_other.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String channel = channels_other.get(position);
-                            channels_other.remove(position);
-                            channels.add(channel);
-                            dragAdapter.notifyDataSetChanged();
-                            other_adapter.notifyDataSetChanged();
-                        }
-                    });
-                }else{
-                    button.setText("编辑");
-                }
-            }
-        });
-
-    }
 }
