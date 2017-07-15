@@ -7,14 +7,12 @@ import android.widget.RelativeLayout;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseActivity;
-import com.example.administrator.pandatv.model.entity.LiveBDLBean;
-import com.example.administrator.pandatv.module.chinaLive.bdl.ChinaLiveContract;
 
 /**
  * Created by lizhuofang on 2017/7/13.
  */
 
-public class SecondActivity extends BaseActivity implements ChinaLiveContract.View {
+public class SecondActivity extends BaseActivity {
     private RelativeLayout mll_pop;
     private LinearLayout mll_time_layout;
     private boolean time_flag;
@@ -41,36 +39,7 @@ public class SecondActivity extends BaseActivity implements ChinaLiveContract.Vi
 
     }
 
-    @Override
-    public void onShowDialog() {
 
-    }
-
-    @Override
-    public void onRefresh() {
-
-    }
-
-    @Override
-    public void onLoadMore() {
-
-    }
-
-    @Override
-    public void showError(String msg) {
-
-    }
-
-    @Override
-    public void setResult(LiveBDLBean tablistBean) {
-
-    }
-
-
-    @Override
-    public void setPresenter(ChinaLiveContract.Presenter presenter) {
-
-    }
 
     public void by_time(View view) {
         mll_pop.setVisibility(View.VISIBLE);

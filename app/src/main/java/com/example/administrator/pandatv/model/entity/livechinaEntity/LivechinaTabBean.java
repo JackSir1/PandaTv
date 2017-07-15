@@ -1,4 +1,4 @@
-package com.example.administrator.pandatv.model.entity;
+package com.example.administrator.pandatv.model.entity.livechinaEntity;
 
 import java.util.List;
 
