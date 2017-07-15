@@ -2,7 +2,6 @@ package com.example.administrator.pandatv.module.ggVideo.adapter;
 
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.widget.ImageView;
 
 import com.androidkun.adapter.BaseAdapter;
@@ -28,6 +27,7 @@ public class GGViedoAdapter extends BaseAdapter<GGBean.ListBean> {
         holder.setText(R.id.time_top_item, listBean.getNum()+"2017-07-13 15:38");
     ImageView viewById = (ImageView) holder.itemView.findViewById(R.id.image_top_item);
         Glide.with(context).load(listBean.getPicurl()).into(viewById);
+
     }
 
 

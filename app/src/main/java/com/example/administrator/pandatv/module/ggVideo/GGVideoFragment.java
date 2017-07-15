@@ -80,6 +80,8 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
 
     @Override
     public void setResult(GGBean ggBean) {
+
+
         for (int i = 0; i < ggBean.getList().size(); i++) {
             GGBean.ListBean listBean = ggBean.getList().get(i);
             arraylist.add(listBean);
