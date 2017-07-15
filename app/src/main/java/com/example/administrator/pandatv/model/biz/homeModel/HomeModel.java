@@ -17,4 +17,9 @@ public class HomeModel implements IHomeModel {
     public void getHomeResult(MyNetCallBack<HomeBean> callBack) {
         App.iHttp.get(Url.HOMELIVE,null,callBack);
     }
+
+    @Override
+    public void loadMore(int pageSize, int pageContent) {
+
+    }
 }

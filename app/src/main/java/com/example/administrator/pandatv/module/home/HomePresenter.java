@@ -32,4 +32,9 @@ public class HomePresenter implements HomeContract.Presenter {
         });
 
     }
+
+    @Override
+    public void loadMore(int pageSize,int pageContent) {
+        new HomeModel().loadMore(pageSize,pageContent);
+    }
 }

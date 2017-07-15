@@ -12,4 +12,5 @@ import java.util.Map;
 
 public interface IHomeModel extends BaseModel {
     void getHomeResult(MyNetCallBack<HomeBean> callBack);
+    void loadMore(int pageSize,int pageContent);
 }
