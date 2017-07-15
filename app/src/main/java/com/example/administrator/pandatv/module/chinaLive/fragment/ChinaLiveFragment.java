@@ -2,7 +2,6 @@ package com.example.administrator.pandatv.module.chinaLive.fragment;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,8 +11,8 @@ import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.LiveBDLBean;
 import com.example.administrator.pandatv.module.chinaLive.activity.LiveChinaAdd;
 import com.example.administrator.pandatv.module.chinaLive.adapter.MyLivechinaAdapter;
-import com.example.administrator.pandatv.module.chinaLive.bdl.ChinaLiveContract;
 import com.example.administrator.pandatv.module.chinaLive.bdl.BDLFragment;
+import com.example.administrator.pandatv.module.chinaLive.bdl.ChinaLiveContract;
 import com.example.administrator.pandatv.module.chinaLive.fhgc.FHGCFragment;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
     TabLayout myLivetablayout;
     private MyLivechinaAdapter myLivechinaAdapter;
     private List<String> mListName;
-    private List<Fragment> fragments;
+    private List<BaseFragment> fragments;
 
     @Override
     protected int getViweId() {

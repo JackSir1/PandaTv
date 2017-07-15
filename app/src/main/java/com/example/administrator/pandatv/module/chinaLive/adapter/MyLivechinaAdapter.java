@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.administrator.pandatv.base.BaseFragment;
+
 import java.util.List;
 
 /**
@@ -12,9 +14,9 @@ import java.util.List;
 
 public class MyLivechinaAdapter extends FragmentStatePagerAdapter {
     private List<String> mListName;
-    private List<Fragment> fragments;
+    private List<BaseFragment> fragments;
 
-    public MyLivechinaAdapter(FragmentManager fm, List<String> mListName, List<Fragment> fragments) {
+    public MyLivechinaAdapter(FragmentManager fm, List<String> mListName, List<BaseFragment> fragments) {
         super(fm);
         this.mListName = mListName;
         this.fragments = fragments;
