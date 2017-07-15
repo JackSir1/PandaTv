@@ -19,5 +19,6 @@ public interface HomeContract {
     }
     interface Presenter extends BasePresenter{
 
+        void loadMore(int pageSize,int pageContent);
     }
 }

@@ -23,7 +23,7 @@ public class HomeViewPagerAdapter extends PagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         if (list.size()>0)
-            container.removeView(list.get(position%list.size()));
+            container.removeView((View) object);
     }
 
     @Override

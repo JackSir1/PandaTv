@@ -30,7 +30,6 @@ public class StartViewPagerAdapter extends PagerAdapter {
             container.addView(imageViews.get(position));
         return imageViews.get(position);
     }
-
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         if (imageViews!=null){
