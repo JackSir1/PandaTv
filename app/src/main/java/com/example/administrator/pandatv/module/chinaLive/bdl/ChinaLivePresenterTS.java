@@ -2,7 +2,7 @@ package com.example.administrator.pandatv.module.chinaLive.bdl;
 
 import com.example.administrator.pandatv.model.biz.chinaModel.ChinaLiveModel;
 import com.example.administrator.pandatv.model.biz.chinaModel.IChinaLiveModel;
-import com.example.administrator.pandatv.model.entity.LiveBDLBean;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveBDLBean;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 
 /**

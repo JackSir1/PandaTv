@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
-import com.example.administrator.pandatv.model.entity.LiveFHGCBean;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveFHGCBean;
 import com.example.administrator.pandatv.module.chinaLive.adapter.Bdadapterfhgc;
 
 import java.util.ArrayList;

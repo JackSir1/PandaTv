@@ -8,7 +8,7 @@ import com.androidkun.adapter.BaseAdapter;
 import com.androidkun.adapter.ViewHolder;
 import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.R;
-import com.example.administrator.pandatv.model.entity.LivechinaTSBean;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.LivechinaTSBean;
 
 import java.util.List;
 

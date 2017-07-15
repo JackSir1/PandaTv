@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.R;
-import com.example.administrator.pandatv.model.entity.LiveFHGCBean;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveFHGCBean;
 
 import java.util.List;
 

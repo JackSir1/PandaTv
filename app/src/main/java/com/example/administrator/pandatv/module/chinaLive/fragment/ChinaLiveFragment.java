@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
-import com.example.administrator.pandatv.model.entity.LiveBDLBean;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveBDLBean;
 import com.example.administrator.pandatv.module.chinaLive.activity.LiveChinaAdd;
 import com.example.administrator.pandatv.module.chinaLive.adapter.MyLivechinaAdapter;
 import com.example.administrator.pandatv.module.chinaLive.bdl.BDLFragment;
@@ -22,7 +22,7 @@ import java.util.List;
  * Created by Administrator on 2017/7/12.
  */
 
-public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract.View,View.OnClickListener {
+public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract.View, View.OnClickListener {
 
     ImageView livechinaFragmentAdd;
     ViewPager myLiveviewpager;
@@ -40,7 +40,7 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
     protected void initView(View view) {
         myLivetablayout = (TabLayout) view.findViewById(R.id.livechina_fragment_tablayout);
         myLiveviewpager = (ViewPager) view.findViewById(R.id.livechina_fragment_viewpager);
-        livechinaFragmentAdd= (ImageView) view.findViewById(R.id.livechina_fragment_add);
+        livechinaFragmentAdd = (ImageView) view.findViewById(R.id.livechina_fragment_add);
         livechinaFragmentAdd.setOnClickListener(this);
     }
 
@@ -100,7 +100,7 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
 
     @Override
     public void onClick(View v) {
-        Intent intent=new Intent(getContext(),LiveChinaAdd.class);
+        Intent intent = new Intent(getContext(), LiveChinaAdd.class);
         startActivity(intent);
 
     }
