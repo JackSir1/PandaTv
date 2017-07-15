@@ -41,6 +41,7 @@ public class MoreSightFragment extends BaseFragment implements MorSightContract.
     @Override
     protected void loadDate() {
         presenter.start();
+
     }
 
     @Override
@@ -55,6 +56,7 @@ public class MoreSightFragment extends BaseFragment implements MorSightContract.
 
     @Override
     public void setResult(PandaLiveMoreBean pandaLiveMoreBean) {
+
         for (int i = 0; i < pandaLiveMoreBean.getList().size(); i++) {
             final PandaLiveMoreBean.ListBean daytime = pandaLiveMoreBean.getList().get(i);
               arraylist.add(daytime);

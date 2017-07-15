@@ -8,6 +8,7 @@ import com.example.administrator.pandatv.model.entity.PandaLiveMoreBean;
 public interface MorSightContract {
     interface Presenter extends BasePresenter{
 
+
     }
     interface view extends BaseView<Presenter>{
         // 获取数据

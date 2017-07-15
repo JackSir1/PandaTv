@@ -12,7 +12,7 @@ import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 
 public interface IPandaLiveModel extends BaseModel {
     void getPandaLive(MyNetCallBack<PandaLiveBean> callBack);
-    void getPandaLiveBud(MyNetCallBack<PandaLiveSplendidBean> callBack);
+    void getPandaLiveBud(String vsid,String n,String serviceId,String o,String of,String p,MyNetCallBack<PandaLiveSplendidBean> callBack);
     void getMoreLive(MyNetCallBack<PandaLiveMoreBean> callBack);
 
 
