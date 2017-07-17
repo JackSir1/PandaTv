@@ -2,6 +2,7 @@ package com.example.administrator.pandatv.module.pandaLive;
 
 import com.example.administrator.pandatv.model.biz.pandaLiveModel.IPandaLiveModel;
 import com.example.administrator.pandatv.model.biz.pandaLiveModel.PandaLiveModel;
+import com.example.administrator.pandatv.model.entity.PandLiveTitleBean;
 import com.example.administrator.pandatv.model.entity.PandaLiveBean;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 
@@ -12,14 +13,16 @@ import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 public class PandaLivePresenter implements PandaLiveContract.Presenter {
     private PandaLiveContract.View view;
     private IPandaLiveModel pandaLiveModel;
-    public PandaLivePresenter(PandaLiveContract.View view){
-        this.view=view;
+
+    public PandaLivePresenter(PandaLiveContract.View view) {
+        this.view = view;
         this.view.setPresenter(this);
-        this.pandaLiveModel=new PandaLiveModel();
+        this.pandaLiveModel = new PandaLiveModel();
     }
+
     @Override
     public void start() {
-       // view.checkbox();
+        // view.checkbox();
         pandaLiveModel.getPandaLive(new MyNetCallBack<PandaLiveBean>() {
             @Override
             public void onSuccess(PandaLiveBean pandaLiveBean) {
@@ -33,6 +36,21 @@ public class PandaLivePresenter implements PandaLiveContract.Presenter {
             }
         });
 
+
+    }
+
+    @Override
+    public void getLoadTitle() {
+        pandaLiveModel.getPandaLiveTitle(new MyNetCallBack<PandLiveTitleBean>() {
+            @Override
+            public void onSuccess(PandLiveTitleBean titleBean) {
+                view.getLoadTitle(titleBean);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
     }
 }
-

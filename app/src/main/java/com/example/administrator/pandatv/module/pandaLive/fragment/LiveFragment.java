@@ -12,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
@@ -122,7 +121,6 @@ public class LiveFragment extends BaseFragment implements LiveContract.View {
     public void checkbox(Boolean isChecked) {
 
         if (isChecked == true) {
-            Toast.makeText(getContext(), "11", Toast.LENGTH_SHORT).show();
             liveLinBrief.setVisibility(View.VISIBLE);
             liveBack1.setVisibility(View.VISIBLE);
 
