@@ -1,6 +1,7 @@
 package com.example.administrator.pandatv.model.biz.pandaLiveModel;
 
 import com.example.administrator.pandatv.config.Url;
+import com.example.administrator.pandatv.model.entity.PandLiveTitleBean;
 import com.example.administrator.pandatv.model.entity.PandaLiveBean;
 import com.example.administrator.pandatv.model.entity.PandaLiveMoreBean;
 import com.example.administrator.pandatv.model.entity.PandaLiveSplendidBean;
@@ -39,7 +40,10 @@ public class PandaLiveModel implements IPandaLiveModel {
         I_HTTP.get(Url.MORELIVE,null,callBack);
     }
 
-
+    @Override
+    public void getPandaLiveTitle(MyNetCallBack<PandLiveTitleBean> callBack) {
+        I_HTTP.get(Url.PANDALIVETITLE,null,callBack);
+    }
 
 
 }

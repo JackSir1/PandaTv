@@ -65,7 +65,6 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override

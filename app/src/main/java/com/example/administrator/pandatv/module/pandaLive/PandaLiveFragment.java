@@ -10,19 +10,13 @@ import android.view.ViewGroup;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
+import com.example.administrator.pandatv.model.entity.PandLiveTitleBean;
 import com.example.administrator.pandatv.model.entity.PandaLiveBean;
 import com.example.administrator.pandatv.module.pandaLive.Pageadapter.MyAdapter;
 import com.example.administrator.pandatv.module.pandaLive.Pageadapter.OnePageAdapter;
 import com.example.administrator.pandatv.module.pandaLive.budpull.BudPresenter;
-import com.example.administrator.pandatv.module.pandaLive.fragment.BudRullFragment;
 import com.example.administrator.pandatv.module.pandaLive.fragment.LiveFragment;
-import com.example.administrator.pandatv.module.pandaLive.fragment.OriginalFragment;
-import com.example.administrator.pandatv.module.pandaLive.fragment.PandaRecoadFragment;
-import com.example.administrator.pandatv.module.pandaLive.fragment.PandaThingsFragment;
 import com.example.administrator.pandatv.module.pandaLive.fragment.PandaTopFragment;
-import com.example.administrator.pandatv.module.pandaLive.fragment.PandabarFragment;
-import com.example.administrator.pandatv.module.pandaLive.fragment.SpecialslFragment;
-import com.example.administrator.pandatv.module.pandaLive.fragment.SplendidFragment;
 import com.example.administrator.pandatv.module.pandaLive.live.LivePresenter;
 
 import java.util.ArrayList;
@@ -44,40 +38,38 @@ public class PandaLiveFragment extends BaseFragment implements PandaLiveContract
     ViewPager pandaLivePager;
     private OnePageAdapter pageAdapter;
 
+    private Bundle bundle;
+    private PandLiveTitleBean titleBean;
 
     @Override
     protected int getViweId() {
         return R.layout.pandalive;
     }
 
+
+
+    @Override
+    protected void initView(View view) {
+        presenter.start();
+        presenter.getLoadTitle();
+    }
     private void fragment() {
-        //直播1
-        LiveFragment liveFragment = new LiveFragment();
-        //超萌滚滚秀2
-        BudRullFragment budRullFragment = new BudRullFragment();
-        //原创新闻3
-        OriginalFragment originalFragment = new OriginalFragment();
-        //当熊不让4
-        PandabarFragment pandabarFragment = new PandabarFragment();
-        //熊猫那些事儿5
-        PandaThingsFragment pandaThingsFragment = new PandaThingsFragment();
+        LiveFragment liveFragment=new LiveFragment();
         //熊猫TOP榜6
         PandaTopFragment topFragment = new PandaTopFragment();
-        //特别节目7
-        SpecialslFragment specialslFragment = new SpecialslFragment();
-        //精彩一刻8
-        SplendidFragment splendidFragment = new SplendidFragment();
-        //熊猫档案9
         if(arraylist.size()>0) {
             arraylist.clear();
         }
         String[] str=new String[]{"  直播  ","精彩一刻","当熊不让","超萌滚滚秀","熊猫档案","熊猫TOP榜","熊猫那些事儿","特别节目","原创新闻"};
-
-        PandaRecoadFragment pandaRecoadFragment = new PandaRecoadFragment();
         arraylist.add(liveFragment);
-        for(int i = 0; i <str.length-2 ; i++) {
+        Bundle bundle=null;
+        for(int i = 1; i <str.length ; i++) {
             topFragment = new PandaTopFragment();
-             arraylist.add(topFragment);
+            String id = titleBean.getTablist().get(i).getId();
+            bundle=new Bundle();
+            bundle.putString("vid",id);
+            topFragment.setParams(bundle);
+            arraylist.add(topFragment);
             new BudPresenter(topFragment);
         }
 
@@ -88,14 +80,7 @@ public class PandaLiveFragment extends BaseFragment implements PandaLiveContract
     }
 
     @Override
-    protected void initView(View view) {
-        fragment();
-    }
-
-    @Override
     protected void loadDate() {
-
-        presenter.start();
 
 
     }
@@ -125,7 +110,6 @@ public class PandaLiveFragment extends BaseFragment implements PandaLiveContract
     @Override
     public void setResult(PandaLiveBean pandaLiveBean) {
 
-
     }
 
     @Override
@@ -139,6 +123,11 @@ public class PandaLiveFragment extends BaseFragment implements PandaLiveContract
     }
 
     @Override
+    public void setParams(Bundle bundle) {
+
+    }
+
+    @Override
     public void pageradapter(String[] strings, ViewPager viewPager, TabLayout tab, List<Fragment> list) {
 
         MyAdapter pageadapter = new MyAdapter(getActivity().getSupportFragmentManager(), list, strings);
@@ -148,11 +137,17 @@ public class PandaLiveFragment extends BaseFragment implements PandaLiveContract
 
     }
 
+    @Override
+    public void getLoadTitle(PandLiveTitleBean liveTitleBean) {
+        titleBean=liveTitleBean;
+        fragment();
+    }
+
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+
     }
 
 

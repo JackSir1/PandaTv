@@ -2,11 +2,14 @@ package com.example.administrator.pandatv.module.pandaLive.fragment.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.androidkun.adapter.BaseAdapter;
 import com.androidkun.adapter.ViewHolder;
 import com.bumptech.glide.Glide;
+import com.example.administrator.pandatv.PlayViedoActivity;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.model.entity.PandaLiveSplendidBean;
 
@@ -26,6 +29,13 @@ public class SplendidAdapter extends BaseAdapter< PandaLiveSplendidBean.VideoBea
         holder.setText(R.id.time_top_item, listBean.getPtime());
         ImageView viewById = (ImageView) holder.itemView.findViewById(R.id.image_top_item);
         Glide.with(context).load(listBean.getImg()).into(viewById);
+        holder.setOnclickListener(R.id.lin_gg, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in=new Intent(context, PlayViedoActivity.class);
+                context.startActivity(in);
+            }
+        });
     }
 
 

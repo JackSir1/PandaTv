@@ -27,13 +27,14 @@ import butterknife.ButterKnife;
 //熊猫TOP榜
 public class PandaTopFragment extends BaseFragment implements BudContract.view {
     private IPandaLiveModel iPandaLiveModel;
-
+    private Bundle bundle;
 
     BudContract.Presenter presenter;
     @BindView(R.id.recycler)
     PullToRefreshRecyclerView recycler;
     private int Index = 1;
     private List< PandaLiveSplendidBean.VideoBean> arraylist = new ArrayList<>();
+    private String vid;
 
 
     @Override
@@ -50,9 +51,13 @@ public class PandaTopFragment extends BaseFragment implements BudContract.view {
     protected void loadDate() {
         presenter.start();
         //vsid=VSET100167216881&n=7&serviceId=panda&o=desc&of=time&p=1";
-       // String o,String of
+        // String o,String of
         //hvsid=VSET100167216881&n=7&serviceId=panda&o=desc&of=time&p=1
-        presenter.GetData("VSET100167216881", "7","panda","desc","time", Index+"");
+        if(bundle!=null) {
+            vid = bundle.getString("vid");
+            presenter.GetData(vid, "7","panda","desc","time", Index+"");
+        }
+
 
     }
 
@@ -63,7 +68,7 @@ public class PandaTopFragment extends BaseFragment implements BudContract.view {
 
     @Override
     public void setParams(Bundle bundle) {
-
+        this.bundle=bundle;
     }
 
     @Override
@@ -96,7 +101,7 @@ public class PandaTopFragment extends BaseFragment implements BudContract.view {
             arraylist.add(videoBean);
         }*/
         List<PandaLiveSplendidBean.VideoBean> video = pandaLiveSplendidBean.getVideo();
-         arraylist.addAll(video);
+        arraylist.addAll(video);
         final SplendidAdapter adapter = new SplendidAdapter(getContext(), arraylist);
         recycler.setPullRefreshEnabled(true);
         recycler.setLoadingMoreEnabled(true);
@@ -111,7 +116,7 @@ public class PandaTopFragment extends BaseFragment implements BudContract.view {
                         recycler.setRefreshComplete();
                         arraylist.clear();
                         Index=1;
-                        presenter.GetData("VSET100167216881", "7","panda","desc","time","1" );
+                        presenter.GetData(vid, "7","panda","desc","time","1" );
                         adapter.notifyDataSetChanged();
                     }
                 },2000);
@@ -129,7 +134,7 @@ public class PandaTopFragment extends BaseFragment implements BudContract.view {
                         Log.e("TAG",Index+"");
                         //http://api.cntv.cn/video/videolistById?
                         //hvsid=VSET100167216881&n=7&serviceId=panda&o=desc&of=time&p=1
-                        presenter.GetData("VSET100167216881", "7","panda","desc","time",  i);
+                        presenter.GetData(vid, "7","panda","desc","time",  i);
 
                         adapter.notifyDataSetChanged();
                     }
