@@ -72,7 +72,7 @@
                 android:drawableTop="@drawable/login_weixin"
                 android:gravity="center"
                 android:text="微信"
-                android:textStyle="bold" />
+                 />
 
             <RadioButton
                 android:id="@+id/login_radiobutton_qq"
@@ -83,7 +83,7 @@
                 android:drawableTop="@drawable/login_qq"
                 android:gravity="center"
                 android:text="QQ"
-                android:textStyle="bold" />
+                 />
 
             <RadioButton
                 android:id="@+id/login_radiobutton_sina"
@@ -94,7 +94,7 @@
                 android:drawableTop="@drawable/login_sina"
                 android:gravity="center"
                 android:text="新浪"
-                android:textStyle="bold" />
+                 />
         </RadioGroup>
 
         <TextView

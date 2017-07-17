@@ -79,68 +79,12 @@ public class LoginActivity extends Activity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.login_radiobutton_wenxin:
-//                        UMShareAPI.get(LoginActivity.this).deleteOauth(mActivity, list.get(position).mPlatform, authListener);
-                        UMShareAPI.get(LoginActivity.this).doOauthVerify(LoginActivity.this, platforms.get(0).mPlatform, authListener);
                         break;
                     case R.id.login_radiobutton_qq:
-//                        UMShareAPI.get(LoginActivity.this).fetchAuthResultWithBundle(LoginActivity.this, savedInstanceState, new UMAuthListener() {
-//                            @Override
-//                            public void onStart(SHARE_MEDIA platform) {
-//                                SocializeUtils.safeShowDialog(dialog);
-//                            }
-//
-//                            @Override
-//                            public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-//                                Toast.makeText(getApplicationContext(), "onRestoreInstanceState Authorize succeed", Toast.LENGTH_SHORT).show();
-//                                //shareAdapter.notifyDataSetChanged();
-//                                SocializeUtils.safeCloseDialog(dialog);
-//                            }
-//
-//                            @Override
-//                            public void onError(SHARE_MEDIA platform, int action, Throwable t) {
-//                                Toast.makeText(getApplicationContext(), "onRestoreInstanceState Authorize onError", Toast.LENGTH_SHORT).show();
-//                                //shareAdapter.notifyDataSetChanged();
-//                                SocializeUtils.safeCloseDialog(dialog);
-//                            }
-//
-//                            @Override
-//                            public void onCancel(SHARE_MEDIA platform, int action) {
-//                                Toast.makeText(getApplicationContext(), "onRestoreInstanceState Authorize onCancel", Toast.LENGTH_SHORT).show();
-//                                //shareAdapter.notifyDataSetChanged();
-//                                SocializeUtils.safeCloseDialog(dialog);
-//                            }
-//                        });
-                        Intent intent = new Intent(LoginActivity.this, AuthActivity.class);
-                        startActivity(intent);
+                        UMShareAPI.get(LoginActivity.this).doOauthVerify(LoginActivity.this, platforms.get(0).mPlatform, authListener);
                         break;
                     case R.id.login_radiobutton_sina:
-//                        UMShareAPI.get(LoginActivity.this).getPlatformInfo(LoginActivity.this, SHARE_MEDIA.SINA, new UMAuthListener() {
-//                            @Override
-//                            public void onStart(SHARE_MEDIA share_media) {
-//                                Log.e("TAG", share_media.toString());
-//                            }
-//
-//                            @Override
-//                            public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-//                                String uid = map.get("uid");
-//                                String name = map.get("name");
-//                                String gender = map.get("gender");
-//                                String iconurl = map.get("iconurl");
-//                                Log.e("TAG", "uid:" + uid + "," + "name:" + name + "," + "gender:" + gender + "," + "iconurl:" + iconurl);
-//                            }
-//
-//                            @Override
-//                            public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-//                                Log.e("TAG", throwable.toString());
-//                            }
-//
-//                            @Override
-//                            public void onCancel(SHARE_MEDIA share_media, int i) {
-//                                Log.e("TAG", "取消分享");
-//                            }
-//                        });
                         UMShareAPI.get(LoginActivity.this).doOauthVerify(LoginActivity.this, platforms.get(1).mPlatform, authListener);
-
                         break;
                 }
             }
@@ -247,5 +191,7 @@ public class LoginActivity extends Activity {
 
     @OnClick(R.id.livechina_wangjimimaa)
     public void onClick() {
+        Intent intent=new Intent(this,WJMMActivity.class);
+        startActivity(intent);
     }
 }
