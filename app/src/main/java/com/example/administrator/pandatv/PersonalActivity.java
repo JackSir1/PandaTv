@@ -55,7 +55,6 @@ public class PersonalActivity extends BaseActivity{
 
     }
 
-
     @OnClick({R.id.personal_return_iv, R.id.personal_linear_login, R.id.personal_linear_watch_history, R.id.personal_linear_mineshoucang, R.id.personal_linear_setting})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -69,17 +68,14 @@ public class PersonalActivity extends BaseActivity{
             case R.id.personal_linear_watch_history:
                 Intent intent1=new Intent(this, HistoryActivity.class);
                 startActivity(intent1);
-
                 break;
             case R.id.personal_linear_mineshoucang:
                 Intent intent2=new Intent(this,CollectionActivity.class);
                 startActivity(intent2);
-
                 break;
             case R.id.personal_linear_setting:
                 Intent intent3=new Intent(this,SettingActivity.class);
                 startActivity(intent3);
-
                 break;
         }
     }

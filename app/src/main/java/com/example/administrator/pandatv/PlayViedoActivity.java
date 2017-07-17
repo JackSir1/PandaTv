@@ -21,7 +21,6 @@ public class PlayViedoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_viedo);
         initView();
-
     }
 
     private void initView() {
@@ -98,7 +97,6 @@ public class PlayViedoActivity extends AppCompatActivity {
                 case JCUserAction.ON_TOUCH_SCREEN_SEEK_POSITION:
                     Log.i("USER_EVENT", "ON_TOUCH_SCREEN_SEEK_POSITION" + " title is : " + (objects.length == 0 ? "" : objects[0]) + " url is : " + url + " screen is : " + screen);
                     break;
-
                 case JCUserActionStandard.ON_CLICK_START_THUMB:
                     Log.i("USER_EVENT", "ON_CLICK_START_THUMB" + " title is : " + (objects.length == 0 ? "" : objects[0]) + " url is : " + url + " screen is : " + screen);
                     break;

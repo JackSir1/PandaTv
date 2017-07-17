@@ -63,15 +63,12 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         switch (checkedId){
             case R.id.main_home:
                 showHome();
-
                 break;
             case R.id.main_pandaLive:
                 showPandaLive();
-
                 break;
             case R.id.main_ggVideo:
                 showGGVideo();
-
                 break;
             case R.id.main_pandaObserver:
                 showPandaObserver();
@@ -79,7 +76,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 break;
             case R.id.mian_chinaLive:
                 showChinaLive();
-
                 break;
         }
     }
