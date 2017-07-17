@@ -19,7 +19,7 @@
         android:scrollbars="none"
         android:id="@+id/home_ggVedio_listView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y800"
+        android:layout_height="@dimen/y1100"
         android:layout_marginLeft="@dimen/x10"
         android:layout_marginRight="@dimen/x10"
         android:layout_marginTop="@dimen/y2"

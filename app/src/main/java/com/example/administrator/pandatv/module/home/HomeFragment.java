@@ -20,6 +20,7 @@ import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.HomeBean;
 import com.example.administrator.pandatv.module.home.viewpager.HomeAdapter;
 import com.example.administrator.pandatv.module.home.viewpager.HomeViewPagerAdapter;
+import com.example.administrator.pandatv.module.pandaObserver.OnViewPagerItemListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     private View inflater;
     private LinearLayout homeViewpagerLinearLayout;
     private ViewPager homeViewpager;
-
     private int currmentNum = 100000;
     private List<View> viewPagerFragments = new ArrayList<>();
     private HomeContract.Presenter presenter;
@@ -53,11 +53,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         homeRecyclerView.setLayoutManager(manager);
-
         inflater = LayoutInflater.from(getContext()).inflate(R.layout.home_viewpager_main, null);
         homeViewpagerLinearLayout= (LinearLayout) inflater.findViewById(R.id.home_viewpager_linearLayout);
         homeViewpager= (ViewPager) inflater.findViewById(R.id.home_viewpager);
-
         homeRecyclerView.addHeaderView(inflater);
     }
 
@@ -126,7 +124,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     //輪播圖
-    public void showViewPager(List<HomeBean.DataBean.BigImgBean> bigImgBeanList) {
+    public void showViewPager(final List<HomeBean.DataBean.BigImgBean> bigImgBeanList) {
         View view = null;
         CheckBox checkBox;
         View view1 = null;
@@ -150,6 +148,19 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         checkBoxes.get(currmentNum % checkBoxes.size()).setChecked(true);
         homeViewpager.setCurrentItem(currmentNum);
         handler.sendEmptyMessageDelayed(222, 2000);
+        adapter.setOnViewPagerItemListener(new OnViewPagerItemListener() {
+            @Override
+            public void onItemListener(View view, int posetion) {
+                String url = bigImgBeanList.get(posetion).getUrl();
+                String pid = bigImgBeanList.get(posetion).getPid();
+                String stype = bigImgBeanList.get(posetion).getStype();
+                String type = bigImgBeanList.get(posetion).getType();
+                String title = bigImgBeanList.get(posetion).getTitle();
+                if ("2".endsWith(type)){
+
+                }
+            }
+        });
     }
 
     Handler handler = new Handler() {

@@ -46,7 +46,7 @@ public class HomeGGVideoAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         HolderView holderView=null;
         if (convertView==null){
-            convertView=inflater.inflate(R.layout.home_splendid_item,null);
+            convertView=inflater.inflate(R.layout.observer_adapter_item,null);
             holderView=new HolderView(convertView);
             convertView.setTag(holderView);
         }else {
@@ -59,8 +59,8 @@ public class HomeGGVideoAdapter extends BaseAdapter {
         ImageView imageView;
         TextView title;
         public HolderView(View view){
-            imageView= (ImageView) view.findViewById(R.id.homesplendid_image);
-            title= (TextView) view.findViewById(R.id.homesplendid_title);
+            imageView= (ImageView) view.findViewById(R.id.observer_list_image);
+            title= (TextView) view.findViewById(R.id.observer_list_title);
         }
         public void setDate(HomeBean.DataBean.WallliveBean.ListBeanX bean){
             String image = bean.getImage();

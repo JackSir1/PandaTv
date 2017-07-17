@@ -4,6 +4,8 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.administrator.pandatv.module.pandaObserver.OnViewPagerItemListener;
+
 import java.util.List;
 
 /**
@@ -22,14 +24,26 @@ public class HomeViewPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        if (list.size()>0)
-            container.removeView((View) object);
     }
 
+    private OnViewPagerItemListener onViewPagerItemListener;
+    public void setOnViewPagerItemListener(OnViewPagerItemListener onViewPagerItemListener){
+        this.onViewPagerItemListener=onViewPagerItemListener;
+    }
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
+        final View view = list.get(position % list.size());
+        if (view.getParent()!=null){
+            ((ViewGroup) view.getParent()).removeView(view);
+        }
         if (list.size()>0)
             container.addView(list.get(position%list.size()));
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onViewPagerItemListener.onItemListener(view,position % list.size());
+            }
+        });
         return list.get(position%list.size());
     }
 

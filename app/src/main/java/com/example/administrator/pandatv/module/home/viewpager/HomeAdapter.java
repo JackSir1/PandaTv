@@ -180,7 +180,12 @@ public class HomeAdapter extends RecyclerView.Adapter {
             home_ggVedio_listView= (ListView) itemView.findViewById(R.id.home_ggVedio_listView);
         }
         public void setDate(HomeBean.DataBean.WallliveBean wallliveBean){
-            HomeGGVideoAdapter splendidAdapter=new HomeGGVideoAdapter(context,wallliveBean.getList());
+
+            List<HomeBean.DataBean.WallliveBean.ListBeanX> wallliveBeanList=new ArrayList<>();
+            for (int i = 0; i <6 ; i++) {
+                wallliveBeanList.add(wallliveBean.getList().get(i));
+            }
+            HomeGGVideoAdapter splendidAdapter=new HomeGGVideoAdapter(context,wallliveBeanList);
             home_ggVedio_listView.setAdapter(splendidAdapter);
         }
     }
