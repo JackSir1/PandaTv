@@ -20,7 +20,8 @@ public class Url {
     public  static  final  String GGVIEDO=" http://api.cntv.cn/apicommon/index?path=iphoneInterface/general/getArticleAndVideoListInfo.json&primary_id=PAGE1449807494852603,PAGE1451473625420136,PAGE1449807502866458,PAGE1451473627439140,PAGE1451473547108278,PAGE1451473628934144&serviceId=panda";
     //熊猫直播top
     public static final  String PANDALIVETITLE="http://www.ipanda.com/kehuduan/PAGE14501772263221982/index.json";
-
+    //原创
+    public static final String CEHUA = BASEURL + "PAGE14501767715521482/index.json";
     //直播中国
     // 天山
     public static final String LIVECHINA = BASEURL + "PAGE14501776855882402/index.json";

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.administrator.pandatv.base.BaseActivity;
 import com.example.administrator.pandatv.model.util.MainFragmentBuild;
 import com.example.administrator.pandatv.module.chinaLive.ChinaLivePresenter;
+import com.example.administrator.pandatv.module.chinaLive.activity.CehuaActivity;
 import com.example.administrator.pandatv.module.chinaLive.fragment.ChinaLiveFragment;
 import com.example.administrator.pandatv.module.ggVideo.GGVideoFragment;
 import com.example.administrator.pandatv.module.ggVideo.GGVideoPresenter;
@@ -49,6 +50,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     protected void setListener() {
         main_radiogroup.setOnCheckedChangeListener(this);
         imageView.setOnClickListener(this);
+        main_imagehudong.setOnClickListener(this);
     }
 
     @Override
@@ -121,7 +123,16 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     public void onClick(View v) {
-        Intent intent=new Intent(MainActivity.this,PersonalActivity.class);
-        startActivity(intent);
+        switch (v.getId()) {
+            case  main_imagepersonal:
+                Intent intent=new Intent(MainActivity.this,PersonalActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.main_imagehudong:
+                Intent intent1=new Intent(MainActivity.this,CehuaActivity.class);
+                startActivity(intent1);
+                break;
+        }
+
     }
 }

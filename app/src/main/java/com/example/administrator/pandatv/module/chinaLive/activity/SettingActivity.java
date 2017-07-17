@@ -29,7 +29,7 @@ public class SettingActivity extends BaseActivity {
     LinearLayout livechinaSettingClear;
     @BindView(R.id.textView2)
     TextView textView2;
-    @BindView(R.id.livechina_setting_fankuiandhelp)
+    @BindView(R.id.livechina_setting_help)
     LinearLayout livechinaSettingFankuiandhelp;
     @BindView(R.id.livechina_setting_check)
     LinearLayout livechinaSettingCheck;
@@ -71,7 +71,7 @@ public class SettingActivity extends BaseActivity {
 
 
 
-    @OnClick({R.id.livechina_setting_return, R.id.livechina_setting_clear, R.id.livechina_setting_fankuiandhelp, R.id.livechina_setting_check, R.id.livechina_setting_likeours, R.id.livechina_setting_about})
+    @OnClick({R.id.livechina_setting_return, R.id.livechina_setting_clear, R.id.livechina_setting_help, R.id.livechina_setting_check, R.id.livechina_setting_likeours, R.id.livechina_setting_about})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.livechina_setting_return:
@@ -79,7 +79,7 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.livechina_setting_clear:
                 break;
-            case R.id.livechina_setting_fankuiandhelp:
+            case R.id.livechina_setting_help:
                 Intent intent = new Intent(this, FankuiANDHelpActivity.class);
                 startActivity(intent);
 

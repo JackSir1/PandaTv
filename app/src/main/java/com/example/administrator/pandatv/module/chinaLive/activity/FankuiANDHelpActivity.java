@@ -2,11 +2,11 @@ package com.example.administrator.pandatv.module.chinaLive.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseActivity;
+import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveBDLBean;
 import com.example.administrator.pandatv.module.chinaLive.adapter.MyLivechinaAdapter;
 import com.example.administrator.pandatv.module.chinaLive.bdl.ChinaLiveContract;
@@ -30,7 +30,7 @@ public class FankuiANDHelpActivity extends BaseActivity implements ChinaLiveCont
     ViewPager viewpager;
     MyLivechinaAdapter adapter;
     private List<String> mListName;
-    private List<Fragment> fragments;
+    private List<BaseFragment> fragments;
 
     @Override
     protected int getViewID() {

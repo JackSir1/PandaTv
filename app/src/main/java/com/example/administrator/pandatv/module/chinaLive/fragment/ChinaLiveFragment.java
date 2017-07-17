@@ -13,7 +13,12 @@ import com.example.administrator.pandatv.module.chinaLive.activity.LiveChinaAdd;
 import com.example.administrator.pandatv.module.chinaLive.adapter.MyLivechinaAdapter;
 import com.example.administrator.pandatv.module.chinaLive.bdl.BDLFragment;
 import com.example.administrator.pandatv.module.chinaLive.bdl.ChinaLiveContract;
+import com.example.administrator.pandatv.module.chinaLive.emeishan.EMeiShanFragment;
 import com.example.administrator.pandatv.module.chinaLive.fhgc.FHGCFragment;
+import com.example.administrator.pandatv.module.chinaLive.huangshan.HuangShanFragment;
+import com.example.administrator.pandatv.module.chinaLive.songshan.SongShanFragment;
+import com.example.administrator.pandatv.module.chinaLive.taishan.TaiShanFragment;
+import com.example.administrator.pandatv.module.chinaLive.zhangjiajie.ZhangjiajieFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +28,7 @@ import java.util.List;
  */
 
 public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract.View, View.OnClickListener {
+
 
     ImageView livechinaFragmentAdd;
     ViewPager myLiveviewpager;
@@ -51,13 +57,23 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
 
         mListName.add("八达岭");
         mListName.add("凤凰古城");
+        mListName.add("嵩山少林寺");
         mListName.add("嵩山");
+        mListName.add("峨眉山");
+        mListName.add("泰山");
+        mListName.add("黄山");
+        mListName.add("张家界");
 
         fragments.add(new BDLFragment());
         fragments.add(new FHGCFragment());
-        fragments.add(new BDLFragment());
+        fragments.add(new SongShanFragment());
+        fragments.add(new SongShanFragment());
+        fragments.add(new EMeiShanFragment());
+        fragments.add(new TaiShanFragment());
+        fragments.add(new HuangShanFragment());
+        fragments.add(new ZhangjiajieFragment());
 
-        myLivetablayout.setTabMode(TabLayout.MODE_FIXED);
+        myLivetablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         myLivechinaAdapter = new MyLivechinaAdapter(getChildFragmentManager(), mListName, fragments);
         myLiveviewpager.setAdapter(myLivechinaAdapter);
         myLivetablayout.setupWithViewPager(myLiveviewpager);
@@ -100,7 +116,7 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getContext(), LiveChinaAdd.class);
+        Intent intent = new Intent(getActivity(), LiveChinaAdd.class);
         startActivity(intent);
 
     }

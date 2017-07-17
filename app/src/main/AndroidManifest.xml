@@ -4,6 +4,17 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!--使用的权限-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -11,10 +22,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartActivity" />
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".module.chinaLive.activity.LiveChinaAdd" />
-        <activity android:name=".PersonalActivity" />
+        <activity android:name=".StartActivity"/>
+        <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".module.chinaLive.activity.LiveChinaAdd"/>
+        <activity android:name=".PersonalActivity"/>
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +34,62 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PlayViedoActivity"></activity>
+        <activity android:name=".module.chinaLive.activity.CollectionActivity" />
+        <activity android:name=".module.chinaLive.activity.HistoryActivity" />
+        <activity android:name=".module.chinaLive.activity.FankuiANDHelpActivity" />
+        <activity android:name=".module.chinaLive.activity.LikeoursActivity" />
+        <activity android:name=".module.chinaLive.activity.AboutActivity" />
+        <activity android:name=".module.chinaLive.activity.WJMMActivity" />
+        <activity android:name=".module.chinaLive.activity.RegisterActivity" />
+        <activity android:name=".module.chinaLive.activity.LoginActivity" />
+        <activity android:name=".module.chinaLive.activity.SettingActivity" />
+        <!--qq-->
+        <activity
+            android:name="com.umeng.qq.tencent.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent100424468" />
+                <!--tencent100424468-->
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.umeng.qq.tencent.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--sina-->
+        <activity
+            android:name="com.umeng.socialize.media.WBShareCallBackActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
+        <activity
+            android:name=".share.WbShareTransActivity"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+
+        <!--友盟的key-->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5969be157666130b30001e28">
+        </meta-data>
+
     </application>
 
 </manifest>
+
