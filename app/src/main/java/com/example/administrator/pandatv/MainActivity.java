@@ -1,6 +1,7 @@
 package com.example.administrator.pandatv;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -125,5 +126,18 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     public void onClick(View v) {
         Intent intent=new Intent(MainActivity.this,PersonalActivity.class);
         startActivity(intent);
+    }
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentManager.BackStackEntry entry = manager.getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
+        String simpleName = entry.getName();
+        if (simpleName.equals("PandaObserverFragment") || simpleName.equals("PandaLiveFragment") || simpleName.equals("HomeFragment")
+                || simpleName.equals("GGVideoFragment")|| simpleName.equals("ChinaLiveFragment")) {
+            App.content.finish();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

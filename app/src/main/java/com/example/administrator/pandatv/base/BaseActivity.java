@@ -34,17 +34,5 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void setIntent();
 
-    @Override
-    public void onBackPressed() {
-//        super.onBackPressed();
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentManager.BackStackEntry entry = manager.getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
-        String simpleName = entry.getName();
-        if (simpleName.equals("PandaObserverFragment") || simpleName.equals("PandaLiveFragment") || simpleName.equals("HomeFragment")
-                || simpleName.equals("GGVideoFragment")|| simpleName.equals("ChinaLiveFragment")) {
-            App.content.finish();
-        } else {
-            super.onBackPressed();
-        }
-    }
+
 }
