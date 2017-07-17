@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.administrator.pandatv.app.App;
 import com.example.administrator.pandatv.base.BaseActivity;
 import com.example.administrator.pandatv.model.util.MainFragmentBuild;
 import com.example.administrator.pandatv.module.chinaLive.ChinaLivePresenter;
@@ -37,6 +38,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     protected void initView() {
+        App.content = this;
         main_radiogroup= (RadioGroup) findViewById(R.id.main_radiogroup);
         main_titlebar= (TextView) findViewById(R.id.main_titlebar);
         main_image= (ImageView) findViewById(R.id.main_image);
