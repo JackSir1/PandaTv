@@ -2,7 +2,7 @@ package com.example.administrator.pandatv.module.chinaLive.fhgc;
 
 import com.example.administrator.pandatv.base.BasePresenter;
 import com.example.administrator.pandatv.base.BaseView;
-import com.example.administrator.pandatv.model.entity.LiveFHGCBean;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveFHGCBean;
 
 /**
  * Created by lizhuofang on 2017/7/14.

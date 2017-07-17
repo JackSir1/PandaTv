@@ -52,7 +52,7 @@
                 android:text="点击登录"
                 android:paddingLeft="15dp"
                 android:layout_gravity="center_vertical"
-                android:textSize="18dp"/>
+                android:textSize="15dp"/>
         </LinearLayout>
 <TextView
     android:layout_width="match_parent"
@@ -79,7 +79,7 @@
             android:text="观看历史"
             android:paddingLeft="15dp"
             android:layout_gravity="center_vertical"
-            android:textSize="18dp"
+            android:textSize="15dp"
           />
 
         <ImageView
@@ -113,7 +113,7 @@
                 android:text="我的收藏"
                 android:paddingLeft="15dp"
                 android:layout_gravity="center_vertical"
-                android:textSize="18dp"/>
+                android:textSize="15dp"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
                 android:text="设置"
                 android:paddingLeft="15dp"
                 android:layout_gravity="center_vertical"
-                android:textSize="18dp"/>
+                android:textSize="15dp"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

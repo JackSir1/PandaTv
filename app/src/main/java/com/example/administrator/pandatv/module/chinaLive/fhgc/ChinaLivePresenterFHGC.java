@@ -2,7 +2,7 @@ package com.example.administrator.pandatv.module.chinaLive.fhgc;
 
 import com.example.administrator.pandatv.model.biz.chinaModel.ChinaLiveModel;
 import com.example.administrator.pandatv.model.biz.chinaModel.IChinaLiveModel;
-import com.example.administrator.pandatv.model.entity.LiveFHGCBean;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveFHGCBean;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 
 /**

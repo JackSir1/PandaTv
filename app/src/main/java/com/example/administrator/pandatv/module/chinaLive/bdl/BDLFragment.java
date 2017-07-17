@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
-import com.example.administrator.pandatv.model.entity.LiveBDLBean;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveBDLBean;
 import com.example.administrator.pandatv.module.chinaLive.adapter.Bdadapter;
 
 import java.util.ArrayList;

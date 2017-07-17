@@ -2,7 +2,7 @@ package com.example.administrator.pandatv.module.chinaLive.bdl;
 
 import com.example.administrator.pandatv.base.BasePresenter;
 import com.example.administrator.pandatv.base.BaseView;
-import com.example.administrator.pandatv.model.entity.LiveBDLBean;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveBDLBean;
 
 /**
  * Created by Administrator on 2017/7/12.

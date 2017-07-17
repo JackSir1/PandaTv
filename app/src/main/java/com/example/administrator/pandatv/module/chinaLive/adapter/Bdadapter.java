@@ -8,12 +8,11 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.R;
-import com.example.administrator.pandatv.model.entity.LiveBDLBean;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveBDLBean;
 
 import java.util.List;
 

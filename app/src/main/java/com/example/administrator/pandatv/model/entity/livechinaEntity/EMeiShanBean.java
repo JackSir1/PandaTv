@@ -1,4 +1,4 @@
-package com.example.administrator.pandatv.model.entity;
+package com.example.administrator.pandatv.model.entity.livechinaEntity;
 
 import java.util.List;
 
@@ -6,7 +6,8 @@ import java.util.List;
  * Created by lizhuofang on 2017/7/14.
  */
 
-public class LiveFHGCBean {
+public class EMeiShanBean {
+
     private List<LiveBean> live;
 
     public List<LiveBean> getLive() {
@@ -19,10 +20,10 @@ public class LiveFHGCBean {
 
     public static class LiveBean {
         /**
-         * title : 凤凰古城南华山
-         * brief : 凤凰古城是位于湖南湘西的历史文化名城，被誉为中国最美丽的小城，也是文学巨匠沈从文的故乡。城内，古代城楼、明清古院风采依然，古老朴实的沱江静静流淌，城外有南华山国家森林公园，城下艺术宫殿奇梁洞，建于唐代的黄丝桥古城，举世瞩目的南方长城。
-         * image : http://p1.img.cctvpic.com/photoAlbum/page/performance/img/2016/9/9/1473408958399_153.jpg
-         * id : fhgcdnhs
+         * title : 云海日出观赏点
+         * brief : 此处是峨眉山观日出的最佳点位，踞高望远，日出景象更加浩瀚壮阔。黎明前的天空是美妙的，渐渐地，地平线上天开一线，飘起缕缕红霞，托着三两朵金色镶边的彩云，一个辉煌的白昼即将降临。彩云下，空旷的紫蓝色的天幕上，一刹间，吐出一点紫红，缓慢上升，逐渐变成小弧、半圆；变成桔红、金红；然后微微一个跳跃，拖着一抹瞬息即逝的尾光，一轮圆圆的红日嵌在天边。
+         * image : http://p1.img.cctvpic.com/photoAlbum/page/performance/img/2015/12/28/1451291907950_701.jpg
+         * id : emsarm
          * order : 1
          */
 

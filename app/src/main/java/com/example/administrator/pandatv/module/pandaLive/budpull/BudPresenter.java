@@ -5,6 +5,7 @@ import com.example.administrator.pandatv.model.biz.pandaLiveModel.IPandaLiveMode
 import com.example.administrator.pandatv.model.biz.pandaLiveModel.PandaLiveModel;
 import com.example.administrator.pandatv.model.entity.PandaLiveSplendidBean;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
+
 //精彩时刻
 public class BudPresenter implements BudContract.Presenter {
     private BudContract.view view;
@@ -19,7 +20,15 @@ public class BudPresenter implements BudContract.Presenter {
 
     @Override
     public void start() {
-        iPandaLiveModel.getPandaLiveBud(new MyNetCallBack<PandaLiveSplendidBean>() {
+
+
+    }
+
+
+
+    @Override
+    public void GetData(String vsid, String n, String serviceId, String o, String of, String p) {
+        iPandaLiveModel.getPandaLiveBud(vsid, n, serviceId,o,of, p, new MyNetCallBack<PandaLiveSplendidBean>() {
             @Override
             public void onSuccess(PandaLiveSplendidBean pandaLiveSplendidBean) {
                 view.setResult(pandaLiveSplendidBean);
@@ -27,9 +36,8 @@ public class BudPresenter implements BudContract.Presenter {
 
             @Override
             public void onError(String error) {
-                view.showMessage(error);
+
             }
         });
-
     }
 }

@@ -162,7 +162,6 @@
         android:hint="请输入您的邮箱，方便我们及时给您回复"
         android:paddingLeft="10dp"
         android:textCursorDrawable="@null"
-
         android:textSize="13sp" />
 
 

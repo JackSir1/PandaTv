@@ -1,18 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <ImageView
-        android:layout_margin="7dp"
-        android:id="@+id/image_top_item"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher"
-        android:layout_width="@dimen/x350"
-        android:layout_height="@dimen/y200" />
+    <LinearLayout
+        android:id="@+id/lin_gg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y200">
+        <ImageView
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/image_top_item"
+            android:layout_width="@dimen/x350"
+            android:layout_height="@dimen/y200" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/lpanda_bottom_gra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+
+                android:src="@drawable/home_play_icon"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/x10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/data_top"
+                android:paddingLeft="@dimen/x20"
+                android:layout_gravity="center_vertical"
+                android:textSize="18sp"
+                android:textColor="@color/colorWhite"
+                android:text="00:31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y207">
+        android:layout_height="@dimen/y200">
         <TextView
             android:id="@+id/tv_top_item"
             android:layout_marginTop="@dimen/y25"
@@ -21,12 +51,17 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/time_top_item"
-            android:layout_marginTop="@dimen/y80"
+            android:layout_marginTop="@dimen/y70"
             android:text="2017-07-13 15:38"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:background="@color/colorHui"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y12" />
 
 
 </LinearLayout>

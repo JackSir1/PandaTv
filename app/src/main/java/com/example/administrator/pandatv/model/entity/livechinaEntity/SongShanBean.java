@@ -1,4 +1,4 @@
-package com.example.administrator.pandatv.model.entity;
+package com.example.administrator.pandatv.model.entity.livechinaEntity;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import java.util.List;
  * Created by lizhuofang on 2017/7/14.
  */
 
-public class LiveBDLBean {
+public class SongShanBean {
 
     private List<LiveBean> live;
 
@@ -20,10 +20,10 @@ public class LiveBDLBean {
 
     public static class LiveBean {
         /**
-         * title : 八达岭南四楼
-         * brief : 八达岭长城位于北京市西北六十公里处，被评为中国旅游胜地四十家之首和北京旅游“世界之最”。因其机构严谨科学，虽经历五百多年的历史风烟，至今仍巍然屹立，足以说明古代汉族劳动人民在建筑科学和艺术上的卓越才能。
-         * image : http://p1.img.cctvpic.com/photoAlbum/page/performance/img/2015/12/28/1451290603994_440.jpg
-         * id : bgws4
+         * title : 少林寺广场
+         * brief : 嵩山坐落于河南省登封市，东西横卧，雄峙中原，主峰峻极峰1492米，以《诗经·嵩高》“峻极于天”为名。因位居五岳之中，通称为中岳嵩山。它是万山之祖，见证了地球的变迁；它是华夏文明之源，佛、道、儒三教在此相融共生，因其“一天一地、一佛一道、一文一武”齐聚一山而闻名于世，自古就有“汴洛两京、畿内名山”之称，为中原地区第一名山。
+         * image : http://p1.img.cctvpic.com/photoAlbum/page/performance/img/2016/1/19/1453190725525_93.jpg
+         * id : zsslsgc
          * order : 1
          */
 

@@ -9,17 +9,16 @@ import android.widget.RelativeLayout;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseActivity;
-import com.example.administrator.pandatv.model.entity.LiveBDLBean;
 import com.example.administrator.pandatv.module.chinaLive.adapter.DragAdapter;
-import com.example.administrator.pandatv.module.chinaLive.bdl.ChinaLiveContract;
 import com.example.administrator.pandatv.module.chinaLive.fragment.DragGridView;
 
 import java.util.ArrayList;
 
+
 /**
  * Created by lizhuofang on 2017/7/13.
  */
-public class LiveChinaAdd extends BaseActivity implements ChinaLiveContract.View{
+public class LiveChinaAdd extends BaseActivity{
 
     private RelativeLayout relativeLayout;
 
@@ -130,38 +129,6 @@ public class LiveChinaAdd extends BaseActivity implements ChinaLiveContract.View
         channels_other.add("雪乡");
         channels_other.add("乐山大佛");
         channels_other.add("哈尼梯田");
-
-    }
-
-    @Override
-    public void onShowDialog() {
-
-    }
-
-    @Override
-    public void onRefresh() {
-
-    }
-
-    @Override
-    public void onLoadMore() {
-
-    }
-
-
-    @Override
-    public void showError(String msg) {
-
-    }
-
-    @Override
-    public void setResult(LiveBDLBean tablistBean) {
-
-    }
-
-    @Override
-    public void setPresenter(ChinaLiveContract.Presenter presenter) {
-
 
     }
 

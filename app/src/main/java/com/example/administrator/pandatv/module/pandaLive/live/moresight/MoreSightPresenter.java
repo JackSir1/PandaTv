@@ -18,15 +18,16 @@ public class MoreSightPresenter implements MorSightContract.Presenter {
 
     @Override
     public void start() {
-        iPandaLiveModel.getMoreLive(new MyNetCallBack<PandaLiveMoreBean>() {
+        //vsid=VSET100167216881&n=7&serviceId=panda&o=desc&of=time&p=1
+        iPandaLiveModel.getMoreLive( new MyNetCallBack<PandaLiveMoreBean>() {
             @Override
             public void onSuccess(PandaLiveMoreBean pandaLiveMoreBean) {
-                view.setResult(pandaLiveMoreBean);
+                  view.setResult(pandaLiveMoreBean);
             }
 
             @Override
             public void onError(String error) {
-                view.showMessage(error);
+
             }
         });
 

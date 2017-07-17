@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 
 import com.example.administrator.pandatv.base.BasePresenter;
 import com.example.administrator.pandatv.base.BaseView;
+import com.example.administrator.pandatv.model.entity.PandLiveTitleBean;
 import com.example.administrator.pandatv.model.entity.PandaLiveBean;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public interface PandaLiveContract {
         void checkbox(Boolean isChecked);
         //tablayout
         void pageradapter(String[] strings, ViewPager viewPager, TabLayout tab, List<Fragment> list);
-
+        void getLoadTitle(PandLiveTitleBean liveTitleBean);
 
 
 
@@ -35,5 +36,6 @@ public interface PandaLiveContract {
 
     interface Presenter extends BasePresenter {
 
+        void getLoadTitle();
     }
 }

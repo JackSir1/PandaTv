@@ -30,8 +30,6 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
     GGVideoContract.Presenter presenter;
     private int index = 0;
 
-
-
     @Override
     protected int getViweId() {
         return R.layout.ggviedo;
@@ -67,7 +65,6 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override
@@ -82,6 +79,8 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
 
     @Override
     public void setResult(GGBean ggBean) {
+
+
         for (int i = 0; i < ggBean.getList().size(); i++) {
             GGBean.ListBean listBean = ggBean.getList().get(i);
             arraylist.add(listBean);
