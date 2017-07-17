@@ -43,6 +43,7 @@
         <activity android:name=".module.chinaLive.activity.RegisterActivity" />
         <activity android:name=".module.chinaLive.activity.LoginActivity" />
         <activity android:name=".module.chinaLive.activity.SettingActivity" />
+        <activity android:name=".PlayViedoActivity"/>
         <!--qq-->
         <activity
             android:name="com.umeng.qq.tencent.AuthActivity"
