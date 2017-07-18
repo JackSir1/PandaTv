@@ -1,6 +1,8 @@
 package com.example.administrator.pandatv.module.chinaLive.activity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.androidkun.adapter.BaseAdapter;
@@ -25,10 +27,18 @@ public class CehuaAdapter extends BaseAdapter<CehuaBean.InteractiveBean> {
 
 
     @Override
-    public void convert(ViewHolder holder, CehuaBean.InteractiveBean interactiveBean) {
+    public void convert(ViewHolder holder, final CehuaBean.InteractiveBean interactiveBean) {
 
         holder.setText(R.id.cehua_item_tv,interactiveBean.getTitle());
         ImageView img = (ImageView) holder.itemView.findViewById(R.id.cehua_item_img);
         Glide.with(context).load(interactiveBean.getImage()).into(img);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context,WebActivity.class);
+                intent.putExtra("url",interactiveBean.getUrl());
+                context.startActivity(intent);
+            }
+        });
     }
 }

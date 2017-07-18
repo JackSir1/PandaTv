@@ -1,7 +1,5 @@
 package com.example.administrator.pandatv.model.biz.pandaObserverModel;
 
-import com.example.administrator.pandatv.app.App;
-import com.example.administrator.pandatv.config.Url;
 import com.example.administrator.pandatv.model.entity.PandaObserverBean;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 
@@ -13,6 +11,6 @@ import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 public class PandaObserverModel implements IPandaObservermodel {
     @Override
     public void setObserverCallBack(MyNetCallBack<PandaObserverBean> callBack) {
-        App.iHttp.get(Url.PandaObserver,null,callBack);
+//        App.iHttp.get(Url.PandaObserver,null,callBack);
     }
 }
