@@ -101,7 +101,6 @@ public class ShouJiRegisterFrag extends BaseFragment {
                 }else{
                     Toast.makeText(getContext(), "请填写您的手机号", Toast.LENGTH_SHORT).show();
                 }
-
                 break;
             case R.id.register_shouji_button:
                 break;
@@ -169,5 +168,4 @@ public class ShouJiRegisterFrag extends BaseFragment {
             }
         }
     };
-
 }
