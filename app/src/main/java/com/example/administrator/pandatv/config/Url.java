@@ -22,6 +22,8 @@ public class Url {
     //熊猫播报
     public  static  final  String PandaObserver=BASEURL+"xmwh/index.json";
 
+    //视频播放
+    public static final String PandaVideoPlayPATH="http://vdn.apps.cntv.cn/api/getVideoInfoForCBox.do";
     //熊猫直播top
     public static final  String PANDALIVETITLE="http://www.ipanda.com/kehuduan/PAGE14501772263221982/index.json";
     //原创
