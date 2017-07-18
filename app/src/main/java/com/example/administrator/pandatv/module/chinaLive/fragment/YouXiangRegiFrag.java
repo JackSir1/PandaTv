@@ -1,4 +1,4 @@
-package com.example.administrator.pandatv.module.chinaLive.activity;
+package com.example.administrator.pandatv.module.chinaLive.fragment;
 
 import android.view.View;
 

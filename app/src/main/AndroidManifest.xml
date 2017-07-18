@@ -132,6 +132,6 @@
         </activity>
 
     </application>
-
+    <!--Error:Execution failed for task ':app:transformClassesWithJarMergingForDebug'.-->
+    <!--&gt; com.android.build.api.transform.TransformException: java.util.zip.ZipException: duplicate entry: com/sina/sso/RemoteSSO$Stub$Proxy.class-->
 </manifest>
-

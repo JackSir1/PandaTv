@@ -3,6 +3,7 @@ package com.example.administrator.pandatv.module.chinaLive.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,7 @@ public class ShouJiRegisterFrag extends BaseFragment {
     @BindView(R.id.register_shouji_button)
     Button registerShoujiButton;
     Unbinder unbinder;
-    private int a=60;
+    private int a = 60;
     private String phone;
 
     @Override
@@ -81,6 +82,7 @@ public class ShouJiRegisterFrag extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        SMSSDK.unregisterEventHandler(eventHandler);
     }
 
     @OnClick({R.id.register_shouji_receivebut, R.id.register_shouji_button})
@@ -88,50 +90,58 @@ public class ShouJiRegisterFrag extends BaseFragment {
         switch (view.getId()) {
             case R.id.register_shouji_receivebut:
                 phone = registerShoujiZhanghao.getText().toString().trim();
-                SMSSDK.getVerificationCode("+86", phone, new OnSendMessageHandler() {
-                    @Override
-                    public boolean onSendMessage(String s, String s1) {
-                        return false;
-                    }
-                });
-                handler.post(runnable);
+                if(!TextUtils.isEmpty(phone)) {
+                    SMSSDK.getVerificationCode("+86", phone, new OnSendMessageHandler() {
+                        @Override
+                        public boolean onSendMessage(String s, String s1) {
+                            return false;
+                        }
+                    });
+                    handler.post(runnable);
+                }else{
+                    Toast.makeText(getContext(), "请填写您的手机号", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             case R.id.register_shouji_button:
                 break;
         }
     }
-    private Handler handler=new Handler(){
+
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 0:
-                    Toast.makeText(getContext(),"短信验证成功",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "短信验证成功", Toast.LENGTH_SHORT).show();
                     break;
                 case 1:
-                    Toast.makeText(getContext(),"短信获取成功",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "短信获取成功", Toast.LENGTH_SHORT).show();
                     break;
                 case 2:
                     break;
             }
         }
     };
-    private Runnable runnable=new Runnable() {
+    private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            if(a>0) {
+            if (a > 0) {
+                registerShoujiReceivebut.setText("正在获取验证码");
                 a--;
                 handler.sendEmptyMessage(2);
                 handler.postDelayed(runnable, 1000);
                 registerShoujiReceivebut.setClickable(false);
-            }else{
-                a=60;
+            }  else {
+                a = 60;
                 registerShoujiReceivebut.setClickable(true);
-                registerShoujiReceivebut.setText("重新发送验证码");
+                registerShoujiReceivebut.setText("验证码获取成功");
+
             }
         }
     };
-    private EventHandler eventHandler=new EventHandler(){
+    private EventHandler eventHandler = new EventHandler() {
 
         @Override
         public void afterEvent(int event, int result, Object data) {
@@ -139,19 +149,19 @@ public class ShouJiRegisterFrag extends BaseFragment {
             if (result == SMSSDK.RESULT_COMPLETE) {
                 //回调完成
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                    HashMap<String,Object> map= (HashMap<String, Object>) data;
-                    String shouji= (String) map.get("phone");
-                    if(shouji.equals(phone)){
+                    HashMap<String, Object> map = (HashMap<String, Object>) data;
+                    String shouji = (String) map.get("phone");
+                    if (shouji.equals(phone)) {
                         handler.sendEmptyMessage(0);
                     }
                     //提交验证码成功
                 } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                    Boolean boo= (Boolean) data;
+                    Boolean boo = (Boolean) data;
                     handler.sendEmptyMessage(1);
                     //获取验证码成功
                 } else if (event == SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {
-                    ArrayList<HashMap<String,Object>> list= (ArrayList<HashMap<String, Object>>) data;
-                    Log.e("aaa",list+"");
+                    ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) data;
+                    Log.e("aaa", list + "");
                     //返回支持发送验证码的国家列表
                 }
             } else {
@@ -159,4 +169,5 @@ public class ShouJiRegisterFrag extends BaseFragment {
             }
         }
     };
+
 }

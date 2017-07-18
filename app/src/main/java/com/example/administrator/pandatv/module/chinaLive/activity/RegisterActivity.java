@@ -10,6 +10,7 @@ import com.example.administrator.pandatv.base.BaseActivity;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.module.chinaLive.adapter.MyLivechinaAdapter;
 import com.example.administrator.pandatv.module.chinaLive.fragment.ShouJiRegisterFrag;
+import com.example.administrator.pandatv.module.chinaLive.fragment.YouXiangRegiFrag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,6 @@ public class RegisterActivity extends BaseActivity {
         tablayout.setupWithViewPager(viewpager);
 
     }
-
     @Override
     protected void setListener() {
 

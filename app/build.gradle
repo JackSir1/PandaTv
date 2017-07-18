@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
+
     defaultConfig {
         applicationId "com.example.administrator.pandatv"
         minSdkVersion 16
@@ -10,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -68,13 +70,16 @@ dependencies {
     compile files('libs/ShareSDK-QQ-2.8.3.jar')
     compile files('libs/ShareSDK-QZone-2.8.3.jar')
     compile files('libs/ShareSDK-ShortMessage-2.8.3.jar')
-    compile files('libs/ShareSDK-SinaWeibo-2.8.3.jar')
     compile files('libs/ShareSDK-TencentWeibo-2.8.3.jar')
     compile files('libs/ShareSDK-Twitter-2.8.3.jar')
     compile files('libs/ShareSDK-Wechat-2.8.3.jar')
     compile files('libs/ShareSDK-Wechat-Core-2.8.3.jar')
     compile files('libs/ShareSDK-Wechat-Favorite-2.8.3.jar')
     compile files('libs/ShareSDK-Wechat-Moments-2.8.3.jar')
-    compile name:'SMSSDK-2.1.4',ext:'aar'
-    compile name:'SMSSDKGUI-2.1.4',ext:'aar'
+    compile (name:'SMSSDK-2.1.4',ext:'aar'){
+        exclude group: 'nineoldandroids'
+    }
+    compile (name:'SMSSDKGUI-2.1.4',ext:'aar'){
+        exclude group: 'nineoldandroids'
+    }
 }
