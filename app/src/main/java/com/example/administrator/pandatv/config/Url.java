@@ -30,12 +30,13 @@ public class Url {
     public static final String CEHUA = BASEURL + "PAGE14501767715521482/index.json";
     //直播中国 http://www.ipanda.com/kehuduan/PAGE14501775094142282/index.json
    public static final String LIVECHINAS=BASEURL+"PAGE14501775094142282/index.json";
-    // 天山
+    //八达岭
+    public static final String BADALING = BASEURL + "liebiao/badaling/index.json";
+
+    /*  // 天山
     public static final String LIVECHINA = BASEURL + "PAGE14501776855882402/index.json";
     //凤凰古城
     public static final String FHGC = BASEURL + "liebiao/fenghuanggucheng/index.json";
-    //八达岭
-    public static final String BADALING = BASEURL + "liebiao/badaling/index.json";
     //"泰山"
     public static final String TAISHAN = BASEURL + "liebiao/taishan/index.json";
     //"黄山"
@@ -66,7 +67,8 @@ public class Url {
     public static final String DUNHUANG = BASEURL + "liebiao/dunhuangyueyaquan/index.json";
     //"都江堰"
     public static final String DUJIANGYAN = BASEURL + "liebiao/dujiangyan/index.json";
-
-
+*/
+    //登录
+    public static final String LOGIN="https://reg.cntv.cn/login/login.action";
 
 }

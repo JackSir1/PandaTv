@@ -1,45 +1,48 @@
-package com.example.administrator.pandatv.net;
+package com.example.administrator.pandatv.net.okhttploginandregist;
+
+import android.content.SharedPreferences;
 
 import com.example.administrator.pandatv.app.App;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
+import com.example.administrator.pandatv.net.IHttp;
+import com.example.administrator.pandatv.net.OkHttpUtils;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.URLEncoder;
 import java.util.Map;
 import java.util.Set;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created by Administrator on 2017/7/11.
+ * Created by lizhuofang on 2017/7/19.
  */
 
-public class OkHttpUtils implements IHttp{
+public class OkhttpUtilsLogReg implements IHttp {
+    private static OkhttpUtilsLogReg httpUtils = new OkhttpUtilsLogReg();
     private OkHttpClient okHttpClient;
     private static OkHttpUtils okHttpUtils;
-    private OkHttpUtils(){
+    private SharedPreferences mPreferences;
+
+    private OkhttpUtilsLogReg() {
         okHttpClient=new OkHttpClient();
     }
-    public static OkHttpUtils getInsent(){
-        if (okHttpUtils==null){
-            synchronized (OkHttpUtils.class){
-                if (okHttpUtils==null){
-                    okHttpUtils=new OkHttpUtils();
-                }
-            }
-        }
-        return okHttpUtils;
+
+    public static OkhttpUtilsLogReg getInstance() {
+        return httpUtils;
     }
+
+
     @Override
     public <T> void get(String url, Map<String, String> map, final MyNetCallBack<T> callBack) {
-
         StringBuffer sb=new StringBuffer(url);
         if (map !=null && map.size()>0){
             sb.append("?");
@@ -50,11 +53,20 @@ public class OkHttpUtils implements IHttp{
             }
             url=sb.deleteCharAt(sb.length()-1).toString();
         }
-        Request request = new Request.Builder()
-                .url(url).build();
+
+        Request request = null;
+        try {
+            request = new Request.Builder()
+                    .url(url)
+                    .addHeader("Referer", URLEncoder.encode("http://cbox_mobile.regclientuser.cntv.cn", "UTF-8"))
+                    .addHeader("User-Agent", URLEncoder.encode("CNTV_APP_CLIENT_CBOX_MOBILE", "UTF-8"))
+                    .build();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call,final IOException e) {
+            public void onFailure(Call call, final IOException e) {
                 App.content.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -77,21 +89,26 @@ public class OkHttpUtils implements IHttp{
     }
 
     @Override
-    public <T> void post(String url, Map<String, String> map,final MyNetCallBack<T> callBack) {
-
-        FormBody.Builder builder = new FormBody.Builder();
-        if(map !=null && map.size() > 0){
-            Set<String> keys = map.keySet();
-            for (String key : keys) {
+    public <T> void post(String url, Map<String, String> map, final MyNetCallBack<T> callBack) {
+        StringBuffer sb=new StringBuffer(url);
+        if (map !=null && map.size()>0){
+            sb.append("?");
+            Set<String> keySet = map.keySet();
+            for (String key : keySet) {
                 String value = map.get(key);
-                builder.add(key,value);
+                sb.append(key).append("=").append(value).append("&");
             }
+            url=sb.deleteCharAt(sb.length()-1).toString();
         }
 
-        Request request = new Request.Builder().url(url).post(builder.build()).build();
+        Request request = new Request.Builder()
+                    .url(url)
+                    .addHeader("Referer","https://reg.cntv.cn/login/login.action")
+                    .addHeader("User-Agent","CNTV_APP_CLIENT_CYNTV_MOBILE")
+                    .build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call,final IOException e) {
+            public void onFailure(Call call, final IOException e) {
                 App.content.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -111,6 +128,8 @@ public class OkHttpUtils implements IHttp{
                 });
             }
         });
+
+
     }
 
     @Override
@@ -127,7 +146,6 @@ public class OkHttpUtils implements IHttp{
     public void loadImage() {
 
     }
-
     /**
      * 自动解析json至回调中的JavaBean
      * @param jsonData

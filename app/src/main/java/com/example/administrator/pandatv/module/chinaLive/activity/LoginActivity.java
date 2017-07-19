@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,7 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.pandatv.R;
+import com.example.administrator.pandatv.model.biz.chinaModel.ChinaLiveModel;
+import com.example.administrator.pandatv.model.biz.chinaModel.IChinaLiveModel;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.LoginEntity;
 import com.example.administrator.pandatv.module.chinaLive.adapter.AuthAdapter;
+import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -50,7 +55,6 @@ public class LoginActivity extends Activity {
     EditText loginEditNumber;
     @BindView(R.id.login_edit_password)
     EditText loginEditPassword;
-
     @BindView(R.id.login_button)
     Button loginButton;
     @BindView(R.id.livechina_wangjimimaa)
@@ -120,25 +124,44 @@ public class LoginActivity extends Activity {
     }
 
 
-    @OnClick({R.id.login_return_imageView, R.id.login_register, R.id.login_edit_number, R.id.login_edit_password, R.id.livechina_wangjimimaa, R.id.login_button})
+    @OnClick({R.id.login_return_imageView, R.id.login_register,R.id.livechina_wangjimimaa, R.id.login_button})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_return_imageView:
                 finish();
                 break;
             case R.id.login_register:
-                Intent intent = new Intent(this, RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.login_edit_number:
-                break;
-            case R.id.login_edit_password:
                 break;
             case R.id.livechina_wangjimimaa:
                 Intent intent1 = new Intent(this, WJMMActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.login_button:
+                String phone = loginEditNumber.getText().toString().trim();
+                String pass = loginEditPassword.getText().toString().trim();
+                if(!TextUtils.isEmpty(phone)&&!TextUtils.isEmpty(pass)) {
+                    IChinaLiveModel inchina=new ChinaLiveModel();
+                    inchina.getLogin(phone, pass, new MyNetCallBack<LoginEntity>() {
+                        @Override
+                        public void onSuccess(LoginEntity loginEntity) {
+                            String errType =loginEntity.getErrType();
+                            if(errType.equals(0)) {
+//                                loginEntity.
+                            }else{
+
+                            }
+                        }
+
+                        @Override
+                        public void onError(String error) {
+
+                        }
+                    });
+                }
+                
+                
                 break;
         }
     }
