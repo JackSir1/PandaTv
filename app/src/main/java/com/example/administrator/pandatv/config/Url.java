@@ -26,6 +26,8 @@ public class Url {
     public static final  String PANDALIVETITLE="http://www.ipanda.com/kehuduan/PAGE14501772263221982/index.json";
     //原创
     public static final String CEHUA = BASEURL + "PAGE14501767715521482/index.json";
+    //熊猫视频
+    public static final String PANDAVEDIO="http://vdn.apps.cntv.cn/api/getVideoInfoForCBox.do";
     //直播中国
     // 天山
     public static final String LIVECHINA = BASEURL + "PAGE14501776855882402/index.json";
