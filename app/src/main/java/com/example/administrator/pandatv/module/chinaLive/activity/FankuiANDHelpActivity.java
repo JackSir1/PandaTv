@@ -9,7 +9,7 @@ import com.example.administrator.pandatv.base.BaseActivity;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveBDLBean;
 import com.example.administrator.pandatv.module.chinaLive.adapter.MyLivechinaAdapter;
-import com.example.administrator.pandatv.module.chinaLive.bdl.ChinaLiveContract;
+import com.example.administrator.pandatv.module.chinaLive.bdl.BDLChinaLiveContract;
 import com.example.administrator.pandatv.module.chinaLive.fragment.AlwaysquestFra;
 import com.example.administrator.pandatv.module.chinaLive.fragment.MeetquestFra;
 
@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 /**
  * Created by lizhuofang on 2017/7/14.
  */
-public class FankuiANDHelpActivity extends BaseActivity implements ChinaLiveContract.View{
+public class FankuiANDHelpActivity extends BaseActivity implements BDLChinaLiveContract.View{
 
     @BindView(R.id.userfankui_tablayout)
     TabLayout tablayout;
@@ -96,7 +96,7 @@ public class FankuiANDHelpActivity extends BaseActivity implements ChinaLiveCont
     }
 
     @Override
-    public void setPresenter(ChinaLiveContract.Presenter presenter) {
+    public void setPresenter(BDLChinaLiveContract.Presenter presenter) {
 
     }
 }

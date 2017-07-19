@@ -19,12 +19,14 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.PandaObserverBean;
+import com.example.administrator.pandatv.model.util.ACache;
 import com.example.administrator.pandatv.module.home.viewpager.HomeViewPagerAdapter;
 import com.example.administrator.pandatv.module.pandaObserver.activity.PandaObserverContentActivity;
 import com.example.administrator.pandatv.module.pandaObserver.activity.PandaObserverWebViewActivity;
 import com.example.administrator.pandatv.module.pandaObserver.adapter.OnRecyclerItemClickListener;
 import com.example.administrator.pandatv.module.pandaObserver.adapter.PandaObserverAdapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -175,6 +177,15 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
 
     @Override
     public void setResult(PandaObserverBean observerBean) {
+        ACache aCache = ACache.get(getContext());
+        if (observerBean == null) {
+            PandaObserverBean homeBean1 = (PandaObserverBean) aCache.getAsObject("homeBean");
+            if (homeBean1!=null){
+                observerBean=homeBean1;
+            }
+        } else {
+            aCache.put("homeBean", observerBean);
+        }
         setListView(observerBean.getList());
         showViewPager(observerBean.getBigImg());
     }
@@ -195,6 +206,7 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
                     }
                     handler.sendEmptyMessageDelayed(222, 2000);
                     break;
+
             }
         }
     };
