@@ -147,6 +147,7 @@ public class ChatFragment extends BaseFragment  {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+
     }
 
    /* @Override
