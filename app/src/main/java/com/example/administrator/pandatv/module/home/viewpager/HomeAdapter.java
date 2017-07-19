@@ -142,6 +142,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
             HomeSplendidAdapter splendidAdapter=new HomeSplendidAdapter(context,listscrol2);
             homeSplendidGridView.setAdapter(splendidAdapter);
             homeSplendidGridView.setOnItemClickListener(this);
+
         }
 
 

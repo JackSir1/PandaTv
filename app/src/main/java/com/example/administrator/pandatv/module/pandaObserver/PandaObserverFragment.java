@@ -206,6 +206,7 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
                     }
                     handler.sendEmptyMessageDelayed(222, 2000);
                     break;
+
             }
         }
     };
