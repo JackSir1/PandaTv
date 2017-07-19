@@ -3,11 +3,33 @@
     android:orientation="vertical" android:layout_width="match_parent"
       android:gravity="center"
     android:layout_height="match_parent">
-    <TextView
-        android:textSize="20sp"
-        android:text="边看边聊"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+        <EditText
+            android:hint="添加评论..."
+            android:background="@drawable/ed_chat"
+            android:layout_width="@dimen/x560"
+            android:layout_height="@dimen/y80" />
+        <Button
+            android:layout_marginLeft="10dp"
+            android:text="发送"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y70" />
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+            <com.androidkun.PullToRefreshRecyclerView
+                android:id="@+id/recycler_chat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></com.androidkun.PullToRefreshRecyclerView>
+        </LinearLayout>
+
 
 </LinearLayout>
