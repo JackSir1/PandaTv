@@ -1,12 +1,13 @@
 package com.example.administrator.pandatv.model.entity.livechinaEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by lizhuofang on 2017/7/14.
  */
 
-public class LivechinaTabBean {
+public class LivechinaTabBean implements Serializable {
 
     private List<TablistBean> tablist;
     private List<AlllistBean> alllist;
@@ -27,7 +28,7 @@ public class LivechinaTabBean {
         this.alllist = alllist;
     }
 
-    public static class TablistBean {
+    public static class TablistBean implements Serializable{
         /**
          * title : 八达岭
          * url : http://www.ipanda.com/kehuduan/liebiao/badaling/index.json
@@ -73,7 +74,7 @@ public class LivechinaTabBean {
         }
     }
 
-    public static class AlllistBean {
+    public static class AlllistBean implements Serializable{
         /**
          * title : 凤凰古城
          * url : http://www.ipanda.com/kehuduan/liebiao/fenghuanggucheng/index.json

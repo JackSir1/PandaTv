@@ -22,13 +22,14 @@ public class Url {
     //熊猫播报
     public  static  final  String PandaObserver=BASEURL+"xmwh/index.json";
 
+    //视频播放
+    public static final String PandaVideoPlayPATH="http://vdn.apps.cntv.cn/api/getVideoInfoForCBox.do";
     //熊猫直播top
     public static final  String PANDALIVETITLE="http://www.ipanda.com/kehuduan/PAGE14501772263221982/index.json";
     //原创
     public static final String CEHUA = BASEURL + "PAGE14501767715521482/index.json";
-    //熊猫视频
-    public static final String PANDAVEDIO="http://vdn.apps.cntv.cn/api/getVideoInfoForCBox.do";
-    //直播中国
+    //直播中国 http://www.ipanda.com/kehuduan/PAGE14501775094142282/index.json
+   public static final String LIVECHINAS=BASEURL+"PAGE14501775094142282/index.json";
     // 天山
     public static final String LIVECHINA = BASEURL + "PAGE14501776855882402/index.json";
     //凤凰古城

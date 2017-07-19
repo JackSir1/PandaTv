@@ -10,15 +10,14 @@ import android.widget.TextView;
 
 import com.example.administrator.pandatv.R;
 
-import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class DragAdapter extends BaseAdapter {
     private Context context;
-    public ArrayList<String> channels;
+    public List<String> channels;
 
-    public DragAdapter(Activity activity, ArrayList<String> channels) {
+    public DragAdapter(Activity activity, List<String> channels) {
         context = activity;
         this.channels = channels;
     }

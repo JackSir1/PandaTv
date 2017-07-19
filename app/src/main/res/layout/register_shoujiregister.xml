@@ -10,6 +10,7 @@
     android:layout_height="wrap_content"
     android:textSize="15dp"
     android:gravity="center"
+    android:layout_margin="8dp"
     android:text="海外用户暂不支持手机号才注册，您可以使用邮箱注册"
     android:textColor="@color/colorPrimary"
     />

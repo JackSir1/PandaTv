@@ -45,6 +45,7 @@ import java.io.RandomAccessFile;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -216,13 +217,11 @@ public class ACache {
 	// =======================================
 	/**
 	 * 保存 JSONObject数据 到 缓存中
-	 * 
-	 * @param key
+	 *  @param key
 	 *            保存的key
 	 * @param value
-	 *            保存的JSON数据
 	 */
-	public void put(String key, JSONObject value) {
+	public void put(String key, List<String> value) {
 		put(key, value.toString());
 	}
 
