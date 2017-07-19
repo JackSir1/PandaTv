@@ -1,5 +1,6 @@
 package com.example.administrator.pandatv.module.chinaLive.bdl;
 
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -16,13 +17,12 @@ import java.util.List;
 /**
  * Created by lizhuofang on 2017/7/13.
  */
-public class BDLFragment extends BaseFragment implements ChinaLiveContract.View {
-    ChinaLiveContract.Presenter presenter;
-    //    @BindView(R.id.bdlframent)
+public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.View {
+    BDLChinaLiveContract.Presenter presenter;
     RecyclerView bdlframent;
     private Bdadapter bdlAdapter;
     private List<LiveBDLBean.LiveBean> mList;
-    private ChinaLivePresenterTS chinaLivePresenterTS;
+    private Bundle bundle;
 
     @Override
     protected int getViweId() {
@@ -40,8 +40,11 @@ public class BDLFragment extends BaseFragment implements ChinaLiveContract.View 
         bdlframent.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
 //        bdlframent.setLoadingMoreEnabled(true);
 //        bdlframent.setPullRefreshEnabled(true);
-        chinaLivePresenterTS=new ChinaLivePresenterTS(this);
-        presenter.start();
+        new BDLChinaLivePresenterTS(this);
+        if(bundle!=null) {
+            String url = bundle.getString("url");
+            presenter.setUrl(url);
+        }
     }
 
     @Override
@@ -78,9 +81,14 @@ public class BDLFragment extends BaseFragment implements ChinaLiveContract.View 
         bdlframent.setAdapter(bdlAdapter);
     }
 
+    @Override
+    public void setParams(Bundle bundle) {
+        this.bundle=bundle;
+    }
+
     //presenter报空的话，是一个fragment对应一个presenter
     @Override
-    public void setPresenter(ChinaLiveContract.Presenter presenter) {
+    public void setPresenter(BDLChinaLiveContract.Presenter presenter) {
         this.presenter = presenter;
     }
 

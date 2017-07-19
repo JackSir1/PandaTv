@@ -8,7 +8,7 @@ import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveBDLBea
  * Created by Administrator on 2017/7/12.
  */
 
-public interface ChinaLiveContract {
+public interface BDLChinaLiveContract {
     interface View extends BaseView<Presenter>{
         void onShowDialog();
         void onRefresh();
@@ -19,5 +19,6 @@ public interface ChinaLiveContract {
     }
     interface Presenter extends BasePresenter {
 
+        void setUrl(String url);
     }
 }

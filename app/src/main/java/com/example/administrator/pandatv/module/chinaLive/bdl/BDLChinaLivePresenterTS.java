@@ -9,25 +9,30 @@ import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
  * Created by lizhuofang on 2017/7/13.
  */
 
-public class ChinaLivePresenterTS implements ChinaLiveContract.Presenter {
-    private ChinaLiveContract.View view;
+public class BDLChinaLivePresenterTS implements BDLChinaLiveContract.Presenter {
+    private BDLChinaLiveContract.View view;
     private IChinaLiveModel chinaLiveModel;
-    public ChinaLivePresenterTS(ChinaLiveContract.View view){
+    public BDLChinaLivePresenterTS(BDLChinaLiveContract.View view){
         this.view=view;
         this.view.setPresenter(this);
         this.chinaLiveModel=new ChinaLiveModel();
     }
     @Override
     public void start() {
-        chinaLiveModel.getLivechina(new MyNetCallBack<LiveBDLBean>() {
+
+    }
+
+    @Override
+    public void setUrl(String url) {
+        chinaLiveModel.getLiveChinaUrls(url, new MyNetCallBack<LiveBDLBean>() {
             @Override
-            public void onSuccess(LiveBDLBean tablistBean) {
-                view.setResult(tablistBean);
+            public void onSuccess(LiveBDLBean liveBDLBean) {
+                view.setResult(liveBDLBean);
             }
 
             @Override
             public void onError(String error) {
-                view.showError(error);
+
             }
         });
     }

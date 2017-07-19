@@ -23,7 +23,6 @@ import com.example.administrator.pandatv.module.chinaLive.adapter.DragAdapter;
  */
 
 public class DragGridView extends GridView {
-
     private String TAG = "DragGridView";
     private WindowManager windowManager;
     private int touchX;
@@ -47,6 +46,7 @@ public class DragGridView extends GridView {
     private boolean isMoving;//动画是否结束.
     private int windowX;
     private int windowY;
+
 
     public DragGridView(Context context) {
         this(context, null);
@@ -99,6 +99,7 @@ public class DragGridView extends GridView {
                     TextView tv_text = (TextView) dragView.findViewById(R.id.text_item);
                     tv_text.setText(((TextView) dragView.findViewById(R.id.text_item)).getText());
                 }
+
                 windowLayoutParams = new WindowManager.LayoutParams();
                 windowLayoutParams.gravity = Gravity.TOP | Gravity.LEFT;
                 windowLayoutParams.width = view.getWidth();
@@ -113,10 +114,13 @@ public class DragGridView extends GridView {
                 int horizontalSpacing = getHorizontalSpacing();
                 horizon_div = 1.0f * horizontalSpacing / item_width + 1.0f;
                 vertical_div = 1.0f * verticalSpacing / item_height + 1.0f;
+
                 return false;
             }
         });
+
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
@@ -269,6 +273,7 @@ public class DragGridView extends GridView {
                 Animation.RELATIVE_TO_SELF, toYValue);
         mTranslateAnimation.setFillAfter(true);
         mTranslateAnimation.setDuration(200);
+        mTranslateAnimation.setBackgroundColor(getResources().getColor(R.color.colorWhite));
         return mTranslateAnimation;
     }
 
