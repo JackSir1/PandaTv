@@ -68,9 +68,9 @@ public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.Vi
                 bdlframent.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        loadDate();
-                        bdlframent.setLoadMoreComplete();
-                        bdlAdapter.notifyDataSetChanged();
+//                        loadDate();
+//                        bdlframent.setLoadMoreComplete();
+//                        bdlAdapter.notifyDataSetChanged();
                     }
                 },2000);
             }

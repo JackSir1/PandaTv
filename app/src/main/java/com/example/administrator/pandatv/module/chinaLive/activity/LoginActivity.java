@@ -31,6 +31,7 @@ import com.umeng.socialize.utils.SocializeUtils;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,7 +64,7 @@ public class LoginActivity extends Activity {
     public ArrayList<SnsPlatform> platforms = new ArrayList<SnsPlatform>();
     private SHARE_MEDIA[] list = {SHARE_MEDIA.QQ, SHARE_MEDIA.SINA};
     private ProgressDialog dialog;
-
+//    private
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +87,7 @@ public class LoginActivity extends Activity {
                         break;
                     case R.id.login_radiobutton_qq:
                         UMShareAPI.get(LoginActivity.this).doOauthVerify(LoginActivity.this, platforms.get(0).mPlatform, authListener);
+                        finish();
                         break;
                     case R.id.login_radiobutton_sina:
                         UMShareAPI.get(LoginActivity.this).doOauthVerify(LoginActivity.this, platforms.get(1).mPlatform, authListener);
@@ -148,7 +150,7 @@ public class LoginActivity extends Activity {
                         public void onSuccess(LoginEntity loginEntity) {
                             String errType =loginEntity.getErrType();
                             if(errType.equals(0)) {
-//                                loginEntity.
+
                             }else{
 
                             }
@@ -185,7 +187,16 @@ public class LoginActivity extends Activity {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
             SocializeUtils.safeCloseDialog(dialog);
-            Toast.makeText(LoginActivity.this, "成功了", Toast.LENGTH_LONG).show();
+//            Toast.makeText(LoginActivity.this, "成功了", Toast.LENGTH_LONG).show();
+            Set<String> keyset = data.keySet();
+            String str=null;
+            for (String string:keyset){
+                str=data.get(string);
+            }
+            String name=data.get("name");
+            Intent intent=getIntent();
+            intent.putExtra("na",name);
+            setResult(50,intent);
         }
 
         /**
