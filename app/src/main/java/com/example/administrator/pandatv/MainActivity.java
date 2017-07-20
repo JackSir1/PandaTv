@@ -1,7 +1,7 @@
 package com.example.administrator.pandatv;
 
-import android.app.FragmentManager;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;

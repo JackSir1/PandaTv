@@ -9,12 +9,12 @@ import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.model.entity.PlayVideoBean;
 
 import fm.jiecao.jcvideoplayer_lib.JCFullScreenActivity;
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import fm.jiecao.jcvideoplayer_lib.PandaVedioPlayer;
+
 
 public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoContract.View{
 
-    private JCVideoPlayerStandard videoplayer;
+
     private PlayVideoPresenter presenter;
     private String title;
 

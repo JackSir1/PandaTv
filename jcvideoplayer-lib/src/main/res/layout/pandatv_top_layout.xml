@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@drawable/bbb"
+    android:gravity="center_vertical"
+    android:id="@+id/layout_top"
+    >
+    <ImageView
+        android:id="@+id/back"
+        android:background="@drawable/fanhui"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:paddingLeft="10dp"
+        android:scaleType="centerInside"
+        />
+    <TextView
+        android:textColor="@color/white"
+        android:id="@+id/title"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="标题"
+        android:maxLength="20"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <ImageButton
+        android:layout_alignParentRight="true"
+        android:id="@+id/btn_share"
+        android:layout_width="45dp"
+        android:background="@drawable/fenxiang"
+        android:layout_height="40dp" />
+    <ImageButton
+        android:layout_toLeftOf="@id/btn_share"
+        android:id="@+id/btn_collect"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/wujiao1"
+        android:layout_width="45dp"
+        android:layout_height="40dp" />
+
+
+</RelativeLayout>
