@@ -7,6 +7,7 @@ import com.example.administrator.pandatv.model.entity.livechinaEntity.LivechinaT
 import com.example.administrator.pandatv.model.entity.livechinaEntity.LoginEntity;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 import com.example.administrator.pandatv.net.HttpFactory;
+import com.example.administrator.pandatv.net.okhttploginandregist.OkhttpFra;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,7 +45,7 @@ public class ChinaLiveModel implements IChinaLiveModel {
         map.put("service","client_transaction");
         map.put("username",username);
         map.put("password",pwd);
-        HttpFactory.create().post(Url.LOGIN,null,myNetCallBack);
+        OkhttpFra.create().post(Url.LOGIN,map,myNetCallBack);
 
     }
 
