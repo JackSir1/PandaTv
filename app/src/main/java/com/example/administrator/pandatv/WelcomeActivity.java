@@ -31,12 +31,14 @@ public class WelcomeActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("start",MODE_PRIVATE);
         isFirst = sharedPreferences.getBoolean("isFirst", true);
         init();
+
     }
     public void init(){
         if(isFirst){
             handler.sendEmptyMessageDelayed(100,2000);
             SharedPreferences.Editor edit = sharedPreferences.edit();
             edit.putBoolean("isFirst",false);
+
         }else {
             handler.sendEmptyMessageDelayed(200,2000);
         }
@@ -47,6 +49,9 @@ public class WelcomeActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
+
+
+
                 case 100:
                     Intent intent1=new Intent(WelcomeActivity.this,StartActivity.class);
                     startActivity(intent1);
