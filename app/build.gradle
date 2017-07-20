@@ -41,7 +41,6 @@ repositories{
     }
 }
 
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -81,5 +80,4 @@ dependencies {
     compile(name: 'SMSSDKGUI-2.1.4', ext: 'aar') {
         exclude group: 'nineoldandroids'
     }
-    compile project(':jcvideoplayer-lib')
 }

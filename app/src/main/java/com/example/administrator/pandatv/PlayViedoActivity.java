@@ -1,7 +1,6 @@
 package com.example.administrator.pandatv;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
 public class PlayViedoActivity extends AppCompatActivity {
