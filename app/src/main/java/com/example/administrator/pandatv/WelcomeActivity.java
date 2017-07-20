@@ -31,7 +31,6 @@ public class WelcomeActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("start",MODE_PRIVATE);
         isFirst = sharedPreferences.getBoolean("isFirst", true);
         init();
-
     }
     public void init(){
         if(isFirst){
@@ -49,18 +48,13 @@ public class WelcomeActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
-
-
-
                 case 100:
                     Intent intent1=new Intent(WelcomeActivity.this,StartActivity.class);
                     startActivity(intent1);
-
                     break;
                 case 200:
                     Intent intent=new Intent(WelcomeActivity.this,MainActivity.class);
                     startActivity(intent);
-
                     break;
             }
             finish();
