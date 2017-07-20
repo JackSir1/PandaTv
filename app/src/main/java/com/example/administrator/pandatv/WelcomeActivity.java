@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 public class WelcomeActivity extends AppCompatActivity {
     @BindView(R.id.welcome_image)
     ImageView welcomeImage;
-
     private Boolean isFirst=true;
     private SharedPreferences sharedPreferences;
     @Override
@@ -28,9 +27,11 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.welcome_maian);
         ButterKnife.bind(this);
 
+
         sharedPreferences = getSharedPreferences("start",MODE_PRIVATE);
         isFirst = sharedPreferences.getBoolean("isFirst", true);
         init();
+
     }
     public void init(){
         if(isFirst){

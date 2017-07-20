@@ -186,7 +186,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                 String type = bigImgBeanList.get(posetion).getType();
                 String title = bigImgBeanList.get(posetion).getTitle();
                 if ("2".endsWith(type)){
-
                 }
             }
         });
@@ -215,7 +214,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void showErrorMassage(String errorMessage) {
-
     }
 
     @Override

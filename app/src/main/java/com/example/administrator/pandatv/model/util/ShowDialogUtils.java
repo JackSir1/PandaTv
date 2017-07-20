@@ -52,7 +52,6 @@ public class ShowDialogUtils {
 
     private Boolean wifiConnected ,mobileConnected;
     private void updateConnectedFlags(Context context) {
-
         ConnectivityManager connMgr =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -73,7 +72,6 @@ public class ShowDialogUtils {
             return WIFITYPE;
         if (mobileConnected)
             return MOBILETYPE;
-
         return NULLNET;
     }
 }
