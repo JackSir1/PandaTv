@@ -38,10 +38,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartActivity" />
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".module.chinaLive.activity.LiveChinaAdd" />
-        <activity android:name=".PersonalActivity" />
+        <activity android:name=".StartActivity"/>
+        <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".module.chinaLive.activity.LiveChinaAdd"/>
+        <activity android:name=".PersonalActivity"/>
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,7 +50,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.chinaLive.activity.CehuaActivity" />
+        <activity android:name=".model.util.playVideoUtil.PlayViedoActivity"/>
+        <activity android:name=".module.chinaLive.activity.CehuaActivity"/>
         <activity android:name=".module.chinaLive.activity.CollectionActivity" />
         <activity android:name=".module.chinaLive.activity.HistoryActivity" />
         <activity android:name=".module.chinaLive.activity.FankuiANDHelpActivity" />
@@ -59,8 +61,8 @@
         <activity android:name=".module.chinaLive.activity.RegisterActivity" />
         <activity android:name=".module.chinaLive.activity.LoginActivity" />
         <activity android:name=".module.chinaLive.activity.SettingActivity" />
-        <activity android:name=".PlayViedoActivity" />
-        <activity android:name=".module.chinaLive.activity.WebActivity" />
+        <activity android:name=".PlayViedoActivity"/>
+        <activity android:name=".module.chinaLive.activity.WebActivity"/>
         <!--qq-->
         <activity
             android:name="com.umeng.qq.tencent.AuthActivity"
@@ -72,7 +74,6 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="tencent100424468" />
                 <!--tencent100424468-->
             </intent-filter>
@@ -89,7 +90,7 @@
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <activity
             android:name=".share.WbShareTransActivity"
@@ -105,7 +106,8 @@
         <!--友盟的key-->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="5969be157666130b30001e28"></meta-data>
+            android:value="5969be157666130b30001e28">
+        </meta-data>
 
 
         <activity

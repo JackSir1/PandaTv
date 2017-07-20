@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import com.androidkun.adapter.BaseAdapter;
 import com.androidkun.adapter.ViewHolder;
 import com.bumptech.glide.Glide;
-import com.example.administrator.pandatv.PlayViedoActivity;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.model.entity.GGBean;
+import com.example.administrator.pandatv.model.util.playVideoUtil.PlayViedoActivity;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class GGViedoAdapter extends BaseAdapter<GGBean.ListBean> {
     }
 
     @Override
-    public void convert(ViewHolder holder, GGBean.ListBean listBean) {
+    public void convert(ViewHolder holder, final GGBean.ListBean listBean) {
           holder.setText(R.id.tv_top_item, listBean.getTitle());
 
 
@@ -35,6 +35,8 @@ public class GGViedoAdapter extends BaseAdapter<GGBean.ListBean> {
             @Override
             public void onClick(View v) {
                 Intent in=new Intent(context, PlayViedoActivity.class);
+                in.putExtra("pid",listBean.getGuid());
+                in.putExtra("title",listBean.getTitle());
                 context.startActivity(in);
             }
         });

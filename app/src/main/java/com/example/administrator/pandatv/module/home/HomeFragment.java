@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.androidkun.PullToRefreshRecyclerView;
+import com.androidkun.callback.PullToRefreshListener;
 import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
@@ -56,6 +57,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         inflater = LayoutInflater.from(getContext()).inflate(R.layout.home_viewpager_main, null);
         homeViewpagerLinearLayout= (LinearLayout) inflater.findViewById(R.id.home_viewpager_linearLayout);
         homeViewpager= (ViewPager) inflater.findViewById(R.id.home_viewpager);
+        homeRecyclerView.setPullRefreshEnabled(true);
+        homeRecyclerView.setLoadingMoreEnabled(true);
+        homeRecyclerView.displayLastRefreshTime(true);
         homeRecyclerView.addHeaderView(inflater);
     }
 
@@ -87,6 +91,27 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+        homeRecyclerView.setPullToRefreshListener(new PullToRefreshListener() {
+            @Override
+            public void onRefresh() {
+                homeRecyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        homeRecyclerView.setRefreshComplete();
+                    }
+                },2000);
+            }
+
+            @Override
+            public void onLoadMore() {
+                homeRecyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        homeRecyclerView.setLoadMoreComplete();
+                    }
+                },2000);
             }
         });
     }
