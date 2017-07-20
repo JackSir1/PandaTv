@@ -21,6 +21,7 @@ public class ShowPopuUtils {
 
     private ShowPopuUtils() {
     }
+
     private Dialog loadDialog;
 
     public static ShowPopuUtils getInsent() {
