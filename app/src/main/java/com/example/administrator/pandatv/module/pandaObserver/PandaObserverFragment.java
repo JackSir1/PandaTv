@@ -41,7 +41,6 @@ import butterknife.ButterKnife;
 public class PandaObserverFragment extends BaseFragment implements PandaObserverContract.View {
     @BindView(R.id.observer_recyclerView)
     PullToRefreshRecyclerView observerRecyclerView;
-
     private View inflater;
     private LinearLayout viewpagerLinearLayout;
     private ViewPager viewpager;
@@ -77,7 +76,6 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
 
     @Override
     protected void loadDate() {
-
     }
 
     @Override
@@ -115,8 +113,6 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
 
             }
         });
-
-
     }
     //輪播圖
     public void showViewPager(final List<PandaObserverBean.BigImgBean> bigImgBeanList) {
