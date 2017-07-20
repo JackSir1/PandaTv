@@ -17,6 +17,6 @@ public class PlayVideModel implements IPlayVideoModel {
     public <PlayVideoBean> void setVideoPid(String pid, MyNetCallBack<PlayVideoBean> callBack) {
         Map<String,String> map=new HashMap<>();
         map.put("pid",pid);
-        I_HTTP.get(Url.PANDAVEDIO,map,callBack);
+        I_HTTP.get(Url.PandaVideoPlayPATH,map,callBack);
     }
 }

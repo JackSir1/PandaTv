@@ -1,6 +1,7 @@
 package com.example.administrator.pandatv;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,18 +21,22 @@ public class WelcomeActivity extends AppCompatActivity {
     ImageView welcomeImage;
 
     private Boolean isFirst=true;
-
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_maian);
         ButterKnife.bind(this);
+
+        sharedPreferences = getSharedPreferences("start",MODE_PRIVATE);
+        isFirst = sharedPreferences.getBoolean("isFirst", true);
         init();
     }
     public void init(){
         if(isFirst){
             handler.sendEmptyMessageDelayed(100,2000);
-            isFirst=false;
+            SharedPreferences.Editor edit = sharedPreferences.edit();
+            edit.putBoolean("isFirst",false);
         }else {
             handler.sendEmptyMessageDelayed(200,2000);
         }
@@ -45,12 +50,15 @@ public class WelcomeActivity extends AppCompatActivity {
                 case 100:
                     Intent intent1=new Intent(WelcomeActivity.this,StartActivity.class);
                     startActivity(intent1);
+
                     break;
                 case 200:
                     Intent intent=new Intent(WelcomeActivity.this,MainActivity.class);
                     startActivity(intent);
+
                     break;
             }
+            finish();
         }
     };
 }

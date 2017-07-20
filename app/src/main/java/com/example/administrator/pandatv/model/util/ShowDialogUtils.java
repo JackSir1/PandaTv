@@ -1,7 +1,10 @@
 package com.example.administrator.pandatv.model.util;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.view.View;
 
 import com.example.administrator.pandatv.app.App;
@@ -13,7 +16,6 @@ import java.util.Stack;
  */
 
 public class ShowDialogUtils {
-    private IShowDialogUtils iShowDialogUtils;
     private static ShowDialogUtils showDialogUtils;
     private AlertDialog.Builder dialog;
     private ShowDialogUtils(){
@@ -28,24 +30,50 @@ public class ShowDialogUtils {
             }
         return showDialogUtils;
     }
-    public ShowDialogUtils setViewId(){
-        dialog.setTitle("当前处于移动网络是否继续播放？");
-        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                iShowDialogUtils.setMaked();;
-            }
-        });
-        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        dialog.create().show();
+    public ShowDialogUtils setViewId(final IShowDialogUtils ShowDialogUtils){
+        if (netType()==1) {
+            dialog.setTitle("当前处于移动网络是否继续播放？");
+            dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ShowDialogUtils.setMaked();
+                }
+            });
+            dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.create().show();
+        }
         return this;
     }
-    public void setOnYesDialogMake(IShowDialogUtils iShowDialogUtils){
-        this.iShowDialogUtils=iShowDialogUtils;
+
+    private Boolean wifiConnected ,mobileConnected;
+    private void updateConnectedFlags(Context context) {
+
+        ConnectivityManager connMgr =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
+        if (activeInfo != null && activeInfo.isConnected()) {
+            wifiConnected = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
+            mobileConnected = activeInfo.getType() == ConnectivityManager.TYPE_MOBILE;
+        } else {
+            wifiConnected = false;
+            mobileConnected = false;
+        }
+    }
+    private static final int MOBILETYPE=1;
+    private static final int NULLNET=0;
+    private static final int WIFITYPE=2;
+    public int netType(){
+        if (wifiConnected)
+            return WIFITYPE;
+        if (mobileConnected)
+            return MOBILETYPE;
+
+        return NULLNET;
     }
 }

@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.HomeBean;
+import com.example.administrator.pandatv.model.util.ShowPopuUtils;
 import com.example.administrator.pandatv.module.home.viewpager.HomeAdapter;
 import com.example.administrator.pandatv.module.home.viewpager.HomeViewPagerAdapter;
 import com.example.administrator.pandatv.module.pandaObserver.OnViewPagerItemListener;
@@ -43,7 +44,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     private List<View> viewPagerFragments = new ArrayList<>();
     private HomeContract.Presenter presenter;
     private List<CheckBox> checkBoxes = new ArrayList<>();
-
+    private ShowPopuUtils showPopuUtils;
     @Override
     protected int getViweId() {
         return R.layout.home_fragment;
@@ -51,6 +52,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     protected void initView(View view) {
+
+        showPopuUtils = ShowPopuUtils.getInsent().create(getContext());
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         homeRecyclerView.setLayoutManager(manager);
@@ -146,6 +149,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         homeRecyclerView.setAdapter(adapter);
         List<HomeBean.DataBean.BigImgBean> bigImgBeanList = homeBean.getData().getBigImg();
         showViewPager(bigImgBeanList);
+        showPopuUtils.popuUtilsDismiss();
     }
 
     //輪播圖
