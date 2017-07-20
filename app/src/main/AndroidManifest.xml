@@ -50,6 +50,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".model.util.playVideoUtil.PlayViedoActivity"/>
         <activity android:name=".module.chinaLive.activity.CehuaActivity"/>
         <activity android:name=".module.chinaLive.activity.CollectionActivity" />
         <activity android:name=".module.chinaLive.activity.HistoryActivity" />
@@ -60,7 +61,6 @@
         <activity android:name=".module.chinaLive.activity.RegisterActivity" />
         <activity android:name=".module.chinaLive.activity.LoginActivity" />
         <activity android:name=".module.chinaLive.activity.SettingActivity" />
-        <activity android:name=".PlayViedoActivity"/>
         <activity android:name=".module.chinaLive.activity.WebActivity"/>
         <!--qq-->
         <activity
