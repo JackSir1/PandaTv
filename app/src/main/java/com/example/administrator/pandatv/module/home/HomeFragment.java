@@ -45,6 +45,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     private HomeContract.Presenter presenter;
     private List<CheckBox> checkBoxes = new ArrayList<>();
     private ShowPopuUtils showPopuUtils;
+
     @Override
     protected int getViweId() {
         return R.layout.home_fragment;
@@ -54,12 +55,12 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     protected void initView(View view) {
 
         showPopuUtils = ShowPopuUtils.getInsent().create(getContext());
-        LinearLayoutManager manager=new LinearLayoutManager(getContext());
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         homeRecyclerView.setLayoutManager(manager);
         inflater = LayoutInflater.from(getContext()).inflate(R.layout.home_viewpager_main, null);
-        homeViewpagerLinearLayout= (LinearLayout) inflater.findViewById(R.id.home_viewpager_linearLayout);
-        homeViewpager= (ViewPager) inflater.findViewById(R.id.home_viewpager);
+        homeViewpagerLinearLayout = (LinearLayout) inflater.findViewById(R.id.home_viewpager_linearLayout);
+        homeViewpager = (ViewPager) inflater.findViewById(R.id.home_viewpager);
         homeRecyclerView.setPullRefreshEnabled(true);
         homeRecyclerView.setLoadingMoreEnabled(true);
         homeRecyclerView.displayLastRefreshTime(true);
@@ -104,7 +105,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                     public void run() {
                         homeRecyclerView.setRefreshComplete();
                     }
-                },2000);
+                }, 2000);
             }
 
             @Override
@@ -114,7 +115,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                     public void run() {
                         homeRecyclerView.setLoadMoreComplete();
                     }
-                },2000);
+                }, 2000);
             }
         });
     }
@@ -139,13 +140,13 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     public void setResult(HomeBean homeBean) {
 
         HomeBean.DataBean data = homeBean.getData();
-        List<Object> list=new ArrayList<>();
+        List<Object> list = new ArrayList<>();
         list.add(data.getPandaeye());
         list.add(data.getPandalive());
         list.add(data.getArea());
         list.add(data.getWalllive());
         list.add(data.getChinalive());
-        HomeAdapter adapter=new HomeAdapter(getContext(),list);
+        HomeAdapter adapter = new HomeAdapter(getContext(), list);
         homeRecyclerView.setAdapter(adapter);
         List<HomeBean.DataBean.BigImgBean> bigImgBeanList = homeBean.getData().getBigImg();
         showViewPager(bigImgBeanList);
@@ -185,7 +186,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                 String stype = bigImgBeanList.get(posetion).getStype();
                 String type = bigImgBeanList.get(posetion).getType();
                 String title = bigImgBeanList.get(posetion).getTitle();
-                if ("2".endsWith(type)){
+                if ("2".endsWith(type)) {
                 }
             }
         });

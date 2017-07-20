@@ -18,20 +18,23 @@ import java.util.Stack;
 public class ShowDialogUtils {
     private static ShowDialogUtils showDialogUtils;
     private AlertDialog.Builder dialog;
-    private ShowDialogUtils(){
+
+    private ShowDialogUtils() {
         dialog = new AlertDialog.Builder(App.content);
     }
-    public static ShowDialogUtils getInsenter(){
-        if (showDialogUtils==null)
-            synchronized (ShowDialogUtils.class){
-                if (showDialogUtils==null){
-                    showDialogUtils=new ShowDialogUtils();
+
+    public static ShowDialogUtils getInsenter() {
+        if (showDialogUtils == null)
+            synchronized (ShowDialogUtils.class) {
+                if (showDialogUtils == null) {
+                    showDialogUtils = new ShowDialogUtils();
                 }
             }
         return showDialogUtils;
     }
-    public ShowDialogUtils setViewId(final IShowDialogUtils ShowDialogUtils){
-        if (netType()==1) {
+
+    public ShowDialogUtils setViewId(final IShowDialogUtils ShowDialogUtils) {
+        if (netType() == 1) {
             dialog.setTitle("当前处于移动网络是否继续播放？");
             dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
@@ -50,7 +53,8 @@ public class ShowDialogUtils {
         return this;
     }
 
-    private Boolean wifiConnected ,mobileConnected;
+    private Boolean wifiConnected, mobileConnected;
+
     private void updateConnectedFlags(Context context) {
         ConnectivityManager connMgr =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -64,10 +68,12 @@ public class ShowDialogUtils {
             mobileConnected = false;
         }
     }
-    private static final int MOBILETYPE=1;
-    private static final int NULLNET=0;
-    private static final int WIFITYPE=2;
-    public int netType(){
+
+    private static final int MOBILETYPE = 1;
+    private static final int NULLNET = 0;
+    private static final int WIFITYPE = 2;
+
+    public int netType() {
         if (wifiConnected)
             return WIFITYPE;
         if (mobileConnected)
