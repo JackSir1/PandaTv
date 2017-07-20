@@ -104,6 +104,7 @@ public class LoginActivity extends Activity {
             if (!e.toString().equals(SHARE_MEDIA.GENERIC.toString())) {
                 platforms.add(e.toSnsPlatform());
             }
+
         }
     }
 
@@ -111,6 +112,7 @@ public class LoginActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+
     }
 
     @Override
