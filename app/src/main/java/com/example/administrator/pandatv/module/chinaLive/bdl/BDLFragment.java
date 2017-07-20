@@ -6,10 +6,11 @@ import android.util.Log;
 import android.view.View;
 
 import com.androidkun.PullToRefreshRecyclerView;
+import com.androidkun.callback.PullToRefreshListener;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveBDLBean;
-import com.example.administrator.pandatv.module.chinaLive.adapter.Bdadapter;
+import com.example.administrator.pandatv.module.chinaLive.adapter.BDLAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
 public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.View {
     BDLChinaLiveContract.Presenter presenter;
     PullToRefreshRecyclerView bdlframent;
-    private Bdadapter bdlAdapter;
+    private BDLAdapter bdlAdapter;
     private List<LiveBDLBean.LiveBean> mList;
     private Bundle bundle;
 
@@ -49,7 +50,31 @@ public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.Vi
 
     @Override
     protected void setListener() {
+        bdlframent.setPullToRefreshListener(new PullToRefreshListener() {
+            @Override
+            public void onRefresh() {
+                bdlframent.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadDate();
+                        bdlframent.setRefreshComplete();
+                        bdlAdapter.notifyDataSetChanged();
+                    }
+                },2000);
+            }
 
+            @Override
+            public void onLoadMore() {
+                bdlframent.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+//                        loadDate();
+//                        bdlframent.setLoadMoreComplete();
+//                        bdlAdapter.notifyDataSetChanged();
+                    }
+                },2000);
+            }
+        });
     }
 
     @Override
@@ -77,7 +102,7 @@ public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.Vi
         List<LiveBDLBean.LiveBean> live = tablistBean.getLive();
         Log.e("bdffragment", "请求，，，" + live);
         mList.addAll(live);
-        bdlAdapter = new Bdadapter(getContext(), mList);
+        bdlAdapter = new BDLAdapter(getContext(), mList);
         bdlframent.setAdapter(bdlAdapter);
     }
 

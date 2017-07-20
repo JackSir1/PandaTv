@@ -10,6 +10,7 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.common.QueuedWork;
 
 import cn.sharesdk.framework.ShareSDK;
+import cn.smssdk.SMSSDK;
 
 /**
  * Created by Administrator on 2017/7/11.
@@ -27,11 +28,9 @@ public class App extends Application {
         UMShareAPI.get(this);
         PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
         PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
-        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
+        PlatformConfig.setSinaWeibo("2699399578", "2a6cf5946a9cf8407923d46ce23e09d7", "http://sns.whalecloud.com");
         ShareSDK.initSDK(this);
-//        SMSSDK.initSDK(this, "1e506690017a4", "a627c68689e042e44ed4177f45e65638");
-
-
+        SMSSDK.initSDK(this, "1e506690017a4", "a627c68689e042e44ed4177f45e65638");
     }
 
 }

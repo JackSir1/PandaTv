@@ -63,7 +63,7 @@ public class PersonalActivity extends BaseActivity{
                 break;
             case R.id.personal_linear_login:
                 Intent intent=new Intent(this,LoginActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,100);
                 break;
             case R.id.personal_linear_watch_history:
                 Intent intent1=new Intent(this, HistoryActivity.class);
@@ -77,6 +77,15 @@ public class PersonalActivity extends BaseActivity{
                 Intent intent3=new Intent(this,SettingActivity.class);
                 startActivity(intent3);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==100&&resultCode==50) {
+            String name = data.getStringExtra("na");
+            personalLoginText.setText(name);
         }
     }
 }

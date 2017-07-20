@@ -138,6 +138,7 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
         View view = LayoutInflater.from(getContext()).inflate(R.layout.activity_popup_columns, null);
 
         popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        popupWindow.setFocusable(true);
         popupWindow.setBackgroundDrawable(null);
         popupWindow.setOutsideTouchable(true);
         ImageView imageView = (ImageView) view.findViewById(R.id.fanhui);
@@ -153,11 +154,6 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
         other_adapter = new DragAdapter(getActivity(), channels_other);
         gridView_other.setAdapter(other_adapter);
         gridView_other.setNumColumns(3);
-
-
-
-
-
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,7 +192,7 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
                         other_adapter.notifyDataSetChanged();
 
                     } else {
-                        Toast.makeText(getContext(), "个数不能小于4", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "总数不能小于4", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

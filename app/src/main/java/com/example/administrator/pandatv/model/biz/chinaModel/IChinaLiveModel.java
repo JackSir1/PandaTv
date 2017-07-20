@@ -3,6 +3,7 @@ package com.example.administrator.pandatv.model.biz.chinaModel;
 import com.example.administrator.pandatv.model.entity.livechinaEntity.CehuaBean;
 import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveBDLBean;
 import com.example.administrator.pandatv.model.entity.livechinaEntity.LivechinaTabBean;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.LoginEntity;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 
 /**
@@ -18,4 +19,5 @@ public interface IChinaLiveModel {
 
     void getLiveChinas(MyNetCallBack<LivechinaTabBean> myNetCallBack);
 
+    void getLogin(String username,String pwd,MyNetCallBack<LoginEntity> myNetCallBack);
 }

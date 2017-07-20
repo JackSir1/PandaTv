@@ -1,8 +1,6 @@
 package com.example.administrator.pandatv.model.biz;
 
 import com.example.administrator.pandatv.config.Url;
-import com.example.administrator.pandatv.model.biz.IPlayVideoModel;
-import com.example.administrator.pandatv.model.entity.PlayVideoBean;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 
 import java.util.HashMap;

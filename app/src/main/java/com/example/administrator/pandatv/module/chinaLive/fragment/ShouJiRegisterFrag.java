@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -48,6 +49,8 @@ public class ShouJiRegisterFrag extends BaseFragment {
     Unbinder unbinder;
     private int a = 60;
     private String phone;
+    private String pass;
+    private String receive;
 
     @Override
     protected int getViweId() {
@@ -56,13 +59,13 @@ public class ShouJiRegisterFrag extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-        SMSSDK.registerEventHandler(eventHandler);
-        SMSSDK.getSupportedCountries();
+
     }
 
     @Override
     protected void loadDate() {
-
+        SMSSDK.registerEventHandler(eventHandler);
+        SMSSDK.getSupportedCountries();
     }
 
     @Override
@@ -90,6 +93,7 @@ public class ShouJiRegisterFrag extends BaseFragment {
         switch (view.getId()) {
             case R.id.register_shouji_receivebut:
                 phone = registerShoujiZhanghao.getText().toString().trim();
+                receive = registerShoujiRecivie.getText().toString().trim();
                 if(!TextUtils.isEmpty(phone)) {
                     SMSSDK.getVerificationCode("+86", phone, new OnSendMessageHandler() {
                         @Override
@@ -101,8 +105,32 @@ public class ShouJiRegisterFrag extends BaseFragment {
                 }else{
                     Toast.makeText(getContext(), "请填写您的手机号", Toast.LENGTH_SHORT).show();
                 }
+                String url = "http://reg.cntv.cn/regist/getVerifiCode.action";
+                String from = "http://cbox_mobile.regclientuser.cntv.cn";
+                HashMap<String, String> tHeaders = new HashMap<String, String>();
+                try {
+
+                    tHeaders.put("Referer", URLEncoder.encode(from, "UTF-8"));
+                    tHeaders.put("User-Agent", URLEncoder.encode("CNTV_APP_CLIENT_CBOX_MOBILE", "UTF-8"));
+                    tHeaders.put("Cookie", "JSESSIONID=" + 2);
+                } catch (Exception e) {
+
+                }
+
+                HashMap<String, String> params = new HashMap<String, String>();
+                params.put("method", "getRequestVerifiCodeM");
+                params.put("mobile", phone);
+                params.put("verfiCodeType", "1");
+                params.put("verificationCode", receive);
+//                tHandler.postHeaderJson(url, tHeaders, params, 0);
+
                 break;
             case R.id.register_shouji_button:
+                pass = registerShoujiWritepass.getText().toString().trim();
+                if (TextUtils.isEmpty(pass)&&pass.length() < 6 || pass.length() > 18) {
+
+
+                }
                 break;
         }
     }

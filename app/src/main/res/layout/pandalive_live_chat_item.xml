@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/watch_item_author"
+            android:text="央视网网友"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/watch_item_numlou"
+            android:layout_alignParentRight="true"
+            android:text="175731"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:singleLine="false"
+            android:id="@+id/watch_item_message"
+            android:text="镜头不能拉近吗"
+            android:textSize="14dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:id="@+id/watch_item_time"
+            android:layout_alignParentRight="true"
+            android:text="07—17-2017"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+</LinearLayout>
