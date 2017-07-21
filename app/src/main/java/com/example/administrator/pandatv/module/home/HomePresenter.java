@@ -13,11 +13,12 @@ import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 public class HomePresenter implements HomeContract.Presenter {
     private IHomeModel iHomeModel;
     private HomeContract.View view;
-    public HomePresenter(HomeContract.View view){
-        this.view=view;
+    public HomePresenter(HomeContract.View view) {
+        this.view = view;
         this.view.setPresenter(this);
-        this.iHomeModel=new HomeModel();
+        this.iHomeModel = new HomeModel();
     }
+
     @Override
     public void start() {
         iHomeModel.getHomeResult(new MyNetCallBack<HomeBean>() {
@@ -25,7 +26,6 @@ public class HomePresenter implements HomeContract.Presenter {
             public void onSuccess(HomeBean homeBean) {
                 view.setResult(homeBean);
             }
-
             @Override
             public void onError(String error) {
                 view.showErrorMassage(error);
@@ -35,7 +35,7 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     @Override
-    public void loadMore(int pageSize,int pageContent) {
-        new HomeModel().loadMore(pageSize,pageContent);
+    public void loadMore(int pageSize, int pageContent) {
+        new HomeModel().loadMore(pageSize, pageContent);
     }
 }

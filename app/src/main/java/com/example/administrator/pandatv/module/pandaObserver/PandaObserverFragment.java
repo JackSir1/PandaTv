@@ -20,6 +20,7 @@ import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.PandaObserverBean;
 import com.example.administrator.pandatv.model.util.ACache;
+import com.example.administrator.pandatv.model.util.ShowPopuUtils;
 import com.example.administrator.pandatv.module.home.viewpager.HomeViewPagerAdapter;
 import com.example.administrator.pandatv.module.pandaObserver.activity.PandaObserverContentActivity;
 import com.example.administrator.pandatv.module.pandaObserver.activity.PandaObserverWebViewActivity;
@@ -40,7 +41,6 @@ import butterknife.ButterKnife;
 public class PandaObserverFragment extends BaseFragment implements PandaObserverContract.View {
     @BindView(R.id.observer_recyclerView)
     PullToRefreshRecyclerView observerRecyclerView;
-
     private View inflater;
     private LinearLayout viewpagerLinearLayout;
     private ViewPager viewpager;
@@ -51,6 +51,7 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
     private PandaObserverAdapter pandaObserverAdapter;
     private List<PandaObserverBean.ListBean> beanList=new ArrayList<>();
     private PandaObserverContract.Presenter presenter;
+    private ShowPopuUtils showPopuUtils;
     @Override
     protected int getViweId() {
         return R.layout.observer_fragment;
@@ -58,6 +59,7 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
 
     @Override
     protected void initView(View view) {
+        showPopuUtils = ShowPopuUtils.getInsent().create(getContext());
         LinearLayoutManager manager=new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         observerRecyclerView.setLayoutManager(manager);
@@ -74,7 +76,6 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
 
     @Override
     protected void loadDate() {
-
     }
 
     @Override
@@ -112,8 +113,6 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
 
             }
         });
-
-
     }
     //輪播圖
     public void showViewPager(final List<PandaObserverBean.BigImgBean> bigImgBeanList) {
@@ -188,6 +187,7 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
         }
         setListView(observerBean.getList());
         showViewPager(observerBean.getBigImg());
+        showPopuUtils.popuUtilsDismiss();
     }
     Handler handler = new Handler() {
         @Override
