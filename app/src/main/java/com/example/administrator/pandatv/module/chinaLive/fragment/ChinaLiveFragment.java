@@ -123,7 +123,7 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
             tagUrlMap.put(alllistBean.getTitle(),alllistBean.getUrl());
         }
         myLivetablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        myLivechinaAdapter=new MyLivechinaAdapter(getChildFragmentManager(),mTabListName,mList);
+        myLivechinaAdapter=new MyLivechinaAdapter(getFragmentManager(),mTabListName,mList);
         myLiveviewpager.setAdapter(myLivechinaAdapter);
         myLivetablayout.setupWithViewPager(myLiveviewpager);
 
@@ -136,7 +136,6 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
 
     private void upWopwindowo() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.activity_popup_columns, null);
-
         popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setBackgroundDrawable(null);

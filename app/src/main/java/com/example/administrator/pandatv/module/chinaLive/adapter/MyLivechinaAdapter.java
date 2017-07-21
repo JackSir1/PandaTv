@@ -24,7 +24,7 @@ public class MyLivechinaAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return fragments.get(position);
+        return fragments.get(position-1);
     }
 
     @Override
@@ -34,6 +34,6 @@ public class MyLivechinaAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mListName.get(position);
+        return mListName.get(position-1);
     }
 }

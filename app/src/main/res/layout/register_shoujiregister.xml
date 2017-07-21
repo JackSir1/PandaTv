@@ -1,125 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:paddingTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/colorHui"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="15dp"
-    android:gravity="center"
-    android:layout_margin="8dp"
-    android:text="海外用户暂不支持手机号才注册，您可以使用邮箱注册"
-    android:textColor="@color/colorPrimary"
-    />
+    android:orientation="vertical"
+    android:paddingTop="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:gravity="center"
+        android:text="海外用户暂不支持手机号才注册，您可以使用邮箱注册"
+        android:textColor="@color/colorPrimary"
+        android:textSize="13dp" />
+
     <EditText
         android:id="@+id/register_shouji_zhanghao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:textSize="15dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="5dp"
+        android:background="@drawable/shape_white_corner"
         android:hint="账号：请输入手机账号"
-        android:background="@drawable/shape_white_corner"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        >
-
-    <EditText
-        android:id="@+id/register_shouji_photoyanzheng"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:layout_gravity="center_vertical"
         android:paddingLeft="5dp"
-        android:layout_marginRight="15dp"
-        android:hint="请输入图片验证码"
-        android:background="@drawable/shape_white_corner"/>
-    <ImageView
-        android:layout_width="90dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/live_china_add"/>
-    </LinearLayout>
+        android:paddingTop="10dp"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/phone_red_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:text="手机号码不能为空"
+        android:textColor="@color/colorRed"
+        android:textSize="13dp"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        >
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:id="@+id/register_shouji_photoyanzheng"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_white_corner"
+            android:hint="请输入图片验证码"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/shouji_photo"
+            android:layout_width="90dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/live_china_add" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/phone_red_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:text="图片验证码输入有误"
+        android:textColor="@color/colorRed"
+        android:textSize="13dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
 
         <EditText
             android:id="@+id/register_shouji_recivie"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:layout_gravity="center_vertical"
-            android:paddingLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_white_corner"
             android:hint="请输入收到的验证码"
-            android:background="@drawable/shape_white_corner"/>
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:textSize="15dp" />
+
         <Button
             android:id="@+id/register_shouji_receivebut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:background="@drawable/button_bg_blue"
-           android:layout_marginLeft="15dp"
             android:text="获取验证码"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorWhite" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/phone_red_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingLeft="5dp"
+        android:text="验证码不能为空"
+        android:textColor="@color/colorRed"
+        android:textSize="13dp"
+        android:visibility="gone" />
+
     <EditText
         android:id="@+id/register_shouji_writepass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:textSize="15dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
-        android:paddingTop="10dp"
+        android:background="@drawable/shape_white_corner"
+        android:hint="请输入密码"
         android:paddingBottom="10dp"
         android:paddingLeft="5dp"
-        android:hint="请输入密码"
-        android:background="@drawable/shape_white_corner"/>
+        android:paddingTop="10dp"
+        android:textSize="15dp" />
+
     <RadioButton
         android:id="@+id/register_shouji_radiobutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:button="@null"
-        android:layout_marginTop="40dp"
-        android:textSize="15dp"
-        android:checked="true"
-        android:drawablePadding="5dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="40dp"
+        android:button="@null"
+        android:checked="true"
         android:drawableLeft="@drawable/selector_check"
+        android:drawablePadding="5dp"
         android:text="我已阅读并同意《央视网网络服务使用协议》"
-        android:textColor="@color/colorPrimary"/>
+        android:textColor="@color/colorPrimary"
+        android:textSize="15dp" />
 
-<Button
-    android:id="@+id/register_shouji_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="注册"
-    android:textSize="16dp"
-    android:textColor="@color/colorWhite"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="20dp"
-    android:background="@drawable/button_bg_blue"/>
+    <Button
+        android:id="@+id/register_shouji_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_bg_blue"
+        android:text="注册"
+        android:textColor="@color/colorWhite"
+        android:textSize="16dp" />
 </LinearLayout>

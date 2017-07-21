@@ -1,8 +1,7 @@
 package com.example.administrator.pandatv.module.chinaLive.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,23 +9,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.pandatv.R;
+import com.example.administrator.pandatv.app.App;
 import com.example.administrator.pandatv.base.BaseFragment;
+import com.example.administrator.pandatv.model.util.ACache;
+import com.example.administrator.pandatv.net.ThreadUtils;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import cn.smssdk.EventHandler;
-import cn.smssdk.OnSendMessageHandler;
-import cn.smssdk.SMSSDK;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.Headers;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by lizhuofang on 2017/7/18.
@@ -47,10 +59,25 @@ public class ShouJiRegisterFrag extends BaseFragment {
     @BindView(R.id.register_shouji_button)
     Button registerShoujiButton;
     Unbinder unbinder;
+    @BindView(R.id.shouji_photo)
+    ImageView shoujiPhoto;
+    @BindView(R.id.phone_red_number)
+    TextView phoneRedNumber;
+    @BindView(R.id.phone_red_photo)
+    TextView phoneRedPhoto;
+    @BindView(R.id.phone_red_pass)
+    TextView phoneRedPass;
+    Unbinder unbinder1;
     private int a = 60;
     private String phone;
     private String pass;
     private String receive;
+    private byte[] bytes;
+    private String jsonid;
+    private OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+    private ACache aCache;
+    private String zhanghao;
+    private String photoyanzheng;
 
     @Override
     protected int getViweId() {
@@ -60,12 +87,12 @@ public class ShouJiRegisterFrag extends BaseFragment {
     @Override
     protected void initView(View view) {
 
+        aCache = ACache.get(App.activity);
     }
 
     @Override
     protected void loadDate() {
-        SMSSDK.registerEventHandler(eventHandler);
-        SMSSDK.getSupportedCountries();
+        getPhoto();
     }
 
     @Override
@@ -73,127 +100,209 @@ public class ShouJiRegisterFrag extends BaseFragment {
 
     }
 
+
+    /*
+    * 图片验证码
+    * */
+    private void getPhoto() {
+        String from = "http://reg.cntv.cn/simple/verificationCode.action";
+        final Request request = new Request.Builder()
+                .url(from)
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                bytes = response.body().bytes();
+                Headers headers = response.headers();
+                jsonid = headers.get("Set-Cookie");
+
+                ThreadUtils.runOnMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        shoujiPhoto.setImageDrawable(byteToDrawable(bytes));
+                    }
+                });
+            }
+        });
+    }
+
+    public Drawable byteToDrawable(byte[] buteArray) {
+        try {
+            String string = new String(buteArray, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        ByteArrayInputStream ins = new ByteArrayInputStream(buteArray);
+        return Drawable.createFromStream(ins, null);
+    }
+
+    /*
+    * 短信验证码
+    * */
+    private void getMessage() {
+        String url = "http://reg.cntv.cn/regist/getVerifiCode.action";
+        String from = "http://cbox_mobile.regclientuser.cntv.cn";
+//                    手机号
+        String phoneNumber = registerShoujiZhanghao.getText().toString().trim();
+//                    验证码
+        String imgyanzhengma = registerShoujiPhotoyanzheng.getText().toString().trim();
+
+        RequestBody body = new FormBody.Builder()
+                .add("method", "getRequestVerifiCodeM")
+                .add("mobile", phoneNumber)
+                .add("verfiCodeType", "1")
+                .add("verificationCode", imgyanzhengma)
+                .build();
+
+        try {
+            Request request = new Request.Builder().url(url)
+                    .addHeader("Referer", URLEncoder.encode(from, "UTF-8"))
+                    .addHeader("User-Agent", URLEncoder.encode("CNTV_APP_CLIENT_CBOX_MOBILE", "UTF-8"))
+                    .addHeader("Cookie", jsonid)
+                    .post(body).build();
+            aCache.put("Cookie", jsonid);
+            okHttpClient.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Log.i("TAG", "失败");
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String string = response.body().string();
+                    Log.i("TAG", "手机验证码打印：" + string);
+                }
+            });
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+    * 注册
+    * */
+    private void register() {
+        String url = "https://reg.cntv.cn/regist/mobileRegist.do";
+        RequestBody requestBody = null;
+        try {
+            requestBody = new FormBody.Builder()
+                    .add("method", "saveMobileRegisterM")
+                    .add("mobile", registerShoujiZhanghao.getText().toString().trim())
+                    .add("verfiCode", registerShoujiRecivie.getText().toString().toString())
+                    .add("passWd", URLEncoder.encode(registerShoujiWritepass.getText().toString().trim(), "UTF-8"))
+                    .add("addons", URLEncoder.encode("http://cbox_mobile.regclientuser.cntv.cn", "UTF-8"))
+                    .build();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        OkHttpClient okHttpClient1 = new OkHttpClient();
+        Request request2 = null;
+        try {
+            request2 = new Request.Builder()
+                    .url(url)
+                    .addHeader("Referer", URLEncoder.encode("http://cbox_mobile.regclientuser.cntv.cn", "UTF-8"))
+                    .addHeader("User-Agent", URLEncoder.encode("CNTV_APP_CLIENT_CBOX_MOBILE", "UTF-8"))
+                    .post(requestBody)
+                    .build();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        okHttpClient1.newCall(request2).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("lianxi", "result:" + e.getMessage());
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.e("Main", "请求结果" + response.body().string());
+                ThreadUtils.runOnMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(), "注册成功", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
+        unbinder1 = ButterKnife.bind(this, rootView);
         return rootView;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
-        SMSSDK.unregisterEventHandler(eventHandler);
+        unbinder1.unbind();
     }
 
-    @OnClick({R.id.register_shouji_receivebut, R.id.register_shouji_button})
+    @OnClick({R.id.register_shouji_zhanghao,R.id.register_shouji_writepass,R.id.register_shouji_photoyanzheng,R.id.shouji_photo,R.id.register_shouji_receivebut, R.id.register_shouji_button})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.register_shouji_receivebut:
-                phone = registerShoujiZhanghao.getText().toString().trim();
-                receive = registerShoujiRecivie.getText().toString().trim();
-                if(!TextUtils.isEmpty(phone)) {
-                    SMSSDK.getVerificationCode("+86", phone, new OnSendMessageHandler() {
-                        @Override
-                        public boolean onSendMessage(String s, String s1) {
-                            return false;
-                        }
-                    });
-                    handler.post(runnable);
+            case R.id.register_shouji_zhanghao:
+                    phoneRedNumber.setVisibility(View.GONE);
+                break;
+            case R.id.register_shouji_writepass:
+                if(TextUtils.isEmpty(zhanghao)&&TextUtils.isEmpty(photoyanzheng)) {
+                    phoneRedNumber.setVisibility(View.VISIBLE);
+                    phoneRedPhoto.setVisibility(View.VISIBLE);
                 }else{
-                    Toast.makeText(getContext(), "请填写您的手机号", Toast.LENGTH_SHORT).show();
+                    phoneRedNumber.setVisibility(View.GONE);
+                    phoneRedPhoto.setVisibility(View.GONE);
                 }
-                String url = "http://reg.cntv.cn/regist/getVerifiCode.action";
-                String from = "http://cbox_mobile.regclientuser.cntv.cn";
-                HashMap<String, String> tHeaders = new HashMap<String, String>();
-                try {
-
-                    tHeaders.put("Referer", URLEncoder.encode(from, "UTF-8"));
-                    tHeaders.put("User-Agent", URLEncoder.encode("CNTV_APP_CLIENT_CBOX_MOBILE", "UTF-8"));
-                    tHeaders.put("Cookie", "JSESSIONID=" + 2);
-                } catch (Exception e) {
-
+                break;
+            case R.id.register_shouji_photoyanzheng:
+                if(TextUtils.isEmpty(zhanghao)) {
+                        phoneRedNumber.setVisibility(View.VISIBLE);
+                }else {
+                    phoneRedNumber.setVisibility(View.GONE);
+                }
+                break;
+            case R.id.shouji_photo:
+                getPhoto();
+                break;
+            case R.id.register_shouji_receivebut:
+                zhanghao = registerShoujiZhanghao.getText().toString().trim();
+                photoyanzheng = registerShoujiPhotoyanzheng.getText().toString().trim();
+                if(TextUtils.isEmpty(zhanghao)&&TextUtils.isEmpty(photoyanzheng)) {
+                    phoneRedNumber.setVisibility(View.VISIBLE);
+                    phoneRedPhoto.setVisibility(View.VISIBLE);
+                }else{
+                    phoneRedNumber.setVisibility(View.GONE);
+                    phoneRedPhoto.setVisibility(View.GONE);
+                }
+                if (a > 0) {
+                    Timer ti = new Timer();
+                    ti.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            a--;
+                        }
+                    }, 1000);
+                    registerShoujiReceivebut.setText("重新发送" + "(" + ti + ")");
+                    getMessage();
+                } else {
+                    a = 60;
+                    registerShoujiReceivebut.setText("获取验证码成功");
                 }
 
-                HashMap<String, String> params = new HashMap<String, String>();
-                params.put("method", "getRequestVerifiCodeM");
-                params.put("mobile", phone);
-                params.put("verfiCodeType", "1");
-                params.put("verificationCode", receive);
-//                tHandler.postHeaderJson(url, tHeaders, params, 0);
 
                 break;
             case R.id.register_shouji_button:
-                pass = registerShoujiWritepass.getText().toString().trim();
-                if (TextUtils.isEmpty(pass)&&pass.length() < 6 || pass.length() > 18) {
-
-
-                }
+                register();
                 break;
         }
     }
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    Toast.makeText(getContext(), "短信验证成功", Toast.LENGTH_SHORT).show();
-                    break;
-                case 1:
-                    Toast.makeText(getContext(), "短信获取成功", Toast.LENGTH_SHORT).show();
-                    break;
-                case 2:
-                    break;
-            }
-        }
-    };
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            if (a > 0) {
-                registerShoujiReceivebut.setText("正在获取验证码");
-                a--;
-                handler.sendEmptyMessage(2);
-                handler.postDelayed(runnable, 1000);
-                registerShoujiReceivebut.setClickable(false);
-            }  else {
-                a = 60;
-                registerShoujiReceivebut.setClickable(true);
-                registerShoujiReceivebut.setText("验证码获取成功");
-
-            }
-        }
-    };
-    private EventHandler eventHandler = new EventHandler() {
-
-        @Override
-        public void afterEvent(int event, int result, Object data) {
-
-            if (result == SMSSDK.RESULT_COMPLETE) {
-                //回调完成
-                if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                    HashMap<String, Object> map = (HashMap<String, Object>) data;
-                    String shouji = (String) map.get("phone");
-                    if (shouji.equals(phone)) {
-                        handler.sendEmptyMessage(0);
-                    }
-                    //提交验证码成功
-                } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                    Boolean boo = (Boolean) data;
-                    handler.sendEmptyMessage(1);
-                    //获取验证码成功
-                } else if (event == SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {
-                    ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>) data;
-                    Log.e("aaa", list + "");
-                    //返回支持发送验证码的国家列表
-                }
-            } else {
-                ((Throwable) data).printStackTrace();
-            }
-        }
-    };
 }

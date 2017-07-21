@@ -3,6 +3,7 @@ package com.example.administrator.pandatv.module.chinaLive.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.pandatv.R;
+import com.example.administrator.pandatv.db.MyManger;
 import com.example.administrator.pandatv.model.biz.chinaModel.ChinaLiveModel;
 import com.example.administrator.pandatv.model.biz.chinaModel.IChinaLiveModel;
 import com.example.administrator.pandatv.model.entity.livechinaEntity.LoginEntity;
@@ -36,6 +38,7 @@ import java.util.Set;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by lizhuofang on 2017/7/14.
@@ -61,15 +64,24 @@ public class LoginActivity extends Activity {
     @BindView(R.id.livechina_wangjimimaa)
     TextView livechinaWangjimima;
     private AuthAdapter shareAdapter;
+    private SharedPreferences mShared;
+    private SharedPreferences.Editor meditor;
+    private MyManger manger;
+    private OkHttpClient client=new OkHttpClient.Builder().build();
     public ArrayList<SnsPlatform> platforms = new ArrayList<SnsPlatform>();
     private SHARE_MEDIA[] list = {SHARE_MEDIA.QQ, SHARE_MEDIA.SINA};
     private ProgressDialog dialog;
-//    private
+    private String usrid;
+
+    //    private
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.livechina_login);
         ButterKnife.bind(this);
+        manger=new MyManger(this);
+        mShared=getSharedPreferences("data",MODE_PRIVATE);
+        meditor=mShared.edit();
         loginRadiogroup = (RadioGroup) findViewById(R.id.login_radiogroup);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -87,7 +99,7 @@ public class LoginActivity extends Activity {
                         break;
                     case R.id.login_radiobutton_qq:
                         UMShareAPI.get(LoginActivity.this).doOauthVerify(LoginActivity.this, platforms.get(0).mPlatform, authListener);
-                        finish();
+//                        finish();
                         break;
                     case R.id.login_radiobutton_sina:
                         UMShareAPI.get(LoginActivity.this).doOauthVerify(LoginActivity.this, platforms.get(1).mPlatform, authListener);
@@ -135,7 +147,7 @@ public class LoginActivity extends Activity {
                 finish();
                 break;
             case R.id.login_register:
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                final Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 break;
             case R.id.livechina_wangjimimaa:
@@ -145,17 +157,22 @@ public class LoginActivity extends Activity {
             case R.id.login_button:
                 String phone = loginEditNumber.getText().toString().trim();
                 String pass = loginEditPassword.getText().toString().trim();
+
                 if(!TextUtils.isEmpty(phone)&&!TextUtils.isEmpty(pass)) {
                     IChinaLiveModel inchina=new ChinaLiveModel();
                     inchina.getLogin(phone, pass, new MyNetCallBack<LoginEntity>() {
                         @Override
                         public void onSuccess(LoginEntity loginEntity) {
-                            String errType =loginEntity.getErrType();
-                            if(errType.equals(0)) {
-
+                            String errMsg = loginEntity.getErrMsg();
+                            if(errMsg.equals("成功")) {
+                                usrid = loginEntity.getUser_seq_id();
+                               Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                             }else{
-
-                            }
+                               Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                           }
+                            Intent intent2=getIntent();
+                            intent2.putExtra("names","央视网"+usrid);
+                            setResult(50,intent2);
                         }
 
                         @Override
@@ -164,8 +181,8 @@ public class LoginActivity extends Activity {
                         }
                     });
                 }
-                
-                
+
+
                 break;
         }
     }
@@ -198,7 +215,7 @@ public class LoginActivity extends Activity {
             String name=data.get("name");
             Intent intent=getIntent();
             intent.putExtra("na",name);
-            setResult(50,intent);
+            setResult(200,intent);
         }
 
         /**
@@ -230,4 +247,5 @@ public class LoginActivity extends Activity {
         Intent intent=new Intent(this,WJMMActivity.class);
         startActivity(intent);
     }
+
 }
