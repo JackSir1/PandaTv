@@ -51,7 +51,7 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="5dp"
-        android:hint="请输入密码"
+        android:hint="请确认密码"
         android:background="@drawable/shape_white_corner"/>
 
     <LinearLayout
@@ -91,7 +91,6 @@
         android:button="@null"
         android:layout_marginTop="40dp"
         android:textSize="15dp"
-        android:checked="true"
         android:drawablePadding="5dp"
         android:layout_marginLeft="10dp"
         android:drawableLeft="@drawable/selector_check"

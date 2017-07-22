@@ -17,6 +17,7 @@ import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.livechinaEntity.LivechinaTabBean;
 import com.example.administrator.pandatv.model.util.ACache;
+import com.example.administrator.pandatv.model.util.ShowPopuUtils;
 import com.example.administrator.pandatv.module.chinaLive.adapter.DragAdapter;
 import com.example.administrator.pandatv.module.chinaLive.adapter.MyLivechinaAdapter;
 import com.example.administrator.pandatv.module.chinaLive.bdl.BDLFragment;
@@ -37,8 +38,9 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
     ViewPager myLiveviewpager;
     TabLayout myLivetablayout;
     private MyLivechinaAdapter myLivechinaAdapter;
-    private List<String> mTabListName;
-    private List<BaseFragment> mList;
+    private List<String> mTabListName = new ArrayList<>();
+
+    private List<BaseFragment> mList= new ArrayList<>();;
     private ChinaLivePresenter presenter;
     private ACache aCache;
     private PopupWindow popupWindow;
@@ -50,6 +52,7 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
     private List<String> channels = new ArrayList<>();
     private List<String> channels_other = new ArrayList<>();
     private Map<String, String> tagUrlMap;
+    private ShowPopuUtils showPopuUtils;
 
     @Override
     protected int getViweId() {
@@ -58,6 +61,7 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
 
     @Override
     protected void initView(View view) {
+        showPopuUtils = ShowPopuUtils.getInsent().create(getContext());
         aCache = ACache.get(getContext());
         myLivetablayout = (TabLayout) view.findViewById(R.id.livechina_fragment_tablayout);
         myLiveviewpager = (ViewPager) view.findViewById(R.id.livechina_fragment_viewpager);
@@ -71,7 +75,7 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
 
         new ChinaLivePresenter(this);
         presenter.start();
-
+        showPopuUtils.popuUtilsDismiss();
     }
 
     @Override
@@ -94,17 +98,18 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
             livechinaTabBean1 = livechinaTabBean;
         }
 
-        add_Fragment(livechinaTabBean1);
+        add_Fragment(livechinaTabBean);
         List<LivechinaTabBean.TablistBean> tablist = livechinaTabBean1.getTablist();
         List<LivechinaTabBean.AlllistBean> alllist = livechinaTabBean1.getAlllist();
         initDatatitle(tablist);
         initDataOther(alllist);
+        showPopuUtils.popuUtilsDismiss();
 
     }
 
     public void add_Fragment(LivechinaTabBean popupBean) {
-        mTabListName = new ArrayList<>();
-        mList = new ArrayList<>();
+        mTabListName.clear();
+        mList.clear();
         tagUrlMap = new HashMap<>();
         List<LivechinaTabBean.TablistBean> tablist = popupBean.getTablist();
         List<LivechinaTabBean.AlllistBean> alllist = popupBean.getAlllist();
@@ -123,10 +128,9 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
             tagUrlMap.put(alllistBean.getTitle(), alllistBean.getUrl());
         }
         myLivetablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        myLivechinaAdapter = new MyLivechinaAdapter(getChildFragmentManager(), mTabListName, mList);
+        myLivechinaAdapter = new MyLivechinaAdapter(getFragmentManager(), mTabListName, mList);
         myLiveviewpager.setAdapter(myLivechinaAdapter);
         myLivetablayout.setupWithViewPager(myLiveviewpager);
-
     }
 
     @Override
@@ -136,7 +140,6 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
 
     private void upWopwindowo() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.activity_popup_columns, null);
-
         popupWindow = new PopupWindow(view, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setBackgroundDrawable(null);
@@ -216,8 +219,8 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
     }
 
     public void setRefresh() {
-        mTabListName = new ArrayList<>();
-        mList = new ArrayList<>();
+        mTabListName.clear();
+        mList.clear();
         BDLFragment badaLingFragment = null;
         Bundle bundle = null;
         for (String title : channels) {

@@ -31,7 +31,7 @@ public class Bdadapter extends RecyclerView.Adapter<Bdadapter.Holder> {
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.livechina_adapter,null);
+        View view= LayoutInflater.from(mCon).inflate(R.layout.livechina_adapter,null);
         Holder holder=new Holder(view);
         return holder;
     }

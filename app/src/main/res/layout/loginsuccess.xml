@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorHui"
+    android:id="@+id/duccess_main_login"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
-        android:padding="15dp">
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/loginsuc_return_imageView"
@@ -35,7 +36,7 @@
         android:layout_height="70dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:background="@color/colorWhite">
 
         <TextView
@@ -68,7 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="10dp"
         android:background="@color/colorWhite">
 
@@ -95,4 +96,14 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/personal_enter_img" />
     </LinearLayout>
+    <Button
+        android:id="@+id/loginsuccess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/button_bg_blue"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="160dp"
+        android:text="退出登录"/>
 </LinearLayout>

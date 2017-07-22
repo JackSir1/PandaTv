@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.administrator.pandatv">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <!--使用的权限-->
@@ -41,7 +43,6 @@
         <activity android:name=".StartActivity"/>
         <activity android:name=".MainActivity">
         </activity>
-        <activity android:name=".module.chinaLive.activity.LiveChinaAdd"/>
         <activity android:name=".PersonalActivity"/>
         <activity android:name=".WelcomeActivity">
             <intent-filter>
@@ -51,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".model.util.playVideoUtil.PlayViedoActivity"/>
-        <activity android:name=".module.chinaLive.activity.CehuaActivity"/>
+        <activity android:name=".module.chinaLive.activity.HDActivity"/>
         <activity android:name=".module.chinaLive.activity.CollectionActivity" />
         <activity android:name=".module.chinaLive.activity.HistoryActivity" />
         <activity android:name=".module.chinaLive.activity.FankuiANDHelpActivity" />
@@ -63,6 +64,7 @@
         <activity android:name=".module.chinaLive.activity.SettingActivity" />
         <activity android:name=".PlayViedoActivity"/>
         <activity android:name=".module.chinaLive.activity.WebActivity"/>
+        <activity android:name=".SuccessActivity"/>
         <!--qq-->
         <activity
             android:name="com.umeng.qq.tencent.AuthActivity"
@@ -109,7 +111,6 @@
             android:value="5969be157666130b30001e28">
         </meta-data>
 
-
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -134,6 +135,4 @@
         </activity>
 
     </application>
-    <!--Error:Execution failed for task ':app:transformClassesWithJarMergingForDebug'.-->
-    <!--&gt; com.android.build.api.transform.TransformException: java.util.zip.ZipException: duplicate entry: com/sina/sso/RemoteSSO$Stub$Proxy.class-->
 </manifest>
