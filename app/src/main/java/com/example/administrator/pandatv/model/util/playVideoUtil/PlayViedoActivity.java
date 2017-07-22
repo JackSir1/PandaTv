@@ -57,26 +57,34 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             PlayViedoActivity.this.finish();
+            System.exit(0);
 
 
         }
 
         return false;
     }
-    public void setVideoPlayer(String videoUrl, String title) {
+    public void setVideoPlayer(final String videoUrl, final String title) {
         play.setUp(videoUrl
                 ,JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, title);
             Log.e("TAG",videoUrl);
         JCVideoPlayer.setJcUserAction(new MyUserActionStandard());
         play.setMonitor(new JCVideoPlayerStandard.imgClickon() {
             @Override
+            //分享
             public void Share(View view) {
                  share();
                 Toast.makeText(PlayViedoActivity.this, "分享", Toast.LENGTH_SHORT).show();
             }
 
             @Override
+            //收藏
             public void CollectionMonitor(CompoundButton compoundButton, boolean b) {
+                if(b==true) {
+                     Toast.makeText(PlayViedoActivity.this, "已收藏", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(PlayViedoActivity.this, "已取消收藏", Toast.LENGTH_SHORT).show();
+                }
 
             }
 
@@ -87,11 +95,19 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
 
             @Override
             public void setgq() {
+          Toast.makeText(PlayViedoActivity.this, "已切换至高清", Toast.LENGTH_SHORT).show();
+                //play.removeAllViews();
+                play.setUp(videoUrl
+                        ,JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, title);
 
             }
 
             @Override
             public void setbq() {
+                //play.removeAllViews();
+                play.setUp(videoUrl
+                        ,JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, title);
+                Toast.makeText(PlayViedoActivity.this, "已切换至标清", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -104,10 +120,11 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
     }
 
     @Override
-    public void getVedioUrl(PlayVideoBean playVideoBean) {
+    public void getVedioUrl( final PlayVideoBean playVideoBean) {
         String hls_url = playVideoBean.getHls_url();
         setVideoPlayer(hls_url,this.title);
     }
+    //分享
        private void share() {
 
         UMImage image = new UMImage(PlayViedoActivity.this,R.drawable.ic_launcher);
