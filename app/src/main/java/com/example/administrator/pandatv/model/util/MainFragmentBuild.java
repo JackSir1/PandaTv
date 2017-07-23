@@ -61,7 +61,7 @@ public class MainFragmentBuild {
         return null;
     }
     public MainFragmentBuild builder(){
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
         return this;
     }
 

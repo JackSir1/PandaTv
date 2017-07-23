@@ -11,6 +11,7 @@ import com.androidkun.callback.PullToRefreshListener;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.GGBean;
+import com.example.administrator.pandatv.model.util.ShowPopuUtils;
 import com.example.administrator.pandatv.module.ggVideo.adapter.GGViedoAdapter;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
     private List<GGBean.ListBean> arraylist = new ArrayList<>();
     GGVideoContract.Presenter presenter;
     private int index = 0;
+    private ShowPopuUtils showPopuUtils;
 
     @Override
     protected int getViweId() {
@@ -37,6 +39,7 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
 
     @Override
     protected void initView(View view) {
+
         View inflate = LayoutInflater.from(getContext()).inflate(R.layout.ggimage, null, false);
         recyGg.addHeaderView(inflate);
         recyGg.setPullRefreshEnabled(true);
@@ -48,6 +51,8 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
 
     @Override
     protected void loadDate() {
+        showPopuUtils = ShowPopuUtils.getInsent().create(getContext());
+
         presenter.start();
     }
 
@@ -85,6 +90,7 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
             GGBean.ListBean listBean = ggBean.getList().get(i);
             arraylist.add(listBean);
         }
+        showPopuUtils.popuUtilsDismiss();
 
         GGViedoAdapter adapter = new GGViedoAdapter(getContext(), arraylist);
 
