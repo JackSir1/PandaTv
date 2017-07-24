@@ -3,6 +3,7 @@ package com.example.administrator.pandatv.module.pandaObserver.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -59,6 +60,12 @@ public class PandaObserverWebViewActivity extends BaseActivity {
     @Override
     protected void setListener() {
 
+        observerWebBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

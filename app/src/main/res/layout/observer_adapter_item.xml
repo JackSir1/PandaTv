@@ -19,19 +19,19 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/lpanda_bottom_gra"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/y45">
             <ImageView
 
                 android:src="@drawable/home_play_icon"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="@dimen/x10"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/x35"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/observer_list_time"
-                android:paddingLeft="@dimen/x20"
+                android:paddingLeft="@dimen/x10"
                 android:layout_gravity="center_vertical"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textColor="@color/colorWhite"
                 android:text="00:31"
                 android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
             android:layout_marginLeft="@dimen/x20"
             android:textSize="@dimen/x20"
             android:textColor="@color/colorBlack"
-            android:layout_marginTop="@dimen/y20"
+            android:layout_marginTop="@dimen/y90"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

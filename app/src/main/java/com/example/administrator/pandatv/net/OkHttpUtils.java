@@ -1,10 +1,12 @@
 package com.example.administrator.pandatv.net;
 
 import com.example.administrator.pandatv.app.App;
+import com.example.administrator.pandatv.model.util.ACache;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -52,13 +54,14 @@ public class OkHttpUtils implements IHttp{
         }
         Request request = new Request.Builder()
                 .url(url).build();
+
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call,final IOException e) {
                 App.content.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                      //  callBack.onError(e.getMessage().toString());
+                        callBack.onError(e.getMessage().toString());
                     }
                 });
             }
@@ -142,6 +145,9 @@ public class OkHttpUtils implements IHttp{
         Type[] actualTypeArguments = ((ParameterizedType) types[0]).getActualTypeArguments();
         Type type = actualTypeArguments[0];
         T t = gson.fromJson(jsonData,type);
+        String simpleName = t.getClass().getSimpleName();
+        ACache aCache=ACache.get(App.content,"interfaceCache");
+        aCache.put(simpleName, (Serializable) t);
         return t;
     }
 }

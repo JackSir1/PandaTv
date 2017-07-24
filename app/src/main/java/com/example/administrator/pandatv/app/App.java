@@ -3,7 +3,9 @@ package com.example.administrator.pandatv.app;
 import android.app.Application;
 
 import com.example.administrator.pandatv.base.BaseActivity;
+import com.example.administrator.pandatv.config.crash.CrashHandler;
 import com.example.administrator.pandatv.net.IHttp;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -23,6 +25,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        MobclickAgent.setDebugMode( true );
         Config.DEBUG = true;
         QueuedWork.isUseThreadPool = false;
         UMShareAPI.get(this);
@@ -31,6 +34,8 @@ public class App extends Application {
         PlatformConfig.setSinaWeibo("2699399578", "2a6cf5946a9cf8407923d46ce23e09d7", "http://sns.whalecloud.com");
         ShareSDK.initSDK(this);
         SMSSDK.initSDK(this, "1e506690017a4", "a627c68689e042e44ed4177f45e65638");
+
+//        CrashHandler.getInstance().init(this);//初始化全局异常管理
     }
 
 }

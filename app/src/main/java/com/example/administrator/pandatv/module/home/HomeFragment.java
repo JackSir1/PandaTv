@@ -17,8 +17,10 @@ import com.androidkun.PullToRefreshRecyclerView;
 import com.androidkun.callback.PullToRefreshListener;
 import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.R;
+import com.example.administrator.pandatv.app.App;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.HomeBean;
+import com.example.administrator.pandatv.model.util.ACache;
 import com.example.administrator.pandatv.model.util.ShowPopuUtils;
 import com.example.administrator.pandatv.module.home.viewpager.HomeAdapter;
 import com.example.administrator.pandatv.module.home.viewpager.HomeViewPagerAdapter;
@@ -214,7 +216,44 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     };
 
     @Override
+    public void unNet() {
+        ACache aCache = ACache.get(App.content,"interfaceCache");
+        HomeBean homeBean = (HomeBean) aCache.getAsObject("HomeBean");
+        if (homeBean.getData()!=null){
+            HomeBean.DataBean data = homeBean.getData();
+            List<Object> list = new ArrayList<>();
+            list.add(data.getPandaeye());
+            list.add(data.getPandalive());
+            list.add(data.getArea());
+            list.add(data.getWalllive());
+            list.add(data.getChinalive());
+            HomeAdapter adapter = new HomeAdapter(getContext(), list);
+            homeRecyclerView.setAdapter(adapter);
+            List<HomeBean.DataBean.BigImgBean> bigImgBeanList = homeBean.getData().getBigImg();
+            showViewPager(bigImgBeanList);
+            showPopuUtils.popuUtilsDismiss();
+        }
+    }
+
+    @Override
     public void showErrorMassage(String errorMessage) {
+
+//        ACache aCache = ACache.get(App.content,"interfaceCache");
+//        HomeBean homeBean = (HomeBean) aCache.getAsObject("HomeBean");
+//        if (homeBean.getData()!=null){
+//            HomeBean.DataBean data = homeBean.getData();
+//            List<Object> list = new ArrayList<>();
+//            list.add(data.getPandaeye());
+//            list.add(data.getPandalive());
+//            list.add(data.getArea());
+//            list.add(data.getWalllive());
+//            list.add(data.getChinalive());
+//            HomeAdapter adapter = new HomeAdapter(getContext(), list);
+//            homeRecyclerView.setAdapter(adapter);
+//            List<HomeBean.DataBean.BigImgBean> bigImgBeanList = homeBean.getData().getBigImg();
+//            showViewPager(bigImgBeanList);
+//            showPopuUtils.popuUtilsDismiss();
+//        }
     }
 
     @Override

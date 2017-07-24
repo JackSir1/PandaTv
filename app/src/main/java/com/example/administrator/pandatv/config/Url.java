@@ -22,6 +22,9 @@ public class Url {
     //熊猫播报
     public  static  final  String PandaObserver=BASEURL+"xmwh/index.json";
 
+    //熊猫播报第一个item
+    public static final String PANDAOBSERVERFIRSTITEM="http://api.cntv.cn/video/videolistById?p=1&serviceId=panda&n=150&vsid=VSET100311356635";
+
     //视频播放
     public static final String PandaVideoPlayPATH="http://vdn.apps.cntv.cn/api/getVideoInfoForCBox.do";
     //熊猫直播top

@@ -41,8 +41,6 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
         recyGg.addHeaderView(inflate);
         recyGg.setPullRefreshEnabled(true);
         recyGg.setLoadingMoreEnabled(true);
-
-
         recyGg.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
@@ -53,7 +51,6 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
 
     @Override
     protected void setListener() {
-
     }
 
     @Override

@@ -24,7 +24,6 @@ public class PandaObserverAdapter extends BaseAdapter<PandaObserverBean.ListBean
     private OnRecyclerItemClickListener  onItemClickListener;
     public void setOnRecyclerItemClickListener(OnRecyclerItemClickListener  onItemClickListener){
         this.onItemClickListener=onItemClickListener;
-
     }
 
     @Override

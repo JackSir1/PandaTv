@@ -23,6 +23,8 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
+import com.example.administrator.pandatv.model.util.saveData.PandaTvBean;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -43,6 +45,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -70,6 +73,7 @@ public class ACache {
 	public static ACache get(Context ctx, String cacheName) {
 		File f = new File(ctx.getCacheDir(), cacheName);
 		return get(f, MAX_SIZE, MAX_COUNT);
+
 	}
 
 	public static ACache get(File cacheDir) {
@@ -261,13 +265,11 @@ public class ACache {
 	// =======================================
 	/**
 	 * 保存 JSONArray数据 到 缓存中
-	 * 
-	 * @param key
+	 *  @param key
 	 *            保存的key
 	 * @param value
-	 *            保存的JSONArray数据
 	 */
-	public void put(String key, JSONArray value) {
+	public void put(String key, Map<String, Object> value) {
 		put(key, value.toString());
 	}
 
@@ -291,7 +293,7 @@ public class ACache {
 	 * @param key
 	 * @return JSONArray数据
 	 */
-	public JSONArray getAsJSONArray(String key) {
+	public ArrayList<Object> getAsJSONArray(String key) {
 		String JSONString = getAsString(key);
 		try {
 			JSONArray obj = new JSONArray(JSONString);
@@ -339,11 +341,12 @@ public class ACache {
 	 * 
 	 * @param key
 	 *            the file name.
+	 * @param map
 	 * @return OutputStream stream for writing data.
 	 * @throws FileNotFoundException
 	 *             if the file can not be created.
 	 */
-	public OutputStream put(String key) throws FileNotFoundException {
+	public OutputStream put(String key, Map<String, PandaTvBean> map) throws FileNotFoundException {
 		return new xFileOutputStream(mCache.newFile(key));
 	}
 

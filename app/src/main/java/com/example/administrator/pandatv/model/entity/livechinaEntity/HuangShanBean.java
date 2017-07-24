@@ -1,12 +1,13 @@
 package com.example.administrator.pandatv.model.entity.livechinaEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by lizhuofang on 2017/7/14.
  */
 
-public class HuangShanBean {
+public class HuangShanBean implements Serializable {
 
     private List<LiveBean> live;
 
@@ -18,7 +19,7 @@ public class HuangShanBean {
         this.live = live;
     }
 
-    public static class LiveBean {
+    public static class LiveBean implements Serializable{
         /**
          * title : 黄山始信峰
          * brief : 始信峰为黄山36小峰之一，海拔1683米。这里巧石争艳，奇松林立，三面临空，悬崖千丈，云蒸霞蔚，风姿独秀。相传，明代黄习远自云谷寺游至此峰，如入画境，似幻而真，方信黄山风景奇绝，并题名“始信”。

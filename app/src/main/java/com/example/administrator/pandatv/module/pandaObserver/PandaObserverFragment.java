@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.androidkun.PullToRefreshRecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.R;
+import com.example.administrator.pandatv.app.App;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.PandaObserverBean;
 import com.example.administrator.pandatv.model.util.ACache;
@@ -27,6 +28,7 @@ import com.example.administrator.pandatv.module.pandaObserver.activity.PandaObse
 import com.example.administrator.pandatv.module.pandaObserver.adapter.OnRecyclerItemClickListener;
 import com.example.administrator.pandatv.module.pandaObserver.adapter.PandaObserverAdapter;
 
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,9 +51,10 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
     private int currmentNum = 100000;
 
     private PandaObserverAdapter pandaObserverAdapter;
-    private List<PandaObserverBean.ListBean> beanList=new ArrayList<>();
+    private List<PandaObserverBean.ListBean> beanList = new ArrayList<>();
     private PandaObserverContract.Presenter presenter;
     private ShowPopuUtils showPopuUtils;
+
     @Override
     protected int getViweId() {
         return R.layout.observer_fragment;
@@ -60,16 +63,16 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
     @Override
     protected void initView(View view) {
         showPopuUtils = ShowPopuUtils.getInsent().create(getContext());
-        LinearLayoutManager manager=new LinearLayoutManager(getContext());
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         observerRecyclerView.setLayoutManager(manager);
 
         inflater = LayoutInflater.from(getContext()).inflate(R.layout.home_viewpager_main, null);
-        viewpagerLinearLayout= (LinearLayout) inflater.findViewById(R.id.home_viewpager_linearLayout);
-        viewpager= (ViewPager) inflater.findViewById(R.id.home_viewpager);
+        viewpagerLinearLayout = (LinearLayout) inflater.findViewById(R.id.home_viewpager_linearLayout);
+        viewpager = (ViewPager) inflater.findViewById(R.id.home_viewpager);
         observerRecyclerView.addHeaderView(inflater);
         observerRecyclerView.displayLastRefreshTime(true);
-        pandaObserverAdapter=new PandaObserverAdapter(getContext(),beanList);
+        pandaObserverAdapter = new PandaObserverAdapter(getContext(), beanList);
         observerRecyclerView.setAdapter(pandaObserverAdapter);
         presenter.start();
     }
@@ -83,11 +86,16 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
         pandaObserverAdapter.setOnRecyclerItemClickListener(new OnRecyclerItemClickListener() {
             @Override
             public void getViewContent(View view, PandaObserverBean.ListBean listBean) {
-                Intent intent=new Intent(getContext(), PandaObserverContentActivity.class);
-                intent.putExtra("url",listBean.getUrl());
-                intent.putExtra("id",listBean.getId());
-                intent.putExtra("type",listBean.getType());
-                getContext().startActivity(intent);
+                String type = listBean.getType();
+                Intent intent;
+                if (type.endsWith("1")) {
+
+                } else if (type.endsWith("2")) {
+                    intent = new Intent(getContext(), PandaObserverContentActivity.class);
+                    getContext().startActivity(intent);
+                }
+
+//                getContext().startActivity(intent);
             }
         });
         viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -114,13 +122,14 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
             }
         });
     }
+
     //輪播圖
     public void showViewPager(final List<PandaObserverBean.BigImgBean> bigImgBeanList) {
 
         View view = null;
         CheckBox checkBox;
         View view1 = null;
-        for (PandaObserverBean.BigImgBean t: bigImgBeanList) {
+        for (PandaObserverBean.BigImgBean t : bigImgBeanList) {
             view1 = LayoutInflater.from(getContext()).inflate(R.layout.checkbox_item, null);
             checkBox = (CheckBox) view1.findViewById(R.id.viewpager_checkbox_btn);
             viewpagerLinearLayout.addView(view1);
@@ -147,9 +156,9 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
                 String type = bigImgBeanList.get(posetion).getType();
                 String pid = bigImgBeanList.get(posetion).getPid();
                 String url = bigImgBeanList.get(posetion).getUrl();
-                if (type.endsWith("5")){
-                    Intent intent=new Intent(getContext(), PandaObserverWebViewActivity.class);
-                    intent.putExtra("url",url);
+                if (type.endsWith("5")) {
+                    Intent intent = new Intent(getContext(), PandaObserverWebViewActivity.class);
+                    intent.putExtra("url", url);
                     startActivity(intent);
                 }
 
@@ -159,9 +168,10 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
 
     @Override
     public void setPresenter(PandaObserverContract.Presenter presenter) {
-        this.presenter=presenter;
+        this.presenter = presenter;
     }
-    public void setListView(List<PandaObserverBean.ListBean> listBeanList){
+
+    public void setListView(List<PandaObserverBean.ListBean> listBeanList) {
         beanList.addAll(listBeanList);
         pandaObserverAdapter.notifyDataSetChanged();
     }
@@ -176,19 +186,34 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
 
     @Override
     public void setResult(PandaObserverBean observerBean) {
-        ACache aCache = ACache.get(getContext());
-        if (observerBean == null) {
-            PandaObserverBean homeBean1 = (PandaObserverBean) aCache.getAsObject("homeBean");
-            if (homeBean1!=null){
-                observerBean=homeBean1;
-            }
-        } else {
-            aCache.put("homeBean", observerBean);
-        }
+
         setListView(observerBean.getList());
         showViewPager(observerBean.getBigImg());
         showPopuUtils.popuUtilsDismiss();
     }
+
+    @Override
+    public void unNet() {
+        ACache aCache = ACache.get(getContext(),"interfaceCache");
+        PandaObserverBean homeBean1 = (PandaObserverBean) aCache.getAsObject("homeBean");
+        if (homeBean1 != null) {
+            setListView(homeBean1.getList());
+            showViewPager(homeBean1.getBigImg());
+            showPopuUtils.popuUtilsDismiss();
+        }
+    }
+
+    @Override
+    public void setError(String error) {
+//        ACache aCache = ACache.get(getContext(),"interfaceCache");
+//        PandaObserverBean homeBean1 = (PandaObserverBean) aCache.getAsObject("homeBean");
+//        if (homeBean1 != null) {
+//            setListView(homeBean1.getList());
+//            showViewPager(homeBean1.getBigImg());
+//            showPopuUtils.popuUtilsDismiss();
+//        }
+    }
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

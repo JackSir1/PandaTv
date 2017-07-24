@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -21,29 +23,34 @@ public class WelcomeActivity extends AppCompatActivity {
     ImageView welcomeImage;
     private Boolean isFirst = true;
     private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor edit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_maian);
         ButterKnife.bind(this);
-
-
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
         sharedPreferences = getSharedPreferences("start", MODE_PRIVATE);
+        edit = sharedPreferences.edit();
         isFirst = sharedPreferences.getBoolean("isFirst", true);
+
         init();
 
     }
 
     public void init() {
         if (isFirst) {
-            handler.sendEmptyMessageDelayed(100, 2000);
-            SharedPreferences.Editor edit = sharedPreferences.edit();
+
             edit.putBoolean("isFirst", false);
+            edit.commit();
+
+            handler.sendEmptyMessageDelayed(100, 2000);
 
         } else {
             handler.sendEmptyMessageDelayed(200, 2000);
         }
+
 
     }
 
@@ -64,4 +71,11 @@ public class WelcomeActivity extends AppCompatActivity {
             finish();
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeMessages(200);
+        handler.removeMessages(100);
+    }
 }

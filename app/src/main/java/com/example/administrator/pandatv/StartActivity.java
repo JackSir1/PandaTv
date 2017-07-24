@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.administrator.pandatv.config.adapter.StartViewPagerAdapter;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,17 @@ public class StartActivity extends AppCompatActivity {
         imageView.setImageResource(R.drawable.guide_three);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageViewList.add(imageView);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
     public void setListener(){
         imageViewList.get(2).setOnClickListener(new View.OnClickListener() {

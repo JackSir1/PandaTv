@@ -11,6 +11,7 @@ import com.example.administrator.pandatv.model.entity.PandaObserverBean;
 public interface PandaObserverContract {
     interface View extends BaseView<Presenter> {
         void setResult(PandaObserverBean observerBean);
+        void setError(String error);
     }
     interface Presenter extends BasePresenter {
 

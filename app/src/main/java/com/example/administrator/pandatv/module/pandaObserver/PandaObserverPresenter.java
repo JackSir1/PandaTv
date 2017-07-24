@@ -27,7 +27,7 @@ public class PandaObserverPresenter implements PandaObserverContract.Presenter {
 
             @Override
             public void onError(String error) {
-
+                view.setError(error);
             }
         });
     }

@@ -1,5 +1,7 @@
 package com.example.administrator.pandatv.model.util;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -16,10 +18,10 @@ public class MainFragmentBuild {
     private FragmentTransaction transaction;
     private BaseFragment fragment,lastFragment;
     private MainFragmentBuild(){
-
         manager = App.content.getSupportFragmentManager();
     }
     public static MainFragmentBuild getInsenter(){
+
         if (fragmentBuild==null){
             synchronized (MainFragmentBuild.class){
                 if (fragmentBuild==null){
@@ -61,7 +63,7 @@ public class MainFragmentBuild {
         return null;
     }
     public MainFragmentBuild builder(){
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
         return this;
     }
 

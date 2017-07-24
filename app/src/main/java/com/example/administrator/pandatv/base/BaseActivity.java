@@ -5,7 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.administrator.pandatv.app.App;
+import com.example.administrator.pandatv.config.crash.AppManager;
 import com.example.administrator.pandatv.net.HttpFactory;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 
@@ -21,9 +23,22 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getViewID());
         ButterKnife.bind(this);
         App.iHttp = new HttpFactory().create();
+        AppManager.getAppManager().addActivity(this);
         initView();
         setListener();
         setIntent();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     protected abstract int getViewID();
