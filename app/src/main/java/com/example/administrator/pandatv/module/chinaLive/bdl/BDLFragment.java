@@ -1,30 +1,36 @@
 package com.example.administrator.pandatv.module.chinaLive.bdl;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
 
-import com.androidkun.PullToRefreshRecyclerView;
-import com.androidkun.callback.PullToRefreshListener;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.livechinaEntity.LiveBDLBean;
-import com.example.administrator.pandatv.module.chinaLive.adapter.BDLAdapter;
+import com.example.administrator.pandatv.module.chinaLive.adapter.Bdadapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler2;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**
  * Created by lizhuofang on 2017/7/13.
  */
 public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.View {
     BDLChinaLiveContract.Presenter presenter;
-    PullToRefreshRecyclerView bdlframent;
-    private BDLAdapter bdlAdapter;
+    RecyclerView bdlframent;
+    private Bdadapter bdlAdapter;
     private List<LiveBDLBean.LiveBean> mList;
     private Bundle bundle;
-
+    private PtrClassicFrameLayout ptrFrameLayout;
+    Handler handler=new Handler();
+    int pager=0;
     @Override
     protected int getViweId() {
         return R.layout.bdlfragment;
@@ -32,15 +38,15 @@ public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.Vi
 
     @Override
     protected void initView(View view) {
-        bdlframent = (PullToRefreshRecyclerView) view.findViewById(R.id.bdlframent);
+        bdlframent = (RecyclerView) view.findViewById(R.id.bdlframent);
+        ptrFrameLayout= (PtrClassicFrameLayout) view.findViewById(R.id.main_ptr);
     }
 
     @Override
     protected void loadDate() {
         mList = new ArrayList<>();
         bdlframent.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
-        bdlframent.setLoadingMoreEnabled(true);
-        bdlframent.setPullRefreshEnabled(true);
+
         new BDLChinaLivePresenterTS(this);
         if(bundle!=null) {
             String url = bundle.getString("url");
@@ -50,31 +56,44 @@ public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.Vi
 
     @Override
     protected void setListener() {
-        bdlframent.setPullToRefreshListener(new PullToRefreshListener() {
+        ptrFrameLayout.postDelayed(new Runnable() {
             @Override
-            public void onRefresh() {
-                bdlframent.postDelayed(new Runnable() {
+            public void run() {
+                ptrFrameLayout.autoRefresh(true);
+            }
+        },2000);
+        ptrFrameLayout.setPtrHandler(new PtrDefaultHandler2() {
+            @Override
+            public void onLoadMoreBegin(PtrFrameLayout frame) {
+                handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        loadDate();
-                        bdlframent.setRefreshComplete();
-                        bdlAdapter.notifyDataSetChanged();
+//                        pager++;
+//                        loadDate();
+//                        bdlAdapter.notifyDataSetChanged();
+//                        ptrFrameLayout.setLoadingMinTime(1000);
+
                     }
-                },2000);
+                }, 1000);
+
             }
 
             @Override
-            public void onLoadMore() {
-                bdlframent.postDelayed(new Runnable() {
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        loadDate();
-//                        bdlframent.setLoadMoreComplete();
-//                        bdlAdapter.notifyDataSetChanged();
+                        mList.clear();
+                        loadDate();
+                        bdlAdapter.notifyDataSetChanged();
+                        ptrFrameLayout.refreshComplete();
+                        ptrFrameLayout.autoLoadMore(true);
                     }
-                },2000);
+                }, 1000);
+
             }
         });
+
     }
 
     @Override
@@ -102,8 +121,9 @@ public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.Vi
         List<LiveBDLBean.LiveBean> live = tablistBean.getLive();
         Log.e("bdffragment", "请求，，，" + live);
         mList.addAll(live);
-        bdlAdapter = new BDLAdapter(getContext(), mList);
+        bdlAdapter = new Bdadapter(getContext(), mList);
         bdlframent.setAdapter(bdlAdapter);
+        bdlAdapter.notifyDataSetChanged();
     }
 
     @Override

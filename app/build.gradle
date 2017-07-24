@@ -55,6 +55,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.2.0'
     compile 'com.androidkun:pulltorefreshrecyclerview:1.0.6'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'in.srain.cube:ptr-load-more:1.0.6'
     //    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     testCompile 'junit:junit:4.12'
     //    compile 'org.greenrobot:greendao:3.2.0'
@@ -81,5 +83,6 @@ dependencies {
     compile(name: 'SMSSDKGUI-2.1.4', ext: 'aar') {
         exclude group: 'nineoldandroids'
     }
-    compile project(':jcvideoplayer-libs')
+
+    compile project(path: ':jcvideoplayer-libs')
 }

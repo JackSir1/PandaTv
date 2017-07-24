@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.administrator.pandatv">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <!--使用的权限-->
@@ -43,7 +45,6 @@
         <activity android:name=".StartActivity"/>
         <activity android:name=".MainActivity">
         </activity>
-        <activity android:name=".module.chinaLive.activity.LiveChinaAdd"/>
         <activity android:name=".PersonalActivity"/>
         <activity android:name=".WelcomeActivity">
             <intent-filter>
@@ -53,9 +54,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".model.util.playVideoUtil.PlayViedoActivity"
-            android:screenOrientation="sensorLandscape"/>
-        <activity android:name=".module.chinaLive.activity.CehuaActivity"/>
-        <activity android:name=".module.chinaLive.activity.CollectionActivity" />
+            android:screenOrientation="sensorLandscape"
+            />
+        <activity android:name=".module.chinaLive.activity.HDActivity"/>
+
+        <activity android:name=".module.chinaLive.activity.CollectionActivity"/>
         <activity android:name=".module.chinaLive.activity.HistoryActivity" />
         <activity android:name=".module.chinaLive.activity.FankuiANDHelpActivity" />
         <activity android:name=".module.chinaLive.activity.LikeoursActivity" />
@@ -64,7 +67,8 @@
         <activity android:name=".module.chinaLive.activity.RegisterActivity" />
         <activity android:name=".module.chinaLive.activity.LoginActivity" />
         <activity android:name=".module.chinaLive.activity.SettingActivity" />
-        <activity android:name=".PlayViedoActivity"/>
+        <activity android:name=".SuccessActivity"/>
+        <activity android:name=".UpdateInfo"/>
         <activity android:name=".module.chinaLive.activity.WebActivity"/>
         <!--qq-->
         <activity

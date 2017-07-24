@@ -20,6 +20,7 @@ import cn.smssdk.SMSSDK;
 
 public class App extends Application {
     public static BaseActivity content;
+    public static RegisterActivity activity;
     public static IHttp iHttp;
 
     @Override

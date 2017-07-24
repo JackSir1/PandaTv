@@ -34,6 +34,26 @@ public class ShowDialogUtils {
         return showDialogUtils;
     }
 
+    public ShowDialogUtils setViewId(final IShowDialogUtils ShowDialogUtils) {
+        if (netType() == 1) {
+            dialog.setTitle("您正在使用移动数据网络，所产生的流量费由当地运营商收取，是否继续？");
+            dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ShowDialogUtils.setMaked();
+                }
+            });
+            dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.create().show();
+        }
+        return this;
+    }
+
     private Boolean wifiConnected, mobileConnected;
 
     public ShowDialogUtils updateConnectedFlags(Context context) {

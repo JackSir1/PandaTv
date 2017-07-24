@@ -15,7 +15,7 @@ public class MyManger {
     private MyHepler myHepler;
     private SQLiteDatabase mDB;
     private Context context;
-    private final String DB_NAME = "lisuyun.db";
+    private final String DB_NAME = "lizhuofang.db";
     private final int DB_VERSION = 1;
 
     public MyManger(Context context) {
@@ -36,7 +36,7 @@ public class MyManger {
         values.put("name", name);
         values.put("pwd", pwd);
 
-        long insert = mDB.insert("lisuyun", null, values);
+        long insert = mDB.insert("lizhuofang", null, values);
 
         if (insert > 0) {
             boo = true;
@@ -51,12 +51,11 @@ public class MyManger {
      */
     public List<LoginEntity> QueryAll() {
         List<LoginEntity> mList = new ArrayList<>();
-        Cursor cursor = mDB.query("lisuyun", null, null, null, null, null, null);
+        Cursor cursor = mDB.query("lizhuofang", null, null, null, null, null, null);
         while (cursor.moveToNext()) {
             LoginEntity bean = new LoginEntity();
-//            bean.getUsrid().(cursor.getString(cursor.getColumnIndex("name")));
-//            bean.getUser().setFans(cursor.getString(cursor.getColumnIndex("pwd")));
-//            bean.getUser().setUid(cursor.getString(cursor.getColumnIndex("uid")));
+            bean.setUser_seq_id(cursor.getString(cursor.getColumnIndex("name")));
+            bean.setUsrid(cursor.getString(cursor.getColumnIndex("uid")));
             mList.add(bean);
         }
 
@@ -65,7 +64,7 @@ public class MyManger {
 
     public String QueryUid() {
         String str = new String();
-        Cursor chao = mDB.query("lisuyun", null, null, null, null, null, null);
+        Cursor chao = mDB.query("lizhuofang", null, null, null, null, null, null);
         boolean id = str.contains(chao.getString(chao.getColumnIndex("id")));
         return str;
     }
