@@ -30,7 +30,7 @@ public class SaveDataToSD {
     private ArrayList<PandaTvBean> arrayList=new ArrayList<>();
     private Map<String,PandaTvBean> map;
     private SaveDataToSD(){}
-    public static void getInsent(){
+    public static SaveDataToSD getInsent(){
         if (saveDataToSD!=null){
             synchronized (SaveDataToSD.class){
                 if (saveDataToSD!=null){
@@ -38,6 +38,7 @@ public class SaveDataToSD {
                 }
             }
         }
+        return saveDataToSD;
     }
     public void  refreshMap(){
         this.map=new ArrayMap<>();

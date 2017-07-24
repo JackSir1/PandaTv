@@ -18,6 +18,8 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.model.util.playVideoUtil.PlayViedoActivity;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.model.entity.HomeBean;
+import com.example.administrator.pandatv.model.util.saveData.PandaTvBean;
+import com.example.administrator.pandatv.model.util.saveData.SaveDataToSD;
 
 
 import java.util.ArrayList;
@@ -158,6 +160,16 @@ public class HomeAdapter extends RecyclerView.Adapter {
             HomeBean.DataBean.AreaBean.ListscrollBean listscrollBean = listscrol2.get(position);
             String pid = listscrollBean.getPid();
             String title = listscrollBean.getTitle();
+
+            PandaTvBean pandaTvBean=new PandaTvBean();
+            pandaTvBean.setImageView(listscrollBean.getImage());
+            pandaTvBean.setContent(listscrollBean.getTitle());
+            pandaTvBean.setVideoTime(listscrollBean.getVideoLength());
+            pandaTvBean.setPid(listscrollBean.getPid());
+            pandaTvBean.setVid(listscrollBean.getVid());
+            pandaTvBean.setType("1");
+            SaveDataToSD.getInsent().addcollect(pandaTvBean);
+
             Intent intent = new Intent(context, PlayViedoActivity.class);
             intent.putExtra("title", title);
             intent.putExtra("pid", pid);

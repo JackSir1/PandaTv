@@ -260,19 +260,6 @@ public class ACache {
 		}
 	}
 
-	// =======================================
-	// ============ JSONArray 数据 读写 =============
-	// =======================================
-	/**
-	 * 保存 JSONArray数据 到 缓存中
-	 *  @param key
-	 *            保存的key
-	 * @param value
-	 */
-	public void put(String key, Map<String, Object> value) {
-		put(key, value.toString());
-	}
-
 	/**
 	 * 保存 JSONArray数据 到 缓存中
 	 * 
@@ -285,23 +272,6 @@ public class ACache {
 	 */
 	public void put(String key, JSONArray value, int saveTime) {
 		put(key, value.toString(), saveTime);
-	}
-
-	/**
-	 * 读取JSONArray数据
-	 * 
-	 * @param key
-	 * @return JSONArray数据
-	 */
-	public ArrayList<Object> getAsJSONArray(String key) {
-		String JSONString = getAsString(key);
-		try {
-			JSONArray obj = new JSONArray(JSONString);
-			return obj;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 
 	// =======================================
@@ -338,7 +308,7 @@ public class ACache {
 
 	/**
 	 * Cache for a stream
-	 * 
+	 *
 	 * @param key
 	 *            the file name.
 	 * @param map

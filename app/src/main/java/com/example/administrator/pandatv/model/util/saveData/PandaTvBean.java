@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public class PandaTvBean implements Serializable{
     private Boolean isSave=false;
-    private ImageView imageView;
+    private String imageView;
     private String videoTime;
     private String type;
     private String content;
@@ -27,11 +27,11 @@ public class PandaTvBean implements Serializable{
         isSave = save;
     }
 
-    public ImageView getImageView() {
+    public String getImageView() {
         return imageView;
     }
 
-    public void setImageView(ImageView imageView) {
+    public void setImageView(String imageView) {
         this.imageView = imageView;
     }
 
