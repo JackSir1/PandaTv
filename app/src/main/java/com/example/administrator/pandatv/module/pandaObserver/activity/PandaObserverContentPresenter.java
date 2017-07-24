@@ -3,6 +3,7 @@ package com.example.administrator.pandatv.module.pandaObserver.activity;
 import com.example.administrator.pandatv.model.biz.pandaObserverModel.IPandaObservermodel;
 import com.example.administrator.pandatv.model.biz.pandaObserverModel.PandaObserverModel;
 import com.example.administrator.pandatv.model.entity.PandaObserverFirstItemBean;
+import com.example.administrator.pandatv.model.entity.PlayVideoBean;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 
 /**
@@ -30,5 +31,21 @@ public class PandaObserverContentPresenter implements PandaObserverContentContra
 
             }
         });
+    }
+
+    @Override
+    public void getVideoUrl(String pid) {
+        pandaObservermodel.setObserverItemVideoBean(pid, new MyNetCallBack<PlayVideoBean>() {
+            @Override
+            public void onSuccess(PlayVideoBean playVideoBean) {
+                view.setPid(playVideoBean);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+
     }
 }

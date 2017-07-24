@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Administrator on 2017/7/21.
  */
 
-public class PandaObserverFirstItemBean {
+public class PandaObserverFirstItemBean implements Serializable{
 
     /**
      * videoset : {"0":{"vsid":"VSET100311356635","relvsid":"","name":"熊猫频道《原创戏曲动画》","img":"http://p1.img.cctvpic.com/photoAlbum/vms/standard/img/2016/10/19/CHANdAyXtBuMEyXBFQq21NVT161019.JPG","enname":"CNTV","url":"http://tv.cntv.cn/videoset/VSET100311356635","cd":"","zy":"","bj":"","dy":"","js":"","nf":"2016","yz":"","fl":"熊猫文化","sbsj":"","sbpd":"CNTV","desc":"戏曲，是中国重要的艺术门类，有着悠久的历史，因为一代代戏曲演员的传承，得以保留至今。而随着时代和科技的发展，我们拥有了更丰富的文化传播载体和手段，一群来自中国戏曲学院、热爱传统文化的年轻人根据多个传统戏曲作品改编成一部部刻画细致、内容生动的动画短片，涉及到河北梆子、湖南花鼓戏、京剧、昆曲等多样门类。","playdesc":"","zcr":"","fcl":""},"count":"7"}
@@ -35,7 +35,7 @@ public class PandaObserverFirstItemBean {
         this.video = video;
     }
 
-    public static class VideosetBean {
+    public static class VideosetBean implements Serializable{
         /**
          * 0 : {"vsid":"VSET100311356635","relvsid":"","name":"熊猫频道《原创戏曲动画》","img":"http://p1.img.cctvpic.com/photoAlbum/vms/standard/img/2016/10/19/CHANdAyXtBuMEyXBFQq21NVT161019.JPG","enname":"CNTV","url":"http://tv.cntv.cn/videoset/VSET100311356635","cd":"","zy":"","bj":"","dy":"","js":"","nf":"2016","yz":"","fl":"熊猫文化","sbsj":"","sbpd":"CNTV","desc":"戏曲，是中国重要的艺术门类，有着悠久的历史，因为一代代戏曲演员的传承，得以保留至今。而随着时代和科技的发展，我们拥有了更丰富的文化传播载体和手段，一群来自中国戏曲学院、热爱传统文化的年轻人根据多个传统戏曲作品改编成一部部刻画细致、内容生动的动画短片，涉及到河北梆子、湖南花鼓戏、京剧、昆曲等多样门类。","playdesc":"","zcr":"","fcl":""}
          * count : 7
@@ -61,7 +61,7 @@ public class PandaObserverFirstItemBean {
             this.count = count;
         }
 
-        public static class _$0Bean {
+        public static class _$0Bean implements Serializable{
             /**
              * vsid : VSET100311356635
              * relvsid :
@@ -268,7 +268,7 @@ public class PandaObserverFirstItemBean {
         }
     }
 
-    public static class VideoBean {
+    public static class VideoBean implements Serializable{
         /**
          * vsid : VSET100311356635
          * order : 1

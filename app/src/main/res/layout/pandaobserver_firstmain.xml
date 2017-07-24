@@ -29,14 +29,14 @@
         android:layout_height="match_parent" />
 
 </LinearLayout>
-    <ImageView
+    <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
         android:id="@+id/ggvideo_video"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y350" />
 
     <LinearLayout
         android:padding="5dp"
-        android:background="@color/white"
+        android:background="@color/colorWhite"
         android:layout_width="match_parent"
         android:layout_marginRight="@dimen/x20"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/y10"
             android:text="首播时间："
-            android:textColor="@color/black"
+            android:textColor="@color/colorBlack"
             android:textSize="16sp" />
 
         <LinearLayout
@@ -81,12 +81,12 @@
     <TextView
         android:text="高清完整"
         android:layout_marginTop="@dimen/y20"
-        android:background="@color/white"
+        android:background="@color/colorWhite"
         android:layout_marginLeft="@dimen/x20"
         android:layout_marginRight="@dimen/x20"
         android:layout_marginBottom="@dimen/y5"
         android:padding="10dp"
-        android:textColor="@color/black"
+        android:textColor="@color/colorBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <com.androidkun.PullToRefreshRecyclerView

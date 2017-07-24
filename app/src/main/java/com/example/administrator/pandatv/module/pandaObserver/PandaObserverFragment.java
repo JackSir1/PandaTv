@@ -22,6 +22,8 @@ import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.PandaObserverBean;
 import com.example.administrator.pandatv.model.util.ACache;
 import com.example.administrator.pandatv.model.util.ShowPopuUtils;
+import com.example.administrator.pandatv.model.util.saveData.PandaTvBean;
+import com.example.administrator.pandatv.model.util.saveData.SaveDataToSD;
 import com.example.administrator.pandatv.module.home.viewpager.HomeViewPagerAdapter;
 import com.example.administrator.pandatv.module.pandaObserver.activity.PandaObserverContentActivity;
 import com.example.administrator.pandatv.module.pandaObserver.activity.PandaObserverWebViewActivity;
@@ -144,7 +146,7 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
             title.setText(titlestr);
             viewPagerFragments.add(view);
         }
-        HomeViewPagerAdapter adapter = new HomeViewPagerAdapter(viewPagerFragments);
+        final HomeViewPagerAdapter adapter = new HomeViewPagerAdapter(viewPagerFragments);
         viewpager.setAdapter(adapter);
         checkBoxes.get(currmentNum % checkBoxes.size()).setChecked(true);
         viewpager.setCurrentItem(currmentNum);
@@ -155,15 +157,66 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
             public void onItemListener(View view, int posetion) {
                 String type = bigImgBeanList.get(posetion).getType();
                 String pid = bigImgBeanList.get(posetion).getPid();
+                String image = bigImgBeanList.get(posetion).getImage();
+                String title = bigImgBeanList.get(posetion).getTitle();
+                String vid = bigImgBeanList.get(posetion).getVid();
+                String id = bigImgBeanList.get(posetion).getId();
                 String url = bigImgBeanList.get(posetion).getUrl();
+                Boolean isSave=false;
+
+                if (vid.equals("")||vid==null){
+                    vid=id;
+                }
+                SaveDataToSD addcollect = SaveDataToSD.getInsent();
+
+                PandaTvBean bean = addcollect.getBean(vid);
+                if (bean!=null){
+                    Boolean save = bean.getSave();
+                    isSave=save;
+                }
+
+
+                PandaTvBean pandaTvBean=new PandaTvBean();
+                pandaTvBean.setVid(vid);
+                pandaTvBean.setImageView(image);
+                pandaTvBean.setUrl(url);
+                pandaTvBean.setContent(title);
+                pandaTvBean.setType("2");
+                pandaTvBean.setPid(pid);
+
+                addcollect.addcollect(pandaTvBean);
+
                 if (type.endsWith("5")) {
                     Intent intent = new Intent(getContext(), PandaObserverWebViewActivity.class);
+                    intent.putExtra("isSave",isSave);
+                    intent.putExtra("vid",vid);
                     intent.putExtra("url", url);
-                    startActivity(intent);
+                    startActivityForResult(intent,666666);
                 }
 
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==666666){
+            String vid = data.getStringExtra("vid");
+            SaveDataToSD addcollect = SaveDataToSD.getInsent();
+            List<PandaTvBean> saveCollect = addcollect.getSaveCollect();
+            for (PandaTvBean pandaTvBean:saveCollect){
+                if (pandaTvBean.getVid().equals(vid)){
+                    Boolean save = pandaTvBean.getSave();
+                    if (save){
+                        pandaTvBean.setSave(false);
+                    }else {
+                        pandaTvBean.setSave(true);
+                    }
+                    addcollect.addcollect(pandaTvBean);
+                }
+            }
+        }
     }
 
     @Override

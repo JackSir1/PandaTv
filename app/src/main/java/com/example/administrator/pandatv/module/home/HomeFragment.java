@@ -22,6 +22,8 @@ import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.HomeBean;
 import com.example.administrator.pandatv.model.util.ACache;
 import com.example.administrator.pandatv.model.util.ShowPopuUtils;
+import com.example.administrator.pandatv.model.util.saveData.PandaTvBean;
+import com.example.administrator.pandatv.model.util.saveData.SaveDataToSD;
 import com.example.administrator.pandatv.module.home.viewpager.HomeAdapter;
 import com.example.administrator.pandatv.module.home.viewpager.HomeViewPagerAdapter;
 import com.example.administrator.pandatv.module.pandaObserver.OnViewPagerItemListener;
@@ -188,6 +190,28 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                 String stype = bigImgBeanList.get(posetion).getStype();
                 String type = bigImgBeanList.get(posetion).getType();
                 String title = bigImgBeanList.get(posetion).getTitle();
+                String image = bigImgBeanList.get(posetion).getImage();
+                String id = bigImgBeanList.get(posetion).getId();
+
+                SaveDataToSD addcollect = SaveDataToSD.getInsent();
+                Boolean isSave=false;
+                PandaTvBean bean = addcollect.getBean(id);
+                if (bean!=null){
+                    Boolean save = bean.getSave();
+                    isSave=save;
+                }
+
+
+                PandaTvBean pandaTvBean=new PandaTvBean();
+                pandaTvBean.setVid(id);
+                pandaTvBean.setImageView(image);
+                pandaTvBean.setUrl(url);
+                pandaTvBean.setContent(title);
+                pandaTvBean.setType("1");
+                pandaTvBean.setPid(pid);
+
+                addcollect.addcollect(pandaTvBean);
+
                 if ("2".endsWith(type)) {
                 }
             }

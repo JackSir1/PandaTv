@@ -2,15 +2,22 @@ package com.example.administrator.pandatv.module.pandaObserver.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseActivity;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,11 +34,17 @@ public class PandaObserverWebViewActivity extends BaseActivity {
     @BindView(R.id.pandaObserver_webUrl)
     WebView pandaObserverWebUrl;
     @BindView(R.id.shoucang_btn)
-    ImageView shoucangBtn;
+    CheckBox shoucangBtn;
     @BindView(R.id.fenxiang_btn)
-    ImageView fenxiangBtn;
+    CheckBox fenxiangBtn;
+
 
     private String url;
+    private String vid;
+    private boolean isSave;
+    private IPandaObserverWebViewActivity pandaObserverWebViewActivity;
+    private Intent intent;
+
     @Override
     protected int getViewID() {
         return R.layout.webviewload_main;
@@ -40,10 +53,12 @@ public class PandaObserverWebViewActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-        Intent intent=getIntent();
-
+        intent = getIntent();
+        isSave = intent.getBooleanExtra("isSave", false);
+        vid = intent.getStringExtra("vid");
         url = intent.getStringExtra("url");
 
+        shoucangBtn.setChecked(isSave);
         WebSettings webSettings = pandaObserverWebUrl.getSettings();
         //设置自适应屏幕，两者合用
         webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
@@ -57,6 +72,9 @@ public class PandaObserverWebViewActivity extends BaseActivity {
         webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
     }
 
+    public void setReturneTop(IPandaObserverWebViewActivity pandaObserverWebViewActivity){
+        this.pandaObserverWebViewActivity=pandaObserverWebViewActivity;
+    }
     @Override
     protected void setListener() {
 
@@ -66,12 +84,57 @@ public class PandaObserverWebViewActivity extends BaseActivity {
                 finish();
             }
         });
+        shoucangBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                intent.putExtra("vid",vid);
+                intent.putExtra("isSave",isSave);
+                setResult(66666,intent);
+            }
+        });
+        fenxiangBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                share();
+            }
+        });
+    }
+    public void share(){
+        UMImage image = new UMImage(PandaObserverWebViewActivity.this,R.drawable.ic_launcher);
+
+        new ShareAction(PandaObserverWebViewActivity.this).withText(url)
+                .withMedia(image)
+                .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
+                .setCallback(new UMShareListener() {
+                    @Override
+                    public void onStart(SHARE_MEDIA share_media) {
+                        Log.e("TAG", "onStart");
+                    }
+
+                    @Override
+                    public void onResult(SHARE_MEDIA share_media) {
+
+                        Log.e("TAG", "onResult");
+                    }
+
+                    @Override
+                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+                        Log.e("TAG", "onError");
+                    }
+
+                    @Override
+                    public void onCancel(SHARE_MEDIA share_media) {
+
+                        Log.e("TAG", "onCancel");
+                    }
+                }).open();
     }
 
     @Override
     protected void setIntent() {
 
-        if (url!=null){
+        if (url != null) {
             pandaObserverWebUrl.loadUrl(url);
         }
 
