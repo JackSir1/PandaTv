@@ -14,6 +14,7 @@ import cn.jpush.android.api.JPushInterface;
 
 public class MyReiver extends BroadcastReceiver {
     @Override
+
     public void onReceive(Context context, Intent intent) {
         if(intent.getAction().equals(JPushInterface.ACTION_MESSAGE_RECEIVED)){
             //获得message的内容
