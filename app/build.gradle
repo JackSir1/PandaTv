@@ -81,6 +81,5 @@ dependencies {
     compile(name: 'SMSSDKGUI-2.1.4', ext: 'aar') {
         exclude group: 'nineoldandroids'
     }
-    compile project(':jcvideoplayer-lib')
-    compile files('libs/utdid4all-1.0.4.jar')
+    compile project(':jcvideoplayer-libs')
 }

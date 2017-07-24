@@ -12,6 +12,7 @@ import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.PandLiveTitleBean;
 import com.example.administrator.pandatv.model.entity.PandaLiveBean;
+import com.example.administrator.pandatv.model.util.ShowPopuUtils;
 import com.example.administrator.pandatv.module.pandaLive.Pageadapter.MyAdapter;
 import com.example.administrator.pandatv.module.pandaLive.Pageadapter.OnePageAdapter;
 import com.example.administrator.pandatv.module.pandaLive.budpull.BudPresenter;
@@ -40,6 +41,7 @@ public class PandaLiveFragment extends BaseFragment implements PandaLiveContract
 
     private Bundle bundle;
     private PandLiveTitleBean titleBean;
+    private ShowPopuUtils showPopuUtils;
 
     @Override
     protected int getViweId() {
@@ -50,6 +52,8 @@ public class PandaLiveFragment extends BaseFragment implements PandaLiveContract
 
     @Override
     protected void initView(View view) {
+        showPopuUtils = ShowPopuUtils.getInsent().create(getContext());
+
         presenter.start();
         presenter.getLoadTitle();
     }
@@ -141,6 +145,7 @@ public class PandaLiveFragment extends BaseFragment implements PandaLiveContract
     public void getLoadTitle(PandLiveTitleBean liveTitleBean) {
         titleBean=liveTitleBean;
         fragment();
+        showPopuUtils.popuUtilsDismiss();
     }
 
 

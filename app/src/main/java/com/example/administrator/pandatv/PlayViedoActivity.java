@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
+
+
 public class PlayViedoActivity extends AppCompatActivity {
+
 
 
 
@@ -12,6 +15,8 @@ public class PlayViedoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_viedo);
+        initView();
+
 
     }
 
@@ -23,5 +28,9 @@ public class PlayViedoActivity extends AppCompatActivity {
         }
 
         return false;
+    }
+
+    private void initView() {
+
     }
 }
