@@ -51,10 +51,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".model.util.playVideoUtil.PlayViedoActivity"/>
+        <activity android:name=".model.util.playVideoUtil.PlayViedoActivity"
+            android:screenOrientation="sensorLandscape"
+            />
         <activity android:name=".module.chinaLive.activity.HDActivity"/>
 
-        <activity android:name=".module.chinaLive.activity.CollectionActivity" />
+        <activity android:name=".module.chinaLive.activity.CollectionActivity"/>
         <activity android:name=".module.chinaLive.activity.HistoryActivity" />
         <activity android:name=".module.chinaLive.activity.FankuiANDHelpActivity" />
         <activity android:name=".module.chinaLive.activity.LikeoursActivity" />

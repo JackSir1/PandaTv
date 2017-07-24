@@ -1,6 +1,7 @@
 package com.example.administrator.pandatv;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,12 +18,14 @@ import com.example.administrator.pandatv.module.chinaLive.activity.LoginActivity
 import com.example.administrator.pandatv.module.chinaLive.activity.SettingActivity;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * Created by lizhuofang on 2017/7/13.
  */
 public class PersonalActivity extends BaseActivity {
+
 
     @BindView(R.id.personal_return_iv)
     ImageView personalReturnIv;
@@ -38,7 +41,6 @@ public class PersonalActivity extends BaseActivity {
     LinearLayout personalLinearMineshoucang;
     @BindView(R.id.personal_linear_setting)
     LinearLayout personalLinearSetting;
-
     private String name;
     private String uer;
     private ACache aCache;
@@ -50,10 +52,7 @@ public class PersonalActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-//        LoginEntity loginentity = (LoginEntity) aCache.getAsObject("loginentity");
-//        if(loginentity!=null) {
-//            personalLoginText.setText("央视网"+user_seq_id);
-//        }
+
     }
 
     @Override
@@ -75,16 +74,16 @@ public class PersonalActivity extends BaseActivity {
                 break;
             case R.id.personal_linear_login:
                 aCache = ACache.get(this);
-                LoginEntity loginEntity= (LoginEntity) aCache.getAsObject("loginentity");
-                if(loginEntity==null) {
+                LoginEntity loginEntity = (LoginEntity) aCache.getAsObject("loginentity");
+                if (loginEntity == null) {
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivityForResult(intent, 100);
-                }else{
-                    Intent inten=new Intent(this,SuccessActivity.class);
-                    inten.putExtra("nameme",loginEntity.getUser_seq_id());
-                    Log.e("PersonalActivity","========="+loginEntity.getUser_seq_id());
+                } else {
+                    Intent inten = new Intent(this, SuccessActivity.class);
+                    inten.putExtra("nameme", loginEntity.getUser_seq_id());
+                    Log.e("PersonalActivity", "=========" + loginEntity.getUser_seq_id());
 //                    inten.putExtra ("image",);
-                    startActivityForResult(inten,150);
+                    startActivityForResult(inten, 150);
                 }
                 break;
             case R.id.personal_linear_watch_history:
@@ -125,6 +124,13 @@ public class PersonalActivity extends BaseActivity {
 
         }
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
 }

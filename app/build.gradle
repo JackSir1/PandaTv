@@ -83,4 +83,5 @@ dependencies {
         exclude group: 'nineoldandroids'
     }
 
+    compile project(path: ':jcvideoplayer-libs')
 }

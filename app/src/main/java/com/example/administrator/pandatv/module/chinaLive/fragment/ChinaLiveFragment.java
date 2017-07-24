@@ -61,7 +61,7 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
 
     @Override
     protected void initView(View view) {
-        showPopuUtils = ShowPopuUtils.getInsent().create(getContext());
+
         aCache = ACache.get(getContext());
         myLivetablayout = (TabLayout) view.findViewById(R.id.livechina_fragment_tablayout);
         myLiveviewpager = (ViewPager) view.findViewById(R.id.livechina_fragment_viewpager);
@@ -72,10 +72,10 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
 
     @Override
     protected void loadDate() {
-
+        showPopuUtils = ShowPopuUtils.getInsent().create(getContext());
         new ChinaLivePresenter(this);
         presenter.start();
-        showPopuUtils.popuUtilsDismiss();
+
     }
 
     @Override
@@ -237,29 +237,5 @@ public class ChinaLiveFragment extends BaseFragment implements ChinaLiveContract
         myLivetablayout.setupWithViewPager(myLiveviewpager);
     }
 
-    public void setSave() {
-        LivechinaTabBean.TablistBean tablistBean;
-        List<LivechinaTabBean.TablistBean> tablistBeanList = new ArrayList<>();
-        List<LivechinaTabBean.AlllistBean> alllistBeanList = new ArrayList<>();
-        LivechinaTabBean.AlllistBean alllistBean;
 
-        LivechinaTabBean livechinaTabbean = new LivechinaTabBean();
-        for (String title : channels) {
-            tablistBean = new LivechinaTabBean.TablistBean();
-            tablistBean.setTitle(title);
-            tablistBean.setUrl(tagUrlMap.get(title));
-            tablistBeanList.add(tablistBean);
-        }
-        for (String title : channels_other) {
-            alllistBean = new LivechinaTabBean.AlllistBean();
-            alllistBean.setUrl(tagUrlMap.get(title));
-            alllistBean.setTitle(title);
-            alllistBeanList.add(alllistBean);
-        }
-        livechinaTabbean.setAlllist(alllistBeanList);
-        livechinaTabbean.setTablist(tablistBeanList);
-        aCache.put("livechinaTabBean", livechinaTabbean);
-
-
-    }
 }
