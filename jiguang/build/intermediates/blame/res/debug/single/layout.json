@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "D:\\0719\\PandaTv\\jiguang\\build\\intermediates\\res\\merged\\debug\\layout\\jpush_popwin_layout.xml",
+        "source": "D:\\0719\\PandaTv\\jiguang\\res\\layout\\jpush_popwin_layout.xml"
+    },
+    {
+        "merged": "D:\\0719\\PandaTv\\jiguang\\build\\intermediates\\res\\merged\\debug\\layout\\jpush_webview_layout.xml",
+        "source": "D:\\0719\\PandaTv\\jiguang\\res\\layout\\jpush_webview_layout.xml"
+    },
+    {
+        "merged": "D:\\0719\\PandaTv\\jiguang\\build\\intermediates\\res\\merged\\debug\\layout\\main.xml",
+        "source": "D:\\0719\\PandaTv\\jiguang\\res\\layout\\main.xml"
+    },
+    {
+        "merged": "D:\\0719\\PandaTv\\jiguang\\build\\intermediates\\res\\merged\\debug\\layout\\push_set_dialog.xml",
+        "source": "D:\\0719\\PandaTv\\jiguang\\res\\layout\\push_set_dialog.xml"
+    },
+    {
+        "merged": "D:\\0719\\PandaTv\\jiguang\\build\\intermediates\\res\\merged\\debug\\layout\\customer_notitfication_layout_one.xml",
+        "source": "D:\\0719\\PandaTv\\jiguang\\res\\layout\\customer_notitfication_layout_one.xml"
+    },
+    {
+        "merged": "D:\\0719\\PandaTv\\jiguang\\build\\intermediates\\res\\merged\\debug\\layout\\customer_notitfication_layout.xml",
+        "source": "D:\\0719\\PandaTv\\jiguang\\res\\layout\\customer_notitfication_layout.xml"
+    },
+    {
+        "merged": "D:\\0719\\PandaTv\\jiguang\\build\\intermediates\\res\\merged\\debug\\layout\\set_push_time.xml",
+        "source": "D:\\0719\\PandaTv\\jiguang\\res\\layout\\set_push_time.xml"
+    }
+]

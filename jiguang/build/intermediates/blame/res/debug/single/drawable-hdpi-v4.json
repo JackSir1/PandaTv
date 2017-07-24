@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\0719\\PandaTv\\jiguang\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\richpush_btn_selector.xml",
+        "source": "D:\\0719\\PandaTv\\jiguang\\res\\drawable-hdpi\\richpush_btn_selector.xml"
+    },
+    {
+        "merged": "D:\\0719\\PandaTv\\jiguang\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\richpush_progressbar.xml",
+        "source": "D:\\0719\\PandaTv\\jiguang\\res\\drawable-hdpi\\richpush_progressbar.xml"
+    },
+    {
+        "merged": "D:\\0719\\PandaTv\\jiguang\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\tiledstripes.xml",
+        "source": "D:\\0719\\PandaTv\\jiguang\\res\\drawable-hdpi\\tiledstripes.xml"
+    },
+    {
+        "merged": "D:\\0719\\PandaTv\\jiguang\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\corners_bg.xml",
+        "source": "D:\\0719\\PandaTv\\jiguang\\res\\drawable-hdpi\\corners_bg.xml"
+    }
+]

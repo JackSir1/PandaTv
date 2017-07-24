@@ -9,6 +9,7 @@ import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.common.QueuedWork;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.sharesdk.framework.ShareSDK;
 import cn.smssdk.SMSSDK;
 
@@ -31,6 +32,8 @@ public class App extends Application {
         PlatformConfig.setSinaWeibo("2699399578", "2a6cf5946a9cf8407923d46ce23e09d7", "http://sns.whalecloud.com");
         ShareSDK.initSDK(this);
         SMSSDK.initSDK(this, "1e506690017a4", "a627c68689e042e44ed4177f45e65638");
+        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);     		// 初始化 JPush
     }
 
 }
