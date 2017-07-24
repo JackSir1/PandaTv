@@ -16,6 +16,7 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 
+import fm.jiecao.jcvideoplayer_lib.JCMediaManager;
 import fm.jiecao.jcvideoplayer_lib.JCUserAction;
 import fm.jiecao.jcvideoplayer_lib.JCUserActionStandard;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
@@ -40,6 +41,7 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
 
     private void initView() {
         play = (JCVideoPlayerStandard) findViewById(R.id.play);
+
         Intent intent = getIntent();
         String pid = intent.getStringExtra("pid");
         title = intent.getStringExtra("title");
@@ -53,22 +55,16 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
         presenter.setVedioPid(pid);
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            PlayViedoActivity.this.finish();
-            System.exit(0);
 
-
-        }
-
-        return false;
-    }
     public void setVideoPlayer(final String videoUrl, final String title) {
         play.setUp(videoUrl
                 ,JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, title);
+        play.startVideo();
+       // JCMediaManager.instance().mediaPlayer.start();
             Log.e("TAG",videoUrl);
         JCVideoPlayer.setJcUserAction(new MyUserActionStandard());
+        JCVideoPlayerStandard.startFullscreen(this,JCUserActionStandard.class,videoUrl,title);
+
         play.setMonitor(new JCVideoPlayerStandard.imgClickon() {
             @Override
             //分享
@@ -157,8 +153,23 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
                     }
                 }).open();
     }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //JCMediaManager.instance().mediaPlayer.pause();
+            PlayViedoActivity.this.finish();
+            //System.exit(0);
+        }
 
-  
+        return false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PlayViedoActivity.this.finish();
+        JCMediaManager.instance().mediaPlayer.pause();
+    }
 }
 
 class MyUserActionStandard implements JCUserActionStandard {
