@@ -2,13 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
-<ImageView
-    android:id="@+id/livechina_adapter_imge"
-    android:layout_width="match_parent"
-    android:src="@drawable/_tw"
-    android:scaleType="centerCrop"
-    android:layout_height="200dp"
-    />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/livechina_adapter_imge"
+            android:layout_width="match_parent"
+            android:src="@drawable/_tw"
+            android:scaleType="centerCrop"
+            android:layout_height="200dp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_play_arrow_white_24dp"
+            android:background="@drawable/pla_continue"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:paddingTop="10dp"
@@ -60,7 +73,7 @@
         android:layout_height="1dp"
         android:background="@color/colorHui"/>
     <TextView
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/livechina_adapter_jianjie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

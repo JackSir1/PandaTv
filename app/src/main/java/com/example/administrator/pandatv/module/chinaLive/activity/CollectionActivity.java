@@ -1,8 +1,8 @@
 package com.example.administrator.pandatv.module.chinaLive.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.widget.ImageView;
-import android.widget.TableLayout;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseActivity;
@@ -15,10 +15,12 @@ import butterknife.OnClick;
  * Created by lizhuofang on 2017/7/14.
  */
 public class CollectionActivity extends BaseActivity {
+
+
     @BindView(R.id.collection_iv)
     ImageView collectionIv;
     @BindView(R.id.livechina_coll_tab)
-    TableLayout livechinaCollTab;
+    TabLayout livechinaCollTab;
 
     @Override
     protected int getViewID() {
@@ -40,6 +42,7 @@ public class CollectionActivity extends BaseActivity {
 
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,5 @@ public class CollectionActivity extends BaseActivity {
 
     @OnClick(R.id.collection_iv)
     public void onClick() {
-        finish();
     }
 }
