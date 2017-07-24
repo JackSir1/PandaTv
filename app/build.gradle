@@ -4,6 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
 
+
     defaultConfig {
         applicationId "com.example.administrator.pandatv"
         minSdkVersion 16
@@ -25,11 +26,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     sourceSets{
         main{
             jniLibs.srcDirs 'libs'
         }
     }
+
 
     signingConfigs {
         debug {
@@ -86,5 +89,7 @@ dependencies {
         exclude group: 'nineoldandroids'
     }
     compile project(':jcvideoplayer-libs')
+
+    // 此处以JCore 1.1.1 版本为例。
     compile files('libs/jcore-android-1.1.5.jar')
 }

@@ -3,7 +3,6 @@ package com.example.administrator.pandatv.app;
 import android.app.Application;
 
 import com.example.administrator.pandatv.base.BaseActivity;
-import com.example.administrator.pandatv.module.chinaLive.activity.RegisterActivity;
 import com.example.administrator.pandatv.net.IHttp;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
@@ -20,7 +19,6 @@ import cn.smssdk.SMSSDK;
 
 public class App extends Application {
     public static BaseActivity content;
-    public static RegisterActivity activity;
     public static IHttp iHttp;
 
     @Override

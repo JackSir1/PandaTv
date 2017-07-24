@@ -18,10 +18,10 @@ import java.util.List;
  * Created by lenovo on 2017/7/15.
  */
 
-public class HDAdapter extends BaseAdapter<CehuaBean.InteractiveBean> {
+public class CehuaAdapter extends BaseAdapter<CehuaBean.InteractiveBean> {
 
 
-    public HDAdapter(Context context, List datas) {
+    public CehuaAdapter(Context context,List datas) {
         super(context, R.layout.cehua_item, datas);
     }
 

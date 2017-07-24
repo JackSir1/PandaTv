@@ -47,19 +47,19 @@ public class DragGridView extends GridView {
     private int windowX;
     private int windowY;
 
+
     public DragGridView(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public DragGridView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public DragGridView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-
     }
 
     @Override

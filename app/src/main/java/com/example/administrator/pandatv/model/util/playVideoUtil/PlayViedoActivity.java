@@ -22,7 +22,6 @@ import fm.jiecao.jcvideoplayer_lib.JCUserActionStandard;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
-
 public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoContract.View{
 
     private PlayVideoPresenter presenter;
@@ -60,11 +59,12 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
     public void setVideoPlayer(final String videoUrl, final String title) {
         play.setUp(videoUrl
                 ,JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, title);
+        //Glide.with(this).load("").into(JCVideoPlayerStandard)
         play.startVideo();
        // JCMediaManager.instance().mediaPlayer.start();
             Log.e("TAG",videoUrl);
         JCVideoPlayer.setJcUserAction(new MyUserActionStandard());
-        //JCVideoPlayerStandard.startFullscreen(this,JCUserActionStandard.class,videoUrl,title);
+        JCVideoPlayerStandard.startFullscreen(this,JCUserActionStandard.class,videoUrl,title);
 
         play.setMonitor(new JCVideoPlayerStandard.imgClickon() {
             @Override

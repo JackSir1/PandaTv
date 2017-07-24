@@ -12,7 +12,7 @@ public class MyHepler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "create table lizhuofang(name varchar(20),pwd varchar(30))";
+        String sql = "create table lisuyun(name varchar(20),pwd varchar(30),uid varchar(30) primary key)";
         db.execSQL(sql);
 
     }

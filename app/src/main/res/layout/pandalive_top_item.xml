@@ -13,8 +13,8 @@
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher"
             android:id="@+id/image_top_item"
-            android:layout_width="@dimen/x350"
-            android:layout_height="@dimen/y200" />
+            android:layout_width="@dimen/x300"
+            android:layout_height="@dimen/y180" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_alignParentBottom="true"

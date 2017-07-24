@@ -10,6 +10,7 @@
         android:background="@color/colorWhite"
         android:orientation="vertical"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="15dp"
         android:padding="15dp">
 
@@ -136,7 +137,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/meetquestion_ider"
+        android:id="@+id/meetquestion_content"
         android:layout_width="fill_parent"
         android:layout_height="150dp"
         android:layout_marginLeft="15dp"
@@ -164,7 +165,7 @@
         android:textSize="13sp" />
 
 
-    <Button
+    <TextView
         android:id="@+id/meetquestion_but_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

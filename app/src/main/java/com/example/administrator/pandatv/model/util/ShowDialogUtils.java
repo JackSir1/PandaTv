@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.view.View;
 
 import com.example.administrator.pandatv.app.App;
+
+import java.util.Stack;
 
 /**
  * Created by Administrator on 2017/7/13.
@@ -32,7 +35,7 @@ public class ShowDialogUtils {
 
     public ShowDialogUtils setViewId(final IShowDialogUtils ShowDialogUtils) {
         if (netType() == 1) {
-            dialog.setTitle("您正在使用移动数据网络，所产生的流量费由当地运营商收取，是否继续？");
+            dialog.setTitle("当前处于移动网络是否继续播放？");
             dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

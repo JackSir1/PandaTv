@@ -66,12 +66,14 @@ public class PandaLiveFragment extends BaseFragment implements PandaLiveContract
         }
         String[] str=new String[]{"  直播  ","精彩一刻","当熊不让","超萌滚滚秀","熊猫档案","熊猫TOP榜","熊猫那些事儿","特别节目","原创新闻"};
         arraylist.add(liveFragment);
+
         Bundle bundle=null;
         for(int i = 1; i <str.length ; i++) {
             topFragment = new PandaTopFragment();
             String id = titleBean.getTablist().get(i).getId();
             bundle=new Bundle();
             bundle.putString("vid",id);
+
             topFragment.setParams(bundle);
             arraylist.add(topFragment);
             new BudPresenter(topFragment);

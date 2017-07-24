@@ -75,7 +75,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
          loadingProgressBar = (ProgressBar) findViewById(R.id.loading);
          tinyBackImageView = (ImageView) findViewById(R.id.back_tiny);
          Collection = (CheckBox) findViewById(R.id.Collection);
-//        JCMediaManager.instance().mediaPlayer.pause();
+        JCMediaManager.instance().mediaPlayer.pause();
         zt_bf = (CheckBox) findViewById(R.id.zt_bf);
          shareit = (ImageView) findViewById(R.id.shareit);
          Watchthelist = (ImageView) findViewById(R.id.Watchthelist);

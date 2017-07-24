@@ -1,6 +1,5 @@
 package com.example.administrator.pandatv;
 
-
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import com.example.administrator.pandatv.app.App;
 import com.example.administrator.pandatv.base.BaseActivity;
 import com.example.administrator.pandatv.model.util.MainFragmentBuild;
-import com.example.administrator.pandatv.module.chinaLive.activity.HDActivity;
+import com.example.administrator.pandatv.module.chinaLive.activity.CehuaActivity;
 import com.example.administrator.pandatv.module.chinaLive.fragment.ChinaLiveFragment;
 import com.example.administrator.pandatv.module.chinaLive.fragment.ChinaLivePresenter;
 import com.example.administrator.pandatv.module.ggVideo.GGVideoFragment;
@@ -129,7 +128,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 startActivity(intent);
                 break;
             case R.id.main_imagehudong:
-                Intent intent1=new Intent(MainActivity.this,HDActivity.class);
+                Intent intent1=new Intent(MainActivity.this,CehuaActivity.class);
                 startActivity(intent1);
                 break;
         }

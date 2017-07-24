@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.androidkun.PullToRefreshRecyclerView;
 import com.androidkun.callback.PullToRefreshListener;
@@ -41,6 +42,8 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
     protected void initView(View view) {
 
         View inflate = LayoutInflater.from(getContext()).inflate(R.layout.ggimage, null, false);
+        ImageView viewById = (ImageView) inflate.findViewById(R.id.image_gg);
+
         recyGg.addHeaderView(inflate);
         recyGg.setPullRefreshEnabled(true);
         recyGg.setLoadingMoreEnabled(true);

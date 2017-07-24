@@ -25,6 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setListener();
         setIntent();
     }
+
     protected abstract int getViewID();
 
     protected abstract void initView();

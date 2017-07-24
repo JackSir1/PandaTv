@@ -17,7 +17,9 @@ public class PlayViedoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_viedo);
         initView();
 
+
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

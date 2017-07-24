@@ -6,7 +6,6 @@ import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 
 import com.example.administrator.pandatv.R;
-import com.example.administrator.pandatv.app.App;
 import com.example.administrator.pandatv.base.BaseActivity;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.module.chinaLive.adapter.MyLivechinaAdapter;
@@ -43,7 +42,6 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        App.activity=this;
         mListName = new ArrayList<>();
         fragments = new ArrayList<>();
 
@@ -69,7 +67,7 @@ public class RegisterActivity extends BaseActivity {
 
     @OnClick(R.id.login_return_imageView)
     public void onClick() {
-        finish();
+
     }
 
     @Override
