@@ -72,5 +72,7 @@ public class Url {
     public static final String LOGIN="https://reg.cntv.cn/login/login.action";
     public static final String EMILEREGIS = "https://reg.cntv.cn/api/register.action";
     public static final String EMILEYANZHENG = "http://reg.cntv.cn/simple/verificationCode.action";
+    //版本升级
+    public static final String UPDATE= "http://115.182.9.124/index.php?action=release-GetNewVersions&applyName=1426217325";
 
 }

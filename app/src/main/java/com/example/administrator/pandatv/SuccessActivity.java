@@ -2,8 +2,9 @@ package com.example.administrator.pandatv;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,12 +19,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.pandatv.base.BaseActivity;
 import com.example.administrator.pandatv.model.util.ACache;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -63,7 +66,8 @@ public class SuccessActivity extends BaseActivity {
     // 裁剪后图片的宽(X)和高(Y),480 X 480的正方形。
     private static int output_X = 480;
     private static int output_Y = 480;
-
+    private Bitmap head;// 头像Bitmap
+    private static String path = "/sdcard/myHead/";// sd路径
 
     @Override
     protected int getViewID() {
@@ -76,7 +80,7 @@ public class SuccessActivity extends BaseActivity {
         intent = getIntent();
         String nameme = intent.getStringExtra("nameme");
         name.setText("央视网"+nameme);
-    }
+}
 
     @Override
     protected void setListener() {
@@ -97,9 +101,13 @@ public class SuccessActivity extends BaseActivity {
                 finish();
                 break;
            case R.id.touxiang:
+               init();
                popwindow();
                 break;
             case R.id.nicheng:
+                Intent intent1=new Intent(SuccessActivity.this,UpdateInfo.class);
+                intent1.putExtra("UpdateName",name.getText().toString().trim());
+                startActivityForResult(intent1,400);
                 break;
             case R.id.loginsuccess:
                ACache aCache = ACache.get(SuccessActivity.this);
@@ -109,48 +117,7 @@ public class SuccessActivity extends BaseActivity {
                 break;
         }
     }
-private void getPop(){
-    View parent = ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
-    View view = LayoutInflater.from(this).inflate(R.layout.add_popup_dialog, null);
-    int w = this.getWindowManager().getDefaultDisplay().getWidth();
-    int width = getResources().getDisplayMetrics().widthPixels;
-    int height = getResources().getDisplayMetrics().heightPixels;
 
-    popupWindow = new PopupWindow(view,width/2+50,height);
-    popupWindow.setFocusable(true);
-    popupWindow.setBackgroundDrawable(null);
-    popupWindow.setOutsideTouchable(true);
-    ColorDrawable dw = new ColorDrawable(0x30000000);
-    popupWindow.setBackgroundDrawable(dw);
-    mButPhoto = (Button) view.findViewById(R.id.add_photo);
-    mButPz = (Button) view.findViewById(R.id.add_pz);
-    mButCancel = (Button) view.findViewById(R.id.add_cancel);
-    mButPhoto.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intentFromGallery = new Intent();
-                intentFromGallery.setType("image/*");//选择图片
-                intentFromGallery.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intentFromGallery, CODE_REQUEST_PICTURE);
-        }
-    });
-
-    mButPz.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            choseHeadImageFromCameraCapture();
-        }
-    });
-
-    mButCancel.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            popupWindow.dismiss();
-        }
-    });
-    popupWindow.showAtLocation(parent, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-
-}
     private void checkPermission(){
         String permission1 = "android.permission.CAMERA";
         String permission2 = "android.permission.WRITE_EXTERNAL_STORAGE";
@@ -206,88 +173,13 @@ private void getPop(){
 
     // 启动手机相机拍摄照片作为头像
     private void choseHeadImageFromCameraCapture() {
-        Intent intentFromCapture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        // 判断存储卡是否可用，存储照片文件
-        if (hasSdcard()) {
-            intentFromCapture.putExtra(MediaStore.EXTRA_OUTPUT, Uri
-                    .fromFile(new File(Environment
-                            .getExternalStorageDirectory(), IMAGE_FILE_NAME)));
-        }
-
-        startActivityForResult(intentFromCapture, CODE_CAMERA_REQUEST);
+        Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent2.putExtra(MediaStore.EXTRA_OUTPUT,
+                Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "head.jpg")));
+        startActivityForResult(intent2, 2);// 采用ForResult打开
+        popupWindow.dismiss();
     }
 
-   /* @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent data) {
-
-        // 用户没有进行有效的设置操作，返回
-        if (resultCode == RESULT_CANCELED) {
-            Toast.makeText(getApplication(), "取消", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        switch (requestCode) {
-            case CODE_GALLERY_REQUEST:
-                cropRawPhoto(intent.getData());
-                break;
-
-            case CODE_CAMERA_REQUEST:
-                if (hasSdcard()) {
-                    File tempFile = new File(
-                            Environment.getExternalStorageDirectory(),
-                            IMAGE_FILE_NAME);
-                    cropRawPhoto(Uri.fromFile(tempFile));
-                } else {
-                    Toast.makeText(getApplication(), "没有SDCard!", Toast.LENGTH_LONG)
-                            .show();
-                }
-
-                break;
-
-            case CODE_RESULT_REQUEST:
-                if (intent != null) {
-                    setImageToHeadView(intent);
-                }
-
-                break;
-        }
-
-    }*/
-    /**
-     * 裁剪原始的图片
-     */
-//    public void cropRawPhoto(Uri uri) {
-//
-//        Intent intent = new Intent("com.android.camera.action.CROP");
-//        intent.setDataAndType(uri, "image/*");
-//
-//        // 设置裁剪
-//        intent.putExtra("crop", "true");
-//
-//        // aspectX , aspectY :宽高的比例
-//        intent.putExtra("aspectX", 1);
-//        intent.putExtra("aspectY", 1);
-//
-//        // outputX , outputY : 裁剪图片宽高
-//        intent.putExtra("outputX", output_X);
-//        intent.putExtra("outputY", output_Y);
-//        intent.putExtra("return-data", true);
-//
-//        startActivityForResult(intent, CODE_RESULT_REQUEST);
-//    }
-
-    /**
-     * 提取保存裁剪之后的图片数据，并设置头像部分的View
-     */
-//    private void setImageToHeadView(Intent intent) {
-//        Bundle extras = intent.getExtras();
-//        if (extras != null) {
-//            Bitmap photo = extras.getParcelable("data");
-//            imge.setImageBitmap(photo);
-//        }
-//    }
 
     /**
      * 检查设备是否存在SDCard的工具方法
@@ -301,7 +193,21 @@ private void getPop(){
             return false;
         }
     }
-//    ==================================================
+
+    private void init() {
+
+        Bitmap bt = BitmapFactory.decodeFile(path + "head.jpg");// 从SD卡中找头像，转换成Bitmap
+        if (bt != null) {
+            @SuppressWarnings("deprecation")
+            Drawable drawable = new BitmapDrawable(bt);// 转换成drawable
+            imge.setImageDrawable(drawable);
+        } else {
+            /**
+             * 如果SD里面没有则需要从服务器取头像，取回来的头像再保存在SD中
+             *
+             */
+        }
+    }
 public void popwindow() {
     popupWindow = new PopupWindow();
     View view = LayoutInflater.from(SuccessActivity.this).inflate(
@@ -326,29 +232,16 @@ public void popwindow() {
         @Override
         public void onClick(View v) {
             // 从本地相册选取图片作为头像
-
-            Intent intentFromGallery = new Intent();
-            // 设置文件类型
-            intentFromGallery.setType("image/*");
-            intentFromGallery.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(intentFromGallery, CODE_GALLERY_REQUEST);
+            Intent intent1 = new Intent(Intent.ACTION_PICK, null);
+            intent1.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+            startActivityForResult(intent1, 1);
+            popupWindow.dismiss();
         }
     });
     mButPz.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            // 启动手机相机拍摄照片作为头像
-
-            Intent intentFromCapture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-            // 判断存储卡是否可用，存储照片文件
-            if (hasSdcard()) {
-                intentFromCapture.putExtra(MediaStore.EXTRA_OUTPUT, Uri
-                        .fromFile(new File(Environment
-                                .getExternalStorageDirectory(), IMAGE_FILE_NAME)));
-            }
-
-            startActivityForResult(intentFromCapture, CODE_CAMERA_REQUEST);
+            choseHeadImageFromCameraCapture();
         }
     });
     mButCancel.setOnClickListener(new View.OnClickListener() {
@@ -359,85 +252,83 @@ public void popwindow() {
     });
 
 }
-    /**
-     * 提取保存裁剪之后的图片数据，并设置头像部分的View
-     */
-    private void setImageToHeadView(Intent intent) {
-        Bundle extras = intent.getExtras();
-        if (extras != null) {
-            Bitmap photo = extras.getParcelable("data");
-            imge.setImageBitmap(photo);
-//            AlertDialog.Builder dilog = new AlertDialog.Builder(this);
-//            dilog.setMessage("您的头像已提交审核请稍后回来确认吧");
-//            dilog.setNegativeButton("我知道啦", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    dialog.dismiss();
-//                }
-//            });
+//    name.setText(intent.getStringExtra("updatena"));
 
-        }
-    }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent intent) {
-
-        // 用户没有进行有效的设置操作，返回
-        if (resultCode == RESULT_CANCELED) {
-            Toast.makeText(getApplication(), "取消", Toast.LENGTH_LONG).show();
-            return;
-        }
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case CODE_GALLERY_REQUEST:
-                cropRawPhoto(intent.getData());
-                break;
-
-            case CODE_CAMERA_REQUEST:
-                if (hasSdcard()) {
-                    File tempFile = new File(
-                            Environment.getExternalStorageDirectory(),
-                            IMAGE_FILE_NAME);
-                    cropRawPhoto(Uri.fromFile(tempFile));
-                } else {
-                    Toast.makeText(getApplication(), "没有SDCard!", Toast.LENGTH_LONG)
-                            .show();
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    cropPhoto(data.getData());// 裁剪图片
                 }
 
                 break;
-
-            case CODE_RESULT_REQUEST:
-                if (intent != null) {
-
-                    setImageToHeadView(intent);
+            case 2:
+                if (resultCode == RESULT_OK) {
+                    File temp = new File(Environment.getExternalStorageDirectory() + "/head.jpg");
+                    cropPhoto(Uri.fromFile(temp));// 裁剪图片
                 }
 
                 break;
+            case 3:
+                if (data != null) {
+                    Bundle extras = data.getExtras();
+                    head = extras.getParcelable("data");
+                    if (head != null) {
+                        /**
+                         * 上传服务器代码
+                         */
+                        setPicToView(head);// 保存在SD卡中
+                        imge.setImageBitmap(head);// 用ImageView显示出来
+                    }
+                }
+                break;
+            default:
+                break;
+
         }
-
-        super.onActivityResult(requestCode, resultCode, intent);
+        super.onActivityResult(requestCode, resultCode, data);
     }
     /**
-     * 裁剪原始的图片
+     * 调用系统的裁剪功能
+     *
+     * @param uri
      */
-    public void cropRawPhoto(Uri uri) {
-
+    public void cropPhoto(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
-
-        // 设置裁剪
         intent.putExtra("crop", "true");
-
-        // aspectX , aspectY :宽高的比例
+        // aspectX aspectY 是宽高的比例
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
-
-        // outputX , outputY : 裁剪图片宽高
-        intent.putExtra("outputX", output_X);
-        intent.putExtra("outputY", output_Y);
+        // outputX outputY 是裁剪图片宽高
+        intent.putExtra("outputX", 150);
+        intent.putExtra("outputY", 150);
         intent.putExtra("return-data", true);
-
-        startActivityForResult(intent, CODE_RESULT_REQUEST);
+        startActivityForResult(intent, 3);
     }
-
+    private void setPicToView(Bitmap mBitmap) {
+        String sdStatus = Environment.getExternalStorageState();
+        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+            return;
+        }
+        FileOutputStream b = null;
+        File file = new File(path);
+        file.mkdirs();// 创建文件夹
+        String fileName = path + "head.jpg";// 图片名字
+        try {
+            b = new FileOutputStream(fileName);
+            mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // 关闭流
+                b.flush();
+                b.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.administrator.pandatv;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -74,19 +75,17 @@ public class PersonalActivity extends BaseActivity {
                 break;
             case R.id.personal_linear_login:
                 aCache = ACache.get(this);
-                String wbname = (String) aCache.getAsObject("wbname");
                 LoginEntity loginEntity= (LoginEntity) aCache.getAsObject("loginentity");
-                if(loginEntity==null&&wbname==null) {
-                    personalLoginText.setText("点击登录");
+                if(loginEntity==null) {
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivityForResult(intent, 100);
                 }else{
                     Intent inten=new Intent(this,SuccessActivity.class);
                     inten.putExtra("nameme",loginEntity.getUser_seq_id());
-//                    inten.putExtra("image",);
+                    Log.e("PersonalActivity","========="+loginEntity.getUser_seq_id());
+//                    inten.putExtra ("image",);
                     startActivityForResult(inten,150);
                 }
-
                 break;
             case R.id.personal_linear_watch_history:
                 Intent intent1 = new Intent(this, HistoryActivity.class);

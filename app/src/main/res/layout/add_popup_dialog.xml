@@ -9,19 +9,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="从手机相册选择"
-    android:textColor="@color/cctv_tab_sel"
+    android:textColor="@color/colorPrimary"
     android:background="@drawable/shape_white_pop"
     />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/black"/>
+        android:background="@color/colorBlack"/>
     <Button
         android:id="@+id/add_pz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="拍一张"
-        android:textColor="@color/cctv_tab_sel"
+        android:textColor="@color/colorPrimary"
         android:background="@drawable/shape_white_pop"
         />
     <Button

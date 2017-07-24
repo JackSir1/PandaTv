@@ -137,7 +137,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/meetquestion_content"
+        android:id="@+id/meetquestion_ider"
         android:layout_width="fill_parent"
         android:layout_height="150dp"
         android:layout_marginLeft="15dp"
@@ -165,7 +165,7 @@
         android:textSize="13sp" />
 
 
-    <TextView
+    <Button
         android:id="@+id/meetquestion_but_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

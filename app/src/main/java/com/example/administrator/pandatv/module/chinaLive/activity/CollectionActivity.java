@@ -1,6 +1,5 @@
 package com.example.administrator.pandatv.module.chinaLive.activity;
 
-import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 
@@ -8,7 +7,6 @@ import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -40,12 +38,7 @@ public class CollectionActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 
     @OnClick(R.id.collection_iv)
     public void onClick() {
