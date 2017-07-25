@@ -1,8 +1,11 @@
 package com.example.administrator.pandatv;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,6 +47,9 @@ public class PersonalActivity extends BaseActivity {
     private String name;
     private String uer;
     private ACache aCache;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    private String sendMsg;
 
     @Override
     protected int getViewID() {
@@ -52,12 +58,19 @@ public class PersonalActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        sharedPreferences=getSharedPreferences("data", Context.MODE_APPEND);
+        editor=sharedPreferences.edit();
+        sendMsg = sharedPreferences.getString("key", "");
     }
 
     @Override
     protected void setListener() {
-
+//        if (mShared.getString("sendMsg","").isEmpty()){
+//            Intent intent=new Intent(getActivity().getApplication().getApplicationContext(), LoginActivityy.class);
+//            startActivity(intent);
+//        }else{
+//            Toast.makeText(getContext(), "你已经登录过了", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Override
@@ -75,14 +88,14 @@ public class PersonalActivity extends BaseActivity {
             case R.id.personal_linear_login:
                 aCache = ACache.get(this);
                 LoginEntity loginEntity = (LoginEntity) aCache.getAsObject("loginentity");
-                if (loginEntity == null) {
+                if (loginEntity == null&&personalLoginText.getText().toString().equals("点击登录")) {
                     Intent intent = new Intent(this, LoginActivity.class);
                     startActivityForResult(intent, 100);
                 } else {
+                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.personal_login_head);
                     Intent inten = new Intent(this, SuccessActivity.class);
-                    inten.putExtra("nameme", loginEntity.getUser_seq_id());
-                    Log.e("PersonalActivity", "=========" + loginEntity.getUser_seq_id());
-//                    inten.putExtra ("image",);
+                    inten.putExtra("nameme",personalLoginText.getText().toString().trim());
+                    inten.putExtra ("image",bitmap);
                     startActivityForResult(inten, 150);
                 }
                 break;

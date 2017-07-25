@@ -2,6 +2,7 @@ package com.example.administrator.pandatv.module.chinaLive.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -66,6 +67,9 @@ public class LoginActivity extends Activity {
     private ShowPopuUtils dialog;
     private String usrid;
     private ACache aCache;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -73,6 +77,8 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.livechina_login);
         ButterKnife.bind(this);
         aCache = ACache.get(this);
+        sharedPreferences=getSharedPreferences("data",MODE_PRIVATE);
+        editor=sharedPreferences.edit();
         loginRadiogroup = (RadioGroup) findViewById(R.id.login_radiogroup);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -167,6 +173,8 @@ public class LoginActivity extends Activity {
                             Intent intent2=getIntent();
                             intent2.putExtra("names","央视网"+usrid);
                             setResult(50,intent2);
+                            editor.putString("key","央视网"+usrid);
+                            editor.commit();
                             finish();
                         }
 
