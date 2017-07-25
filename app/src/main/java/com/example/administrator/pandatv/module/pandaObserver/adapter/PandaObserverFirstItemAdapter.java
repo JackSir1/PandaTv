@@ -19,20 +19,22 @@ import java.util.List;
  */
 
 public class PandaObserverFirstItemAdapter extends BaseAdapter<PandaObserverFirstItemBean.VideoBean> {
-    public PandaObserverFirstItemAdapter(Context context,List<PandaObserverFirstItemBean.VideoBean> datas) {
+    public PandaObserverFirstItemAdapter(Context context, List<PandaObserverFirstItemBean.VideoBean> datas) {
         super(context, R.layout.pandaobserver_firstitem, datas);
     }
+
     private IPandaObserverFirstItemListener firstItemListener;
-    public void setObserverItemListener(IPandaObserverFirstItemListener firstItemListener){
-        this.firstItemListener=firstItemListener;
+
+    public void setObserverItemListener(IPandaObserverFirstItemListener firstItemListener) {
+        this.firstItemListener = firstItemListener;
     }
 
     @Override
     public void convert(ViewHolder holder, final PandaObserverFirstItemBean.VideoBean videoBean) {
-        LinearLayout linearLayout=holder.getView(R.id.pandaObserverFirstItem_linearLayout);
-        holder.setText(R.id.observerfirstitem_content,videoBean.getT());
-        holder.setText(R.id.observerfirstItem_time,videoBean.getLen());
-        ImageView imageView=holder.getView(R.id.pandaObserverFirstItem_image);
+        LinearLayout linearLayout = holder.getView(R.id.pandaObserverFirstItem_linearLayout);
+        holder.setText(R.id.observerfirstitem_content, videoBean.getT());
+        holder.setText(R.id.observerfirstItem_time, videoBean.getLen());
+        ImageView imageView = holder.getView(R.id.pandaObserverFirstItem_image);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         Glide.with(context).load(videoBean.getImg()).asBitmap().into(imageView);
         linearLayout.setOnClickListener(new View.OnClickListener() {

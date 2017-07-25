@@ -25,8 +25,8 @@ import java.util.Set;
 
 public class SaveDataToSD {
     private static SaveDataToSD saveDataToSD;
-    private ACache collectACache = ACache.get(App.content,"collect");
-    private List<String> list=new ArrayList<>();
+    private ACache collectACache = ACache.get(App.content, "collect");
+    private List<String> list = new ArrayList<>();
     private Map<String, PandaTvBean> map;
 
     private SaveDataToSD() {
@@ -44,26 +44,26 @@ public class SaveDataToSD {
     }
 
     public void refreshMap() {
-        collectACache = ACache.get(App.content,"collect");
-        list=new ArrayList<>();
-        list= (List<String>) collectACache.getAsJSONObject("vidList");
+        collectACache = ACache.get(App.content, "collect");
+        list = new ArrayList<>();
+        list = (List<String>) collectACache.getAsJSONObject("vidList");
     }
 
     //收藏和历史记录
     public SaveDataToSD addcollect(PandaTvBean pandaTvBean) {
-        if (list==null  || list.size()==0){
-            list=new ArrayList<>();
+        if (list == null || list.size() == 0) {
+            list = new ArrayList<>();
         }
-        collectACache.put(pandaTvBean.getVid(),pandaTvBean);
+        collectACache.put(pandaTvBean.getVid(), pandaTvBean);
         list.add(pandaTvBean.getVid());
-        collectACache.put("vidList",list);
+        collectACache.put("vidList", list);
 
         return this;
     }
 
-    public PandaTvBean getBean(String vid){
+    public PandaTvBean getBean(String vid) {
 
-        PandaTvBean pandaTvBean= (PandaTvBean) collectACache.getAsObject(vid);
+        PandaTvBean pandaTvBean = (PandaTvBean) collectACache.getAsObject(vid);
 
         return pandaTvBean;
     }
@@ -72,8 +72,8 @@ public class SaveDataToSD {
         List<PandaTvBean> objectList = new ArrayList<>();
 
         if (!list.isEmpty() && list.size() > 0) {
-            for (String vid:list){
-                PandaTvBean pandaTvBean= (PandaTvBean) collectACache.getAsObject(vid);
+            for (String vid : list) {
+                PandaTvBean pandaTvBean = (PandaTvBean) collectACache.getAsObject(vid);
                 objectList.add(pandaTvBean);
             }
             return objectList;
@@ -84,7 +84,7 @@ public class SaveDataToSD {
     public List<PandaTvBean> getSaveCollect() {
 
         List<PandaTvBean> objectList = new ArrayList<>();
-        if (list!=null&&list.size()>0) {
+        if (list != null && list.size() > 0) {
             for (String key : list) {
                 PandaTvBean pandaTvBean = (PandaTvBean) collectACache.getAsObject(key);
                 if (pandaTvBean.getSave()) {
@@ -98,12 +98,12 @@ public class SaveDataToSD {
 
     public void removeConllect(String Vid) {
 
-        for (int i=0;i<list.size();i++){
-            if (list.get(i).equals(Vid)){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals(Vid)) {
                 list.remove(i);
             }
         }
-        collectACache.put("vidList",list);
+        collectACache.put("vidList", list);
         collectACache.remove(Vid);
     }
 

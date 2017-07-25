@@ -77,20 +77,20 @@ public class PandaObserverWebViewActivity extends BaseActivity {
         observerWebBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.putExtra("vid",vid);
-                intent.putExtra("isSave",isSave);
-                setResult(6000,intent);
+                intent.putExtra("vid", vid);
+                intent.putExtra("isSave", isSave);
+                setResult(6000, intent);
                 finish();
             }
         });
         shoucangBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                isSave=!isSave;
-                if (isSave){
-                    Toast.makeText(PandaObserverWebViewActivity.this,"已经收藏",Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(PandaObserverWebViewActivity.this,"已经取消收藏",Toast.LENGTH_SHORT).show();
+                isSave = !isSave;
+                if (isSave) {
+                    Toast.makeText(PandaObserverWebViewActivity.this, "已经收藏", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(PandaObserverWebViewActivity.this, "已经取消收藏", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -102,8 +102,9 @@ public class PandaObserverWebViewActivity extends BaseActivity {
             }
         });
     }
-    public void share(){
-        UMImage image = new UMImage(PandaObserverWebViewActivity.this,R.drawable.ic_launcher);
+
+    public void share() {
+        UMImage image = new UMImage(PandaObserverWebViewActivity.this, R.drawable.ic_launcher);
 
         new ShareAction(PandaObserverWebViewActivity.this).withText(url)
                 .withMedia(image)
@@ -146,9 +147,9 @@ public class PandaObserverWebViewActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            intent.putExtra("vid",vid);
-            intent.putExtra("isSave",isSave);
-            setResult(2000,intent);
+            intent.putExtra("vid", vid);
+            intent.putExtra("isSave", isSave);
+            setResult(2000, intent);
             PandaObserverWebViewActivity.this.finish();
         }
         return false;

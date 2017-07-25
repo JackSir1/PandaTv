@@ -13,11 +13,13 @@ import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 public class PandaObserverContentPresenter implements PandaObserverContentContract.Presenter {
     private PandaObserverContentContract.View view;
     private IPandaObservermodel pandaObservermodel;
-    public PandaObserverContentPresenter(PandaObserverContentContract.View view){
-        this.view=view;
+
+    public PandaObserverContentPresenter(PandaObserverContentContract.View view) {
+        this.view = view;
         this.view.setPresenter(this);
-        pandaObservermodel=new PandaObserverModel();
+        pandaObservermodel = new PandaObserverModel();
     }
+
     @Override
     public void start() {
         pandaObservermodel.setObserverItemVideo(new MyNetCallBack<PandaObserverFirstItemBean>() {
