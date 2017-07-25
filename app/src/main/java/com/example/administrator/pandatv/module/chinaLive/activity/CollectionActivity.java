@@ -2,10 +2,18 @@ package com.example.administrator.pandatv.module.chinaLive.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseActivity;
+import com.example.administrator.pandatv.base.BaseFragment;
+import com.example.administrator.pandatv.module.chinaLive.adapter.MyLivechinaAdapter;
+import com.example.administrator.pandatv.module.chinaLive.fragment.LiveFra;
+import com.example.administrator.pandatv.module.chinaLive.fragment.jcFra;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

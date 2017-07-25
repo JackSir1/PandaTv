@@ -162,7 +162,7 @@ public class LoginActivity extends Activity {
                         @Override
                         public void onSuccess(LoginEntity loginEntity) {
                             ACache aCache=ACache.get(LoginActivity.this);
-                            aCache.put("loginentity",loginEntity);
+                            aCache.put("loginentity",  loginEntity);
                             String errMsg = loginEntity.getErrMsg();
                             if(errMsg.equals("成功")) {
                                 usrid = loginEntity.getUser_seq_id();

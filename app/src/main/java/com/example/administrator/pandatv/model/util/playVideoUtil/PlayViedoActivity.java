@@ -168,7 +168,7 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
         new ShareAction(PlayViedoActivity.this).withText("").setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN).setCallback(new UMShareListener() {
             @Override
             public void onStart(SHARE_MEDIA share_media) {
-                JCMediaManager.instance().mediaPlayer.pause();
+                //JCMediaManager.instance().mediaPlayer.pause();
                 Log.e("share", "onStart");
             }
 
@@ -186,12 +186,12 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
             public void onCancel(SHARE_MEDIA share_media) {
                 Log.e("share", "onCancel");
                 Toast.makeText(PlayViedoActivity.this, "11", Toast.LENGTH_SHORT).show();
-                play.setUp(viedourl
-                        ,JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, title);
-                play.startVideo();
+
             }
         }).withMedia(video).open();
-
+        play.setUp(viedourl
+                ,JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, title);
+        play.startVideo();
     }
 }
 

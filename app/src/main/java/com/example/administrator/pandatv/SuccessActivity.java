@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.example.administrator.pandatv.base.BaseActivity;
 import com.example.administrator.pandatv.model.util.ACache;
+import com.example.administrator.pandatv.module.UpdateInfo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
