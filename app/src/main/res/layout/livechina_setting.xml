@@ -52,13 +52,14 @@
                 android:paddingLeft="15dp"
                 android:layout_gravity="center_vertical"
                 android:textSize="15dp"/>
-            <ImageView
+            <CheckBox
                 android:id="@+id/livechina_setting_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="10dp"
+                android:layout_marginRight="10dp"
+                android:button="@null"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/livechina_setting_msg"
+                android:background="@drawable/livechina_setting_msg"
                 />
         </LinearLayout>
         <TextView
@@ -78,13 +79,14 @@
                 android:paddingLeft="15dp"
                 android:layout_gravity="center_vertical"
                 android:textSize="15dp"/>
-            <ImageView
+            <CheckBox
                 android:id="@+id/livechina_setting_bofang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="10dp"
+                android:layout_marginRight="10dp"
+                android:button="@null"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/livechina_setting_msg"
+                android:background="@drawable/livechina_setting_msg"
                 />
         </LinearLayout>
         <TextView
@@ -101,11 +103,12 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack"
-                android:text="清楚缓存"
+                android:text="清除缓存"
                 android:paddingLeft="15dp"
                 android:layout_gravity="center_vertical"
                 android:textSize="15dp"/>
             <TextView
+                android:id="@+id/clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

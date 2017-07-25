@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -68,6 +68,7 @@ public class SuccessActivity extends BaseActivity {
     private static int output_Y = 480;
     private Bitmap head;// 头像Bitmap
     private static String path = "/sdcard/myHead/";// sd路径
+    private Bitmap bitmapima;
 
     @Override
     protected int getViewID() {
@@ -76,10 +77,11 @@ public class SuccessActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        checkPermission();
         intent = getIntent();
         String nameme = intent.getStringExtra("nameme");
-        name.setText("央视网"+nameme);
+        bitmapima = intent.getParcelableExtra("image");
+        name.setText(nameme);
+        imge.setImageBitmap(bitmapima);
 }
 
     @Override
@@ -118,59 +120,6 @@ public class SuccessActivity extends BaseActivity {
         }
     }
 
-    private void checkPermission(){
-        String permission1 = "android.permission.CAMERA";
-        String permission2 = "android.permission.WRITE_EXTERNAL_STORAGE";
-        String permission3 = "android.permission.READ_EXTERNAL_STORAGE";
-        String[] permissionArray  = {permission1, permission2, permission3};
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(permissionArray, 123);
-        }
-    }
-
-    /**
-     * 判断是否有存储卡，有返回TRUE，否则FALSE
-     * @return
-     */
-    public static boolean isSDcardExist() {
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        //在拍照、选取照片、裁剪Activity结束后，调用的方法
-//        if(requestCode == CODE_REQUEST_CAMERA_PHOTO){
-//            if(resultCode == Activity.RESULT_OK){
-//                if(data == null) {
-//                    return;
-//                }
-//                File tempFile = new File(
-//                        Environment.getExternalStorageDirectory(),
-//                        mCurrentPhotoName);
-//                mNewCurrentPhotoName = "pz_" + mCurrentPhotoName;
-//                String outPath = Environment.getExternalStorageDirectory() + File.separator + mNewCurrentPhotoName;
-//                CropPhotoUtil.cropRawPhoto(this, Uri.fromFile(tempFile), CODE_REQUEST_CROP_PHOTO, outPath, 200, 200);
-//
-//            }
-//        }else if(requestCode == CODE_REQUEST_CROP_PHOTO){
-//            if(resultCode == Activity.RESULT_OK){
-//                String path =  Environment.getExternalStorageDirectory() + File.separator + mNewCurrentPhotoName;
-//                ImageUtils.getInstance(this).setHeadViewFile(imge, path, ImageUtils.ImageType.IMAGE_TYPE_CRICLE);
-//            }
-//        }else if(requestCode == CODE_REQUEST_PICTURE && resultCode == Activity.RESULT_OK){
-//            if(data == null) return;
-//            mNewCurrentPhotoName = System.currentTimeMillis() + ".jpg";
-//            String outPath = Environment.getExternalStorageDirectory() + File.separator + mNewCurrentPhotoName;
-//            CropPhotoUtil.cropRawPhoto(this, data.getData(), CODE_REQUEST_CROP_PHOTO, outPath, 200, 200);
-//            setImageToHeadView(data);
-//        }
-//    }
-
     // 启动手机相机拍摄照片作为头像
     private void choseHeadImageFromCameraCapture() {
         Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -180,19 +129,6 @@ public class SuccessActivity extends BaseActivity {
         popupWindow.dismiss();
     }
 
-
-    /**
-     * 检查设备是否存在SDCard的工具方法
-     */
-    public static boolean hasSdcard() {
-        String state = Environment.getExternalStorageState();
-        if (state.equals(Environment.MEDIA_MOUNTED)) {
-            // 有存储的SDCard
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     private void init() {
 
@@ -210,14 +146,15 @@ public class SuccessActivity extends BaseActivity {
     }
 public void popwindow() {
     popupWindow = new PopupWindow();
-    View view = LayoutInflater.from(SuccessActivity.this).inflate(
+    View view = LayoutInflater.from(this).inflate(
             R.layout.add_popup_dialog, null);
     popupWindow = new PopupWindow(view,
             ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT);
+            ViewGroup.LayoutParams.MATCH_PARENT);
     popupWindow.setFocusable(true);// 取得焦点
+    ColorDrawable colorDrawable=new ColorDrawable(0x30000000);
     //注意  要是点击外部空白处弹框消息  那么必须给弹框设置一个背景色  不然是不起作用的
-    popupWindow.setBackgroundDrawable(new BitmapDrawable());
+    popupWindow.setBackgroundDrawable(colorDrawable);
     //点击外部消失
     popupWindow.setOutsideTouchable(true);
     //设置可以点击
@@ -252,7 +189,6 @@ public void popwindow() {
     });
 
 }
-//    name.setText(intent.getStringExtra("updatena"));
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
