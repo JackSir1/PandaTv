@@ -81,6 +81,7 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
             public void Share(View view) {
                 play.onStatePlaying();
                  share1();
+
                 Toast.makeText(PlayViedoActivity.this, "分享", Toast.LENGTH_SHORT).show();
             }
 
@@ -141,7 +142,7 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             JCMediaManager.instance().mediaPlayer.stop();
-            PlayViedoActivity.this.finish();
+            //PlayViedoActivity.this.finish();
         }
 
         return false;
