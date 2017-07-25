@@ -152,7 +152,7 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
     protected void onDestroy() {
         super.onDestroy();
         PlayViedoActivity.this.finish();
-        JCMediaManager.instance().mediaPlayer.reset();
+        JCMediaManager.instance().mediaPlayer.stop();
     }
     public void share1(){
         UMVideo video = new UMVideo(url);
