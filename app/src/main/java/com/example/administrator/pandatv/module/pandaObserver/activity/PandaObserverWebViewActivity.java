@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseActivity;
@@ -38,11 +39,9 @@ public class PandaObserverWebViewActivity extends BaseActivity {
     @BindView(R.id.fenxiang_btn)
     CheckBox fenxiangBtn;
 
-
     private String url;
     private String vid;
     private boolean isSave;
-    private IPandaObserverWebViewActivity pandaObserverWebViewActivity;
     private Intent intent;
 
     @Override
@@ -72,24 +71,28 @@ public class PandaObserverWebViewActivity extends BaseActivity {
         webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
     }
 
-    public void setReturneTop(IPandaObserverWebViewActivity pandaObserverWebViewActivity){
-        this.pandaObserverWebViewActivity=pandaObserverWebViewActivity;
-    }
     @Override
     protected void setListener() {
 
         observerWebBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                intent.putExtra("vid",vid);
+                intent.putExtra("isSave",isSave);
+                setResult(6000,intent);
                 finish();
             }
         });
         shoucangBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                intent.putExtra("vid",vid);
-                intent.putExtra("isSave",isSave);
-                setResult(66666,intent);
+                isSave=!isSave;
+                if (isSave){
+                    Toast.makeText(PandaObserverWebViewActivity.this,"已经收藏",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(PandaObserverWebViewActivity.this,"已经取消收藏",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         fenxiangBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -143,6 +146,9 @@ public class PandaObserverWebViewActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            intent.putExtra("vid",vid);
+            intent.putExtra("isSave",isSave);
+            setResult(2000,intent);
             PandaObserverWebViewActivity.this.finish();
         }
         return false;
@@ -153,5 +159,11 @@ public class PandaObserverWebViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
     }
 }

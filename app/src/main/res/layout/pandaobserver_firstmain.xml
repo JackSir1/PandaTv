@@ -89,30 +89,44 @@
         android:textColor="@color/colorBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <com.androidkun.PullToRefreshRecyclerView
-        android:id="@+id/ggvideo_list"
-        android:layout_marginLeft="@dimen/x20"
-        android:layout_marginRight="@dimen/x20"
-        android:scrollbars="none"
+    <RelativeLayout
+        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-
-    </com.androidkun.PullToRefreshRecyclerView>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y85">
-        <CheckBox
-            android:button="@null"
+        <com.androidkun.PullToRefreshRecyclerView
+            android:id="@+id/ggvideo_list"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x20"
+            android:scrollbars="none"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <CheckBox
-            android:button="@null"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+        </com.androidkun.PullToRefreshRecyclerView>
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@color/colorBlue"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y85">
+            <CheckBox
+                android:button="@null"
+                android:id="@+id/web_shoucang_btn"
+                android:layout_marginRight="@dimen/x20"
+                android:background="@drawable/pandaobserver_shoucang_btnbk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:button="@null"
+                android:id="@+id/web_fenxiang_btn"
+                android:layout_marginLeft="@dimen/x20"
+                android:background="@drawable/pandaobserver_fenxiang_btnbk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
 
-    </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
 
 </LinearLayout>

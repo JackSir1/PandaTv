@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.administrator.pandatv.base.BaseActivity;
 import com.example.administrator.pandatv.config.crash.CrashHandler;
+import com.example.administrator.pandatv.module.chinaLive.activity.RegisterActivity;
 import com.example.administrator.pandatv.net.IHttp;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.Config;

@@ -25,9 +25,8 @@ import java.util.Set;
 
 public class SaveDataToSD {
     private static SaveDataToSD saveDataToSD;
-    private static Context context;
-    private ACache collectACache;
-    private ArrayList<PandaTvBean> arrayList = new ArrayList<>();
+    private ACache collectACache = ACache.get(App.content,"collect");
+    private List<String> list=new ArrayList<>();
     private Map<String, PandaTvBean> map;
 
     private SaveDataToSD() {
@@ -45,54 +44,36 @@ public class SaveDataToSD {
     }
 
     public void refreshMap() {
-        this.map = new ArrayMap<>();
-        Map<String, PandaTvBean> map2 = (Map<String, PandaTvBean>) collectACache.getAsJSONObject("collect");
-        if (map2 != null && map2.size() > 0) {
-            this.map = map2;
-        }
-
-
+        collectACache = ACache.get(App.content,"collect");
+        list=new ArrayList<>();
+        list= (List<String>) collectACache.getAsJSONObject("vidList");
     }
 
     //收藏和历史记录
     public SaveDataToSD addcollect(PandaTvBean pandaTvBean) {
-
-        collectACache = ACache.get(App.content, "collect");
-        refreshMap();
-        String vid = pandaTvBean.getVid();
-        map.put(vid, pandaTvBean);
-        try {
-            collectACache.put("collect", map);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        if (list==null  || list.size()==0){
+            list=new ArrayList<>();
         }
+        collectACache.put(pandaTvBean.getVid(),pandaTvBean);
+        list.add(pandaTvBean.getVid());
+        collectACache.put("vidList",list);
+
         return this;
     }
 
     public PandaTvBean getBean(String vid){
-        collectACache = ACache.get(App.content, "collect");
-        refreshMap();
-        Map<String, PandaTvBean> map = null;
-        map = (Map<String, PandaTvBean>) collectACache.getAsJSONObject("collect");
-        PandaTvBean pandaTvBean=null;
-        if (map!=null){
 
-            pandaTvBean = map.get(vid);
-        }
+        PandaTvBean pandaTvBean= (PandaTvBean) collectACache.getAsObject(vid);
 
         return pandaTvBean;
     }
 
     public List<PandaTvBean> getHistoryConllect() {
-        Map<String, PandaTvBean> map = null;
+        List<PandaTvBean> objectList = new ArrayList<>();
 
-        map = (Map<String, PandaTvBean>) collectACache.getAsJSONObject("collect");
-
-        if (!map.isEmpty() && map.size() > 0) {
-            Set<String> strings = map.keySet();
-            List<PandaTvBean> objectList = new ArrayList<>();
-            for (String o : strings) {
-                PandaTvBean pandaTvBean = map.get(o);
+        if (!list.isEmpty() && list.size() > 0) {
+            for (String vid:list){
+                PandaTvBean pandaTvBean= (PandaTvBean) collectACache.getAsObject(vid);
                 objectList.add(pandaTvBean);
             }
             return objectList;
@@ -101,29 +82,29 @@ public class SaveDataToSD {
     }
 
     public List<PandaTvBean> getSaveCollect() {
-        collectACache = ACache.get(App.content, "collect");
-        refreshMap();
-        Set<String> strings = map.keySet();
-        List<PandaTvBean> pandaTvBeanList = new ArrayList<>();
-        for (String key : strings) {
-            PandaTvBean pandaTvBean = map.get(key);
-            if (pandaTvBean.getSave()) {
-                pandaTvBeanList.add(pandaTvBean);
+
+        List<PandaTvBean> objectList = new ArrayList<>();
+        if (list!=null&&list.size()>0) {
+            for (String key : list) {
+                PandaTvBean pandaTvBean = (PandaTvBean) collectACache.getAsObject(key);
+                if (pandaTvBean.getSave()) {
+                    objectList.add(pandaTvBean);
+                }
             }
         }
 
-        return pandaTvBeanList;
+        return objectList;
     }
 
     public void removeConllect(String Vid) {
-        collectACache = ACache.get(App.content, "collect");
-        refreshMap();
-        map.remove(Vid);
-        try {
-            collectACache.put("collect", map);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
+        for (int i=0;i<list.size();i++){
+            if (list.get(i).equals(Vid)){
+                list.remove(i);
+            }
         }
+        collectACache.put("vidList",list);
+        collectACache.remove(Vid);
     }
 
     //观看历史

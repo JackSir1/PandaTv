@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidkun.PullToRefreshRecyclerView;
 import com.bumptech.glide.Glide;
@@ -56,6 +57,8 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
     private List<PandaObserverBean.ListBean> beanList = new ArrayList<>();
     private PandaObserverContract.Presenter presenter;
     private ShowPopuUtils showPopuUtils;
+    private PandaTvBean pandaTvBean;
+    private SaveDataToSD addcollect;
 
     @Override
     protected int getViweId() {
@@ -167,16 +170,21 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
                 if (vid.equals("")||vid==null){
                     vid=id;
                 }
-                SaveDataToSD addcollect = SaveDataToSD.getInsent();
+                addcollect = SaveDataToSD.getInsent();
 
-                PandaTvBean bean = addcollect.getBean(vid);
-                if (bean!=null){
-                    Boolean save = bean.getSave();
+                pandaTvBean = addcollect.getBean(vid);
+                if (pandaTvBean !=null){
+                    Boolean save = pandaTvBean.getSave();
                     isSave=save;
+                }
+                if (pandaTvBean !=null){
+
+                }else {
+                    pandaTvBean =new PandaTvBean();
                 }
 
 
-                PandaTvBean pandaTvBean=new PandaTvBean();
+
                 pandaTvBean.setVid(vid);
                 pandaTvBean.setImageView(image);
                 pandaTvBean.setUrl(url);
@@ -191,7 +199,7 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
                     intent.putExtra("isSave",isSave);
                     intent.putExtra("vid",vid);
                     intent.putExtra("url", url);
-                    startActivityForResult(intent,666666);
+                    startActivityForResult(intent,2000);
                 }
 
             }
@@ -201,21 +209,12 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==666666){
+        if (requestCode==2000&&resultCode==6000){
+            boolean isSave = data.getBooleanExtra("isSave", false);
             String vid = data.getStringExtra("vid");
-            SaveDataToSD addcollect = SaveDataToSD.getInsent();
-            List<PandaTvBean> saveCollect = addcollect.getSaveCollect();
-            for (PandaTvBean pandaTvBean:saveCollect){
-                if (pandaTvBean.getVid().equals(vid)){
-                    Boolean save = pandaTvBean.getSave();
-                    if (save){
-                        pandaTvBean.setSave(false);
-                    }else {
-                        pandaTvBean.setSave(true);
-                    }
-                    addcollect.addcollect(pandaTvBean);
-                }
-            }
+            pandaTvBean.setSave(isSave);
+            pandaTvBean.setVid(vid);
+            addcollect.addcollect(pandaTvBean);
         }
     }
 

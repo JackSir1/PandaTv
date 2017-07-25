@@ -38,7 +38,7 @@ public class PandaObserverFirstItemAdapter extends BaseAdapter<PandaObserverFirs
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firstItemListener.setObserverVideoItemPid(videoBean.getVid());
+                firstItemListener.setObserverVideoItemPid(videoBean);
             }
         });
 

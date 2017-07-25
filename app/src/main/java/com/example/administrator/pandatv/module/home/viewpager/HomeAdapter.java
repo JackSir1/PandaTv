@@ -36,6 +36,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
     private Context context;
     private LayoutInflater inflater;
 
+
     public HomeAdapter(Context context, List<Object> objects) {
         inflater = LayoutInflater.from(context);
         this.context = context;
@@ -245,10 +246,19 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 case R.id.home_observer_title1:
                     String pid = pandaeye.getItems().get(0).getPid();
                     String title = pandaeye.getItems().get(0).getTitle();
-
                     String id = pandaeye.getItems().get(0).getId();
                     String vid = pandaeye.getItems().get(0).getVid();
                     String url = pandaeye.getItems().get(0).getUrl();
+
+                    SaveDataToSD addcollect = SaveDataToSD.getInsent();
+
+                    Boolean isSave=false;
+
+                    PandaTvBean bean = addcollect.getBean(vid);
+                    if (bean!=null){
+                        Boolean save = bean.getSave();
+                        isSave=save;
+                    }
 
                     PandaTvBean pandaTvBean=new PandaTvBean();
                     pandaTvBean.setImageView("");
@@ -262,10 +272,10 @@ public class HomeAdapter extends RecyclerView.Adapter {
                     }
                     pandaTvBean.setType("1");
                     pandaTvBean.setUrl(url);
-                    SaveDataToSD addcollect = SaveDataToSD.getInsent();
                     addcollect.addcollect(pandaTvBean);
 
                     Intent intent = new Intent(context, PlayViedoActivity.class);
+                    intent.putExtra("isSave",isSave);
                     intent.putExtra("title", title);
                     intent.putExtra("pid", pid);
                     context.startActivity(intent);
@@ -277,6 +287,16 @@ public class HomeAdapter extends RecyclerView.Adapter {
                     String id1 = pandaeye.getItems().get(1).getId();
                     String vid1 = pandaeye.getItems().get(1).getVid();
                     String url1 = pandaeye.getItems().get(1).getUrl();
+
+                    SaveDataToSD addcollect1 = SaveDataToSD.getInsent();
+
+                    Boolean isSave1=false;
+
+                    PandaTvBean bean1 = addcollect1.getBean(vid1);
+                    if (bean1!=null){
+                        Boolean save = bean1.getSave();
+                        isSave1=save;
+                    }
 
                     PandaTvBean pandaTvBean1=new PandaTvBean();
                     pandaTvBean1.setImageView("");
@@ -290,10 +310,11 @@ public class HomeAdapter extends RecyclerView.Adapter {
                     }
                     pandaTvBean1.setType("1");
                     pandaTvBean1.setUrl(url1);
-                    SaveDataToSD addcollect1 = SaveDataToSD.getInsent();
+
                     addcollect1.addcollect(pandaTvBean1);
 
                     Intent intent1 = new Intent(context, PlayViedoActivity.class);
+                    intent1.putExtra("isSave",isSave1);
                     intent1.putExtra("title", title3);
                     intent1.putExtra("pid", pid1);
                     context.startActivity(intent1);

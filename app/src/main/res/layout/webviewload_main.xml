@@ -32,15 +32,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <CheckBox
+            android:button="@null"
             android:id="@+id/shoucang_btn"
             android:layout_marginRight="@dimen/x20"
-            android:src="@drawable/pandaobserver_shoucang_btnbk"
+            android:background="@drawable/pandaobserver_shoucang_btnbk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <CheckBox
+            android:button="@null"
             android:id="@+id/fenxiang_btn"
             android:layout_marginLeft="@dimen/x20"
-            android:src="@drawable/pandaobserver_fenxiang_btnbk"
+            android:background="@drawable/pandaobserver_fenxiang_btnbk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

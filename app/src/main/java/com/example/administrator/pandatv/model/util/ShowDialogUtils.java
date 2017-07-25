@@ -112,27 +112,4 @@ public class ShowDialogUtils {
         return NULLNET;
     }
 
-    public ShowDialogUtils setViewId(final IShowDialogUtils ShowDialogUtils) {
-        if (netType() == 1) {
-            dialog.setTitle("当前处于移动网络是否继续播放？");
-            dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    ShowDialogUtils.setMaked();
-                }
-            });
-            dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            dialog.show();
-        }
-        return this;
-    }
-
-
-
-
 }
