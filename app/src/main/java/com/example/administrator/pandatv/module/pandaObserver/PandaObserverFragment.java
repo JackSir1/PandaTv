@@ -13,12 +13,10 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.androidkun.PullToRefreshRecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.R;
-import com.example.administrator.pandatv.app.App;
 import com.example.administrator.pandatv.base.BaseFragment;
 import com.example.administrator.pandatv.model.entity.PandaObserverBean;
 import com.example.administrator.pandatv.model.util.ACache;
@@ -31,8 +29,6 @@ import com.example.administrator.pandatv.module.pandaObserver.activity.PandaObse
 import com.example.administrator.pandatv.module.pandaObserver.adapter.OnRecyclerItemClickListener;
 import com.example.administrator.pandatv.module.pandaObserver.adapter.PandaObserverAdapter;
 
-import java.io.FileNotFoundException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +63,7 @@ public class PandaObserverFragment extends BaseFragment implements PandaObserver
 
     @Override
     protected void initView(View view) {
+        new PandaObserverPresenter(this);
         showPopuUtils = ShowPopuUtils.getInsent().create(getContext());
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);

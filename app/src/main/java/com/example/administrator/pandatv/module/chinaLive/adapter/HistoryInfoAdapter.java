@@ -9,7 +9,9 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.R;
+import com.example.administrator.pandatv.model.util.saveData.PandaTvBean;
 
 import java.util.List;
 
@@ -20,9 +22,9 @@ import java.util.List;
 public class HistoryInfoAdapter extends RecyclerView.Adapter<HistoryInfoAdapter.ViewHolder> {
 
     private Context mCon;
-    private List<String> mList;
+    private List<PandaTvBean> mList;
 
-    public HistoryInfoAdapter(Context mCon, List<String> mList) {
+    public HistoryInfoAdapter(Context mCon, List<PandaTvBean> mList) {
         this.mCon = mCon;
         this.mList = mList;
     }
@@ -36,12 +38,14 @@ public class HistoryInfoAdapter extends RecyclerView.Adapter<HistoryInfoAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+            holder.mTime.setText(mList.get(position).getDayTime());
+        holder.mTitle.setText(mList.get(position).getContent());
+        Glide.with(mCon).load(mList.get(position).getImageView()).into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
