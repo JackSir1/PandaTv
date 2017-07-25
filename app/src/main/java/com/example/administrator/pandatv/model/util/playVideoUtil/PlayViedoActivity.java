@@ -1,7 +1,10 @@
 package com.example.administrator.pandatv.model.util.playVideoUtil;
 
+import android.Manifest;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -14,7 +17,7 @@ import com.example.administrator.pandatv.model.entity.PlayVideoBean;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMVideo;
 
 import fm.jiecao.jcvideoplayer_lib.JCMediaManager;
 import fm.jiecao.jcvideoplayer_lib.JCUserAction;
@@ -28,6 +31,10 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
     private JCVideoPlayerStandard player;
     private JCVideoPlayerStandard play;
     private String title;
+    private String hls_url;
+    private String image;
+    private String url;
+    private String viedourl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,21 +63,25 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
     }
 
 
-    public void setVideoPlayer(final String videoUrl, final String title) {
+    public void setVideoPlayer(String image,final String videoUrl, final String title) {
+        url = videoUrl;
+
         play.setUp(videoUrl
                 ,JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, title);
-        //Glide.with(this).load("").into(JCVideoPlayerStandard)
         play.startVideo();
-       // JCMediaManager.instance().mediaPlayer.start();
+
+
             Log.e("TAG",videoUrl);
         JCVideoPlayer.setJcUserAction(new MyUserActionStandard());
-        JCVideoPlayerStandard.startFullscreen(this,JCUserActionStandard.class,videoUrl,title);
+        //JCVideoPlayerStandard.startFullscreen(this,JCUserActionStandard.class,videoUrl,title);
 
         play.setMonitor(new JCVideoPlayerStandard.imgClickon() {
             @Override
             //分享
             public void Share(View view) {
-                 share();
+                play.onStatePlaying();
+                 share1();
+
                 Toast.makeText(PlayViedoActivity.this, "分享", Toast.LENGTH_SHORT).show();
             }
 
@@ -93,22 +104,23 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
             @Override
             public void setgq() {
           Toast.makeText(PlayViedoActivity.this, "已切换至高清", Toast.LENGTH_SHORT).show();
-                //play.removeAllViews();
-                play.setUp(videoUrl
+                play.setUp(viedourl
                         ,JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, title);
+                play.startVideo();
 
             }
 
             @Override
             public void setbq() {
-                //play.removeAllViews();
+
                 play.setUp(videoUrl
                         ,JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, title);
+                play.startVideo();
                 Toast.makeText(PlayViedoActivity.this, "已切换至标清", Toast.LENGTH_SHORT).show();
 
             }
         });
-        //JCVideoPlayerStandard.setMonitor
+
     }
 
     @Override
@@ -118,48 +130,19 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
 
     @Override
     public void getVedioUrl( final PlayVideoBean playVideoBean) {
-        String hls_url = playVideoBean.getHls_url();
-        setVideoPlayer(hls_url,this.title);
+        hls_url = playVideoBean.getHls_url();
+        Log.d("PlayViedoActivity", hls_url);
+        viedourl = playVideoBean.getVideo().getChapters4().get(0).getUrl();
+        image = playVideoBean.getVideo().getChapters().get(0).getImage();
+        setVideoPlayer(image, hls_url,this.title);
     }
     //分享
-       private void share() {
 
-        UMImage image = new UMImage(PlayViedoActivity.this,R.drawable.ic_launcher);
-
-        new ShareAction(PlayViedoActivity.this).withText(""+"!"+ "" )
-                .withMedia(image)
-                .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
-                .setCallback(new UMShareListener() {
-                    @Override
-                    public void onStart(SHARE_MEDIA share_media) {
-                        Log.e("TAG", "onStart");
-                    }
-
-                    @Override
-                    public void onResult(SHARE_MEDIA share_media) {
-
-                        Log.e("TAG", "onResult");
-                    }
-
-                    @Override
-                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-
-                        Log.e("TAG", "onError");
-                    }
-
-                    @Override
-                    public void onCancel(SHARE_MEDIA share_media) {
-
-                        Log.e("TAG", "onCancel");
-                    }
-                }).open();
-    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            //JCMediaManager.instance().mediaPlayer.pause();
+            JCMediaManager.instance().mediaPlayer.stop();
             PlayViedoActivity.this.finish();
-            //System.exit(0);
         }
 
         return false;
@@ -169,7 +152,46 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
     protected void onDestroy() {
         super.onDestroy();
         PlayViedoActivity.this.finish();
-        JCMediaManager.instance().mediaPlayer.pause();
+        JCMediaManager.instance().mediaPlayer.reset();
+    }
+    public void share1(){
+        UMVideo video = new UMVideo(url);
+        video.setTitle(title);//视频的标题
+
+        video.setDescription(title);//视频的描述
+        if (Build.VERSION.SDK_INT >= 23) {
+            String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE, Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP, Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS, Manifest.permission.WRITE_APN_SETTINGS};
+            ActivityCompat.requestPermissions(PlayViedoActivity.this, mPermissionList, 123);
+        }
+
+        //video.setThumb(new UMImage(PlayViedoActivity.this, image));
+        new ShareAction(PlayViedoActivity.this).withText("").setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN).setCallback(new UMShareListener() {
+            @Override
+            public void onStart(SHARE_MEDIA share_media) {
+                JCMediaManager.instance().mediaPlayer.pause();
+                Log.e("share", "onStart");
+            }
+
+            @Override
+            public void onResult(SHARE_MEDIA share_media) {
+                Log.e("share", "onResult");
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                Log.e("share","error"+ throwable.toString());
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA share_media) {
+                Log.e("share", "onCancel");
+                Toast.makeText(PlayViedoActivity.this, "11", Toast.LENGTH_SHORT).show();
+                play.setUp(viedourl
+                        ,JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, title);
+                play.startVideo();
+            }
+        }).withMedia(video).open();
+
     }
 }
 

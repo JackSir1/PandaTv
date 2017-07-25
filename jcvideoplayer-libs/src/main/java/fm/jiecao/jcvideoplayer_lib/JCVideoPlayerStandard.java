@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
@@ -49,13 +50,20 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
 
     protected DismissControlViewTimerTask mDismissControlViewTimerTask;
     public static CheckBox Collection;
-    private  ImageView shareit;
+    private ImageView shareit;
     private ImageView Watchthelist;
     private ImageView share;
-    public  CheckBox  zt_bf;
+    public CheckBox zt_bf;
     private Button lx;
     private SeekBar seekbar;
     private AudioManager am;
+    private FrameLayout surface_container;
+    private ImageView thumb;
+    private ProgressBar bottom_progress;
+    private ImageView back_tiny;
+    private ImageView back;
+    private TextView title;
+    private ImageView yl;
 
     public JCVideoPlayerStandard(Context context) {
         super(context);
@@ -68,21 +76,22 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
     @Override
     public void init(final Context context) {
         super.init(context);
-         bottomProgressBar = (ProgressBar) findViewById(R.id.bottom_progress);
-         titleTextView = (TextView) findViewById(R.id.title);
-         backButton = (ImageView) findViewById(R.id.back);
-         thumbImageView = (ImageView) findViewById(R.id.thumb);
-         loadingProgressBar = (ProgressBar) findViewById(R.id.loading);
-         tinyBackImageView = (ImageView) findViewById(R.id.back_tiny);
-         Collection = (CheckBox) findViewById(R.id.Collection);
-        JCMediaManager.instance().mediaPlayer.pause();
+        bottomProgressBar = (ProgressBar) findViewById(R.id.bottom_progress);
+        titleTextView = (TextView) findViewById(R.id.title);
+        backButton = (ImageView) findViewById(R.id.back);
+        thumbImageView = (ImageView) findViewById(R.id.thumb);
+        yl = (ImageView) findViewById(R.id.yl);
+        loadingProgressBar = (ProgressBar) findViewById(R.id.loading);
+        tinyBackImageView = (ImageView) findViewById(R.id.back_tiny);
+        Collection = (CheckBox) findViewById(R.id.Collection);
+        //JCMediaManager.instance().mediaPlayer.pause();
         zt_bf = (CheckBox) findViewById(R.id.zt_bf);
-         shareit = (ImageView) findViewById(R.id.shareit);
-         Watchthelist = (ImageView) findViewById(R.id.Watchthelist);
-         Collection.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        shareit = (ImageView) findViewById(R.id.shareit);
+        Watchthelist = (ImageView) findViewById(R.id.Watchthelist);
+        Collection.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                imgClickon.CollectionMonitor(compoundButton,b);
+                imgClickon.CollectionMonitor(compoundButton, b);
             }
         });
         shareit.setOnClickListener(new OnClickListener() {
@@ -103,9 +112,9 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         zt_bf.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
+                if (b) {
                     JCMediaManager.instance().mediaPlayer.pause();
-                }else{
+                } else {
                     JCMediaManager.instance().mediaPlayer.start();
                 }
             }
@@ -120,21 +129,23 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             @Override
             public void onClick(View view) {
                 View inflate = View.inflate(context, R.layout.pupoym, null);
-                final PopupWindow popupWindow=new PopupWindow(inflate,WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT,true);
+                final PopupWindow popupWindow = new PopupWindow(inflate, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
                 gq = (RadioButton) inflate.findViewById(R.id.gq);
                 bq = (RadioButton) inflate.findViewById(R.id.bq);
                 radio = (RadioGroup) inflate.findViewById(R.id.radio);
 
                 popupWindow.setFocusable(true);
-                popupWindow.setBackgroundDrawable(new ColorDrawable(Color.argb(200,200,200,200)));
-                popupWindow.showAtLocation(inflate,Gravity.BOTTOM,300,120);
+                popupWindow.setBackgroundDrawable(new ColorDrawable(Color.argb(200, 200, 200, 200)));
+                popupWindow.showAtLocation(inflate, Gravity.BOTTOM, 275, 140);
                 radio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup radioGroup, int i) {
                         if (i == R.id.bq) {
+                            lx.setText("标清");
                             imgClickon.setbq();
                             popupWindow.dismiss();
                         } else if (i == R.id.gq) {
+                            lx.setText("高清");
                             imgClickon.setgq();
                             popupWindow.dismiss();
                         }
@@ -154,7 +165,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if(b){
+                if (b) {
                     //设置系统音量
                     am.setStreamVolume(AudioManager.STREAM_MUSIC, i, 0);
                     int currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
@@ -175,20 +186,24 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
 
     }
 
-    public   interface imgClickon{
-          void Share(View view);
-        //收藏
-          void CollectionMonitor(CompoundButton compoundButton,boolean b);
-          void WatchthelistMonitor(View view);
-          void setgq();
-          void setbq();
-      }
-    private imgClickon imgClickon;
+    public interface imgClickon {
+        void Share(View view);
 
-    public void setMonitor(imgClickon imgClickon){
-        this.imgClickon=imgClickon;
+        //收藏
+        void CollectionMonitor(CompoundButton compoundButton, boolean b);
+
+        void WatchthelistMonitor(View view);
+
+        void setgq();
+
+        void setbq();
     }
 
+    private imgClickon imgClickon;
+
+    public void setMonitor(imgClickon imgClickon) {
+        this.imgClickon = imgClickon;
+    }
 
 
     @Override
@@ -276,7 +291,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
     }
 
 
-
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         int id = v.getId();
@@ -309,7 +323,6 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
                     break;
             }
         }
-
 
 
         return super.onTouch(v, event);

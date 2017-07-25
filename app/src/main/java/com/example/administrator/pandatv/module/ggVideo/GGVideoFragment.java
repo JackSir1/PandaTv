@@ -55,7 +55,6 @@ public class GGVideoFragment extends BaseFragment implements GGVideoContract.Vie
     @Override
     protected void loadDate() {
         showPopuUtils = ShowPopuUtils.getInsent().create(getContext());
-
         presenter.start();
     }
 

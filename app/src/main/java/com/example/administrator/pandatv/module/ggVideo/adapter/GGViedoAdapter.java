@@ -37,6 +37,7 @@ public class GGViedoAdapter extends BaseAdapter<GGBean.ListBean> {
                 Intent in=new Intent(context, PlayViedoActivity.class);
                 in.putExtra("pid",listBean.getGuid());
                 in.putExtra("title",listBean.getTitle());
+
                 context.startActivity(in);
             }
         });

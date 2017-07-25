@@ -77,7 +77,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
     public Object[] objects = null;
     public int seekToInAdvance = 0;
 
-    public ImageView startButton;
+    public ImageView startButton,yl;
     public SeekBar progressBar;
     public ImageView fullscreenButton;
     public TextView currentTimeTextView, totalTimeTextView;
@@ -119,6 +119,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
     public void init(Context context) {
         View.inflate(context, getLayoutId(), this);
         startButton = (ImageView) findViewById(R.id.start);
+        yl = (ImageView) findViewById(R.id.yl);
         fullscreenButton = (ImageView) findViewById(R.id.fullscreen);
         progressBar = (SeekBar) findViewById(R.id.bottom_seek_progress);
         currentTimeTextView = (TextView) findViewById(R.id.current);

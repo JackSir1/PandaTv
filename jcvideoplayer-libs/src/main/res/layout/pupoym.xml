@@ -2,32 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-<RadioGroup
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/radio"
-    android:orientation="vertical">
-    <RadioButton
 
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:button="@null"
-        android:text="高清"
-        android:id="@+id/gq"
-        android:gravity="center"
-        android:background="#303F9F"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"></View>
-    <RadioButton
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:button="@null"
-        android:id="@+id/bq"
-        android:text="标清"
-        android:gravity="center"
-        android:background="#95A093"
-        />
-</RadioGroup>
+    <RadioGroup
+        android:id="@+id/radio"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:orientation="vertical">
+
+        <RadioButton
+
+            android:id="@+id/gq"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:background="#9399be"
+            android:button="@null"
+            android:gravity="center"
+            android:text="高清" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"></View>
+
+        <RadioButton
+            android:id="@+id/bq"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:background="#95A093"
+            android:button="@null"
+            android:gravity="center"
+            android:text="标清" />
+    </RadioGroup>
 </LinearLayout>
