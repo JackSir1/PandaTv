@@ -18,6 +18,8 @@ import com.bumptech.glide.Glide;
 import com.example.administrator.pandatv.model.util.playVideoUtil.PlayViedoActivity;
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.model.entity.HomeBean;
+import com.example.administrator.pandatv.model.util.saveData.PandaTvBean;
+import com.example.administrator.pandatv.model.util.saveData.SaveDataToSD;
 
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
     private List<Object> objects;
     private Context context;
     private LayoutInflater inflater;
+
 
     public HomeAdapter(Context context, List<Object> objects) {
         inflater = LayoutInflater.from(context);
@@ -158,6 +161,23 @@ public class HomeAdapter extends RecyclerView.Adapter {
             HomeBean.DataBean.AreaBean.ListscrollBean listscrollBean = listscrol2.get(position);
             String pid = listscrollBean.getPid();
             String title = listscrollBean.getTitle();
+
+            PandaTvBean pandaTvBean=new PandaTvBean();
+            pandaTvBean.setImageView(listscrollBean.getImage());
+            pandaTvBean.setContent(listscrollBean.getTitle());
+            pandaTvBean.setVideoTime(listscrollBean.getVideoLength());
+            pandaTvBean.setPid(listscrollBean.getPid());
+            String vid = listscrollBean.getVid();
+            if (!vid.equals("")&& vid!=null){
+                pandaTvBean.setVid(vid);
+            }else {
+                pandaTvBean.setVid(listscrollBean.getPid());
+            }
+
+            pandaTvBean.setType("1");
+            SaveDataToSD addcollect = SaveDataToSD.getInsent();
+            addcollect.addcollect(pandaTvBean);
+
             Intent intent = new Intent(context, PlayViedoActivity.class);
             intent.putExtra("title", title);
             intent.putExtra("pid", pid);
@@ -185,6 +205,9 @@ public class HomeAdapter extends RecyclerView.Adapter {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             HomeBean.DataBean.PandaliveBean.ListBean listBean = pandaliveBeans.get(position);
+            String vid = listBean.getVid();
+            String title = listBean.getTitle();
+
         }
     }
 
@@ -223,7 +246,36 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 case R.id.home_observer_title1:
                     String pid = pandaeye.getItems().get(0).getPid();
                     String title = pandaeye.getItems().get(0).getTitle();
+                    String id = pandaeye.getItems().get(0).getId();
+                    String vid = pandaeye.getItems().get(0).getVid();
+                    String url = pandaeye.getItems().get(0).getUrl();
+
+                    SaveDataToSD addcollect = SaveDataToSD.getInsent();
+
+                    Boolean isSave=false;
+
+                    PandaTvBean bean = addcollect.getBean(vid);
+                    if (bean!=null){
+                        Boolean save = bean.getSave();
+                        isSave=save;
+                    }
+
+                    PandaTvBean pandaTvBean=new PandaTvBean();
+                    pandaTvBean.setImageView("");
+                    pandaTvBean.setContent(title);
+                    pandaTvBean.setVideoTime("");
+                    pandaTvBean.setPid(pid);
+                    if (!vid.equals("")){
+                        pandaTvBean.setVid(vid);
+                    }else {
+                        pandaTvBean.setVid(id);
+                    }
+                    pandaTvBean.setType("1");
+                    pandaTvBean.setUrl(url);
+                    addcollect.addcollect(pandaTvBean);
+
                     Intent intent = new Intent(context, PlayViedoActivity.class);
+                    intent.putExtra("isSave",isSave);
                     intent.putExtra("title", title);
                     intent.putExtra("pid", pid);
                     context.startActivity(intent);
@@ -232,7 +284,37 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 case R.id.home_observer_title2:
                     String pid1 = pandaeye.getItems().get(1).getPid();
                     String title3 = pandaeye.getItems().get(1).getTitle();
+                    String id1 = pandaeye.getItems().get(1).getId();
+                    String vid1 = pandaeye.getItems().get(1).getVid();
+                    String url1 = pandaeye.getItems().get(1).getUrl();
+
+                    SaveDataToSD addcollect1 = SaveDataToSD.getInsent();
+
+                    Boolean isSave1=false;
+
+                    PandaTvBean bean1 = addcollect1.getBean(vid1);
+                    if (bean1!=null){
+                        Boolean save = bean1.getSave();
+                        isSave1=save;
+                    }
+
+                    PandaTvBean pandaTvBean1=new PandaTvBean();
+                    pandaTvBean1.setImageView("");
+                    pandaTvBean1.setContent(title3);
+                    pandaTvBean1.setVideoTime("");
+                    pandaTvBean1.setPid(pid1);
+                    if (!vid1.equals("")){
+                        pandaTvBean1.setVid(vid1);
+                    }else {
+                        pandaTvBean1.setVid(id1);
+                    }
+                    pandaTvBean1.setType("1");
+                    pandaTvBean1.setUrl(url1);
+
+                    addcollect1.addcollect(pandaTvBean1);
+
                     Intent intent1 = new Intent(context, PlayViedoActivity.class);
+                    intent1.putExtra("isSave",isSave1);
                     intent1.putExtra("title", title3);
                     intent1.putExtra("pid", pid1);
                     context.startActivity(intent1);
@@ -255,6 +337,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
 
             wallliveBeanList = new ArrayList<>();
+
             for (int i = 0; i < 6; i++) {
                 wallliveBeanList.add(wallliveBean.getList().get(i));
             }
@@ -284,6 +367,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         public void setDate(HomeBean.DataBean.ChinaliveBean chinalive) {
 
             listBeanXXList = new ArrayList<>();
+            listBeanXXList=chinalive.getList();
             HomeChinaLiveAdapter chinaLiveAdapter = new HomeChinaLiveAdapter(context, chinalive.getList());
             homeLiveChinaGridView.setAdapter(chinaLiveAdapter);
             homeLiveChinaGridView.setOnItemClickListener(this);
@@ -293,6 +377,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             HomeBean.DataBean.ChinaliveBean.ListBeanXX listBeanXX = listBeanXXList.get(position);
             String id1 = listBeanXX.getId();
+            String vid = listBeanXX.getVid();
             String title = listBeanXX.getTitle();
         }
     }

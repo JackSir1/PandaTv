@@ -2,10 +2,11 @@ package com.example.administrator.pandatv.model.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 //精彩一刻实体类
-public class PandaLiveSplendidBean {
+public class PandaLiveSplendidBean implements Serializable {
 
 
     /**
@@ -34,7 +35,7 @@ public class PandaLiveSplendidBean {
         this.video = video;
     }
 
-    public static class VideosetBean {
+    public static class VideosetBean implements Serializable{
         /**
          * 0 : {"vsid":"VSET100167216881","name":"熊猫频道-精彩一刻",
          * "img":"http://p5.img.cctvpic.com/fmspic/vms/image/2013/06/21/VSET_1371809214479325.jpg","enname":"
@@ -64,7 +65,7 @@ public class PandaLiveSplendidBean {
             this.count = count;
         }
 
-        public static class _$0Bean {
+        public static class _$0Bean implements Serializable{
             /**
              * vsid : VSET100167216881
              * name : 熊猫频道-精彩一刻
@@ -261,7 +262,7 @@ public class PandaLiveSplendidBean {
         }
     }
 
-    public static class VideoBean {
+    public static class VideoBean implements Serializable{
         /**
          * vsid : VSET100167216881
          * order : 4424

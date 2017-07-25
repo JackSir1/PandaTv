@@ -29,8 +29,9 @@ public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.Vi
     private List<LiveBDLBean.LiveBean> mList;
     private Bundle bundle;
     private PtrClassicFrameLayout ptrFrameLayout;
-    Handler handler=new Handler();
-    int pager=0;
+    Handler handler = new Handler();
+    int pager = 0;
+
     @Override
     protected int getViweId() {
         return R.layout.bdlfragment;
@@ -39,16 +40,16 @@ public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.Vi
     @Override
     protected void initView(View view) {
         bdlframent = (RecyclerView) view.findViewById(R.id.bdlframent);
-        ptrFrameLayout= (PtrClassicFrameLayout) view.findViewById(R.id.main_ptr);
+        ptrFrameLayout = (PtrClassicFrameLayout) view.findViewById(R.id.main_ptr);
     }
 
     @Override
     protected void loadDate() {
         mList = new ArrayList<>();
-        bdlframent.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
+        bdlframent.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
 
         new BDLChinaLivePresenterTS(this);
-        if(bundle!=null) {
+        if (bundle != null) {
             String url = bundle.getString("url");
             presenter.setUrl(url);
         }
@@ -61,7 +62,7 @@ public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.Vi
             public void run() {
 //                ptrFrameLayout.autoRefresh(true);
             }
-        },2000);
+        }, 2000);
         ptrFrameLayout.setPtrHandler(new PtrDefaultHandler2() {
             @Override
             public void onLoadMoreBegin(PtrFrameLayout frame) {
@@ -128,7 +129,7 @@ public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.Vi
 
     @Override
     public void setParams(Bundle bundle) {
-        this.bundle=bundle;
+        this.bundle = bundle;
     }
 
     //presenter报空的话，是一个fragment对应一个presenter

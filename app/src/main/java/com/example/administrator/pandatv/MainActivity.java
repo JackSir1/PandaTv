@@ -142,7 +142,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         String simpleName = entry.getName();
         if (simpleName.equals("PandaObserverFragment") || simpleName.equals("PandaLiveFragment") || simpleName.equals("HomeFragment")
                 || simpleName.equals("GGVideoFragment")|| simpleName.equals("ChinaLiveFragment")) {
-            App.content.finish();
+            System.exit(0);
         } else {
             super.onBackPressed();
         }

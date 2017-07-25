@@ -1,9 +1,10 @@
 package com.example.administrator.pandatv.model.entity.livechinaEntity;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Watch {
+public class Watch implements Serializable {
     private int time;
     private String total;
     ArrayList<Bean> list = new ArrayList<>();
@@ -32,7 +33,7 @@ public class Watch {
         this.list = list;
     }
 
-    public static class Bean{
+    public static class Bean implements Serializable{
         private String pid;
         private String tid;
         private String message;

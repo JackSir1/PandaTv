@@ -1,12 +1,13 @@
 package com.example.administrator.pandatv.model.entity.livechinaEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by lizhuofang on 2017/7/13.
  */
 
-public class LivechinaTSBean {
+public class LivechinaTSBean implements Serializable {
 
     private List<LiveBean> live;
 
@@ -18,7 +19,7 @@ public class LivechinaTSBean {
         this.live = live;
     }
 
-    public static class LiveBean {
+    public static class LiveBean implements Serializable{
         /**
          * title : 天山天池灯杆山
          * brief : 天池以西三公里处是灯杆山，海拔2718米，山体长3公里许，这里是天池观落日和欣赏古冰川地貌的绝好去处。老君庙、东岳庙就建于此。由灯杆山西眺，乌鲁木齐可尽收眼底，尤其在华灯初上之际，远看乌鲁木齐万家灯火，其乐无穷。

@@ -1,9 +1,10 @@
 package com.example.administrator.pandatv.model.entity;
 
 
+import java.io.Serializable;
 import java.util.List;
 //多视角直播
-public class PandaLiveMoreBean {
+public class PandaLiveMoreBean implements Serializable {
     private List<ListBean> list;
 
     public List<ListBean> getList() {
@@ -14,7 +15,7 @@ public class PandaLiveMoreBean {
         this.list = list;
     }
 
-    public static class ListBean {
+    public static class ListBean implements Serializable{
         /**
          * url :
          * image : http://p1.img.cctvpic.com/photoAlbum/page/performance/img/2017/6/14/1497428381378_816.jpg

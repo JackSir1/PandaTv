@@ -1,9 +1,10 @@
 package com.example.administrator.pandatv.model.entity;
 
 
+import java.io.Serializable;
 import java.util.List;
 
-public class PandLiveTitleBean {
+public class PandLiveTitleBean implements Serializable {
 
     private List<TablistBean> tablist;
 
@@ -15,7 +16,7 @@ public class PandLiveTitleBean {
         this.tablist = tablist;
     }
 
-    public static class TablistBean {
+    public static class TablistBean implements Serializable{
         /**
          * title : 直播
          * url : http://www.ipanda.com/kehuduan/PAGE14501769230331752/index.json

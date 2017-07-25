@@ -23,6 +23,8 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
+import com.example.administrator.pandatv.model.util.saveData.PandaTvBean;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -43,6 +45,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -70,6 +73,7 @@ public class ACache {
 	public static ACache get(Context ctx, String cacheName) {
 		File f = new File(ctx.getCacheDir(), cacheName);
 		return get(f, MAX_SIZE, MAX_COUNT);
+
 	}
 
 	public static ACache get(File cacheDir) {
@@ -256,21 +260,6 @@ public class ACache {
 		}
 	}
 
-	// =======================================
-	// ============ JSONArray 数据 读写 =============
-	// =======================================
-	/**
-	 * 保存 JSONArray数据 到 缓存中
-	 * 
-	 * @param key
-	 *            保存的key
-	 * @param value
-	 *            保存的JSONArray数据
-	 */
-	public void put(String key, JSONArray value) {
-		put(key, value.toString());
-	}
-
 	/**
 	 * 保存 JSONArray数据 到 缓存中
 	 * 
@@ -283,23 +272,6 @@ public class ACache {
 	 */
 	public void put(String key, JSONArray value, int saveTime) {
 		put(key, value.toString(), saveTime);
-	}
-
-	/**
-	 * 读取JSONArray数据
-	 * 
-	 * @param key
-	 * @return JSONArray数据
-	 */
-	public JSONArray getAsJSONArray(String key) {
-		String JSONString = getAsString(key);
-		try {
-			JSONArray obj = new JSONArray(JSONString);
-			return obj;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
 	}
 
 	// =======================================
@@ -336,14 +308,15 @@ public class ACache {
 
 	/**
 	 * Cache for a stream
-	 * 
+	 *
 	 * @param key
 	 *            the file name.
+	 * @param map
 	 * @return OutputStream stream for writing data.
 	 * @throws FileNotFoundException
 	 *             if the file can not be created.
 	 */
-	public OutputStream put(String key) throws FileNotFoundException {
+	public OutputStream put(String key, Map<String, PandaTvBean> map) throws FileNotFoundException {
 		return new xFileOutputStream(mCache.newFile(key));
 	}
 

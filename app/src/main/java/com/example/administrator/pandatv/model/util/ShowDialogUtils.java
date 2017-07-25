@@ -18,6 +18,7 @@ import java.util.Stack;
 public class ShowDialogUtils {
     private static ShowDialogUtils showDialogUtils;
     private AlertDialog.Builder dialog;
+    private Context context;
 
     private ShowDialogUtils() {
         dialog = new AlertDialog.Builder(App.content);
@@ -55,7 +56,8 @@ public class ShowDialogUtils {
 
     private Boolean wifiConnected, mobileConnected;
 
-    private void updateConnectedFlags(Context context) {
+    public ShowDialogUtils updateConnectedFlags(Context context) {
+        this.context=context;
         ConnectivityManager connMgr =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -67,6 +69,35 @@ public class ShowDialogUtils {
             wifiConnected = false;
             mobileConnected = false;
         }
+        return this;
+    }
+    public Boolean isNetConnected(){
+        if (wifiConnected || mobileConnected){
+            if (isNetworkAvailable(context)){
+                return true;
+            }else {
+                return false;
+            }
+        }
+        return false;
+    }
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm == null) {
+        } else {
+            //如果仅仅是用来判断网络连接
+             //则可以使用 cm.getActiveNetworkInfo().isAvailable();
+            NetworkInfo[] info = cm.getAllNetworkInfo();
+            if (info != null) {
+                for (int i = 0; i < info.length; i++) {
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     private static final int MOBILETYPE = 1;
@@ -80,4 +111,5 @@ public class ShowDialogUtils {
             return MOBILETYPE;
         return NULLNET;
     }
+
 }

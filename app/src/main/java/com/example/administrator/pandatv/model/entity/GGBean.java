@@ -1,9 +1,10 @@
 package com.example.administrator.pandatv.model.entity;
 
 
+import java.io.Serializable;
 import java.util.List;
 
-public class GGBean {
+public class GGBean implements Serializable {
 
 
     /**
@@ -30,7 +31,7 @@ public class GGBean {
         this.list = list;
     }
 
-    public static class ListBean {
+    public static class ListBean implements Serializable{
         /**
          * num : 1
          * datatype : video
