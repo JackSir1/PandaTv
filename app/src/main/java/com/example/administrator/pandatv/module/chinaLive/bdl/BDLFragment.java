@@ -59,7 +59,7 @@ public class BDLFragment extends BaseFragment implements BDLChinaLiveContract.Vi
         ptrFrameLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ptrFrameLayout.autoRefresh(true);
+//                ptrFrameLayout.autoRefresh(true);
             }
         },2000);
         ptrFrameLayout.setPtrHandler(new PtrDefaultHandler2() {

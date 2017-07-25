@@ -1,10 +1,12 @@
 package com.example.administrator.pandatv.model.entity.livechinaEntity;
 
+import java.io.Serializable;
+
 /**
  * Created by lizhuofang on 2017/7/23.
  */
 
-public class UpDateLoading {
+public class UpDateLoading implements Serializable{
 
     private String status;
     private DataBean data;
@@ -25,7 +27,7 @@ public class UpDateLoading {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * versionsName : 1.5.0
          * versionsNum : 150

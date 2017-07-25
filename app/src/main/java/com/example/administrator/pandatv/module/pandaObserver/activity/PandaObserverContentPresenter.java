@@ -41,7 +41,7 @@ public class PandaObserverContentPresenter implements PandaObserverContentContra
             @Override
             public void onSuccess(PlayVideoBean playVideoBean) {
                 view.setPid(playVideoBean);
-            }
+                }
 
             @Override
             public void onError(String error) {
