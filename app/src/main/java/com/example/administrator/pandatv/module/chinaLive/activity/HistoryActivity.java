@@ -1,5 +1,6 @@
 package com.example.administrator.pandatv.module.chinaLive.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -15,6 +17,8 @@ import android.widget.TextView;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseActivity;
+import com.example.administrator.pandatv.model.util.saveData.PandaTvBean;
+import com.example.administrator.pandatv.model.util.saveData.SaveDataToSD;
 import com.example.administrator.pandatv.module.chinaLive.adapter.HistoryInfoAdapter;
 
 import java.util.ArrayList;
@@ -40,10 +44,10 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
     @BindView(R.id.livachina_linear_button)
     LinearLayout livachinaLinearButton;
     private HistoryInfoAdapter infoAdapter;
-    private List<String> mList = new ArrayList<>();
+    private List<PandaTvBean> mList = new ArrayList<>();
     private PopupWindow popupWindow;
     private TextView button,buttonone;
-
+    int number=0;
     @Override
     protected int getViewID() {
         return R.layout.livechina_history;
@@ -51,6 +55,11 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     protected void initView() {
+        SaveDataToSD.getInsent().refreshMap();
+        List<PandaTvBean> historyConllect = SaveDataToSD.getInsent().getHistoryConllect();
+        if(historyConllect!=null) {
+            mList.addAll(historyConllect);
+        }
         recycleview.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         infoAdapter = new HistoryInfoAdapter(this, mList);
         recycleview.setAdapter(infoAdapter);
@@ -62,10 +71,28 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
         infoAdapter.setOnclick(new HistoryInfoAdapter.OnClickListeren() {
             @Override
             public void getListeren(View view, int position) {
-
+                if (bianji.getText().equals("取消")) {
+                    CheckBox viewById = (CheckBox) view.findViewById(R.id.history_radiobutton);
+                    viewById.setVisibility(View.VISIBLE);
+                    if (mList.get(position).getSave() == true) {
+                        number++;
+                        livechinaDelete.setText("删除" + number);
+                    } else {
+                        number--;
+                        livechinaDelete.setText("删除" + number);
+                        mList.get(position).setSave(false);
+                    }
+                    if (number == 0) {
+                        livechinaDelete.setText("删除");
+                    }
+                }else{
+                    Intent inten = new Intent(HistoryActivity.this,VideoActivity.class);
+                    startActivity(inten);
+                }
+                infoAdapter.notifyDataSetChanged();
             }
         });
-    }
+            }
 
     @Override
     protected void setIntent() {
@@ -84,26 +111,25 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
                 if(bianji.getText().toString().equals("编辑")) {
                     bianji.setText("取消");
                     livachinaLinearButton.setVisibility(View.VISIBLE);
+
                 }else if(bianji.getText().toString().equals("取消")){
                     bianji.setText("编辑");
                     livachinaLinearButton.setVisibility(View.GONE);
+
                 }
                 break;
             case R.id.livechina_cancel:
                 if(livechinaCancel.getText().toString().equals("全选")) {
                     livechinaCancel.setText("取消全选");
-//                    if (bianji.getText().equals("取消")) {
-//                        for (int i = 0; i < his_array.size(); i++) {
-//                            his_array.get(i).setFlg_bulen(true);
-//                        }
-//                        his_ array.size();
-//                        livechinaDelete.setText("删除" + number);
-//                    }
-//                } else {
-//                    for (int i = 0; i < his_array.size(); i++) {
-//                        his_array.get(i).setFlg_bulen(false);
-//                    }
-//                    number = 0;
+                    if (bianji.getText().equals("取消")) {
+                        for (int i = 0; i < mList.size(); i++) {
+                            mList.get(i).setSave(true);
+                        }
+                        number = mList.size();
+                        livechinaDelete.setText("删除" + number);
+                    }
+                } else {
+                    number = 0;
                     livechinaDelete.setText("删除");
                     livechinaCancel.setText("全选");
                 }
@@ -135,7 +161,11 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                for (int i=0;i<mList.size();i++){
+                    mList.remove(i);
+                }
+                infoAdapter.notifyDataSetChanged();
+                popupWindow.dismiss();
             }
         });
         buttonone= (TextView) view.findViewById(R.id.delete_no);

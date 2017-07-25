@@ -45,7 +45,6 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -221,11 +220,11 @@ public class ACache {
 	// =======================================
 	/**
 	 * 保存 JSONObject数据 到 缓存中
-	 *  @param key
+	 * @param key
 	 *            保存的key
 	 * @param value
 	 */
-	public void put(String key, List<String> value) {
+	public void put(String key, JSONArray value) {
 		put(key, value.toString());
 	}
 
@@ -259,6 +258,8 @@ public class ACache {
 			return null;
 		}
 	}
+
+
 
 	/**
 	 * 保存 JSONArray数据 到 缓存中
@@ -334,6 +335,25 @@ public class ACache {
 			return null;
 		return new FileInputStream(file);
 	}
+
+
+	/**
+	 * 读取JSONArray数据
+	 *
+	 * @param key
+	 * @return JSONArray数据
+	 */
+	public JSONArray getAsJSONArray(String key) {
+		String JSONString = getAsString(key);
+		try {
+			JSONArray obj = new JSONArray(JSONString);
+			return obj;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 
 	/**
 	 * 保存 byte数据 到 缓存中

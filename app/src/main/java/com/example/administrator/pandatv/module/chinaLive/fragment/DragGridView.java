@@ -140,7 +140,7 @@ public class DragGridView extends GridView {
                 break;
             case MotionEvent.ACTION_UP://拖动时判断位置，平移；
                 if (isDraging) {
-                    isDraging = false;
+                    isDraging = true;
                     closeWindow(ev);
                 }
 
