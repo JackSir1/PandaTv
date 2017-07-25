@@ -81,7 +81,6 @@ public class PlayViedoActivity extends AppCompatActivity implements IPlayVideoCo
             public void Share(View view) {
                 play.onStatePlaying();
                  share1();
-
                 Toast.makeText(PlayViedoActivity.this, "分享", Toast.LENGTH_SHORT).show();
             }
 
