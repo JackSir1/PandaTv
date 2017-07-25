@@ -3,9 +3,8 @@ package com.example.administrator.pandatv.model.biz.homeModel;
 import com.example.administrator.pandatv.app.App;
 import com.example.administrator.pandatv.config.Url;
 import com.example.administrator.pandatv.model.entity.HomeBean;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.UpDateLoading;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
-
-import java.util.Map;
 
 /**
  * 首页工具类
@@ -21,5 +20,10 @@ public class HomeModel implements IHomeModel {
     @Override
     public void loadMore(int pageSize, int pageContent) {
 
+    }
+
+    @Override
+    public void getVerSion(MyNetCallBack<UpDateLoading> myNetCallBack) {
+        App.iHttp.get(Url.UPDATE,null,myNetCallBack);
     }
 }

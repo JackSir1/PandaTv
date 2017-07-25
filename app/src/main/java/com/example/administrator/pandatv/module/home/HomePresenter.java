@@ -1,9 +1,9 @@
 package com.example.administrator.pandatv.module.home;
 
-import com.example.administrator.pandatv.MainActivity;
 import com.example.administrator.pandatv.model.biz.homeModel.HomeModel;
 import com.example.administrator.pandatv.model.biz.homeModel.IHomeModel;
 import com.example.administrator.pandatv.model.entity.HomeBean;
+import com.example.administrator.pandatv.model.entity.livechinaEntity.UpDateLoading;
 import com.example.administrator.pandatv.net.CallBack.MyNetCallBack;
 
 /**
@@ -31,7 +31,16 @@ public class HomePresenter implements HomeContract.Presenter {
                 view.showErrorMassage(error);
             }
         });
+        iHomeModel.getVerSion(new MyNetCallBack<UpDateLoading>() {
+            @Override
+            public void onSuccess(UpDateLoading upDateLoading) {
+                view.getVersion(upDateLoading);
+            }
 
+            @Override
+            public void onError(String msg) {
+            }
+        });
     }
 
     @Override

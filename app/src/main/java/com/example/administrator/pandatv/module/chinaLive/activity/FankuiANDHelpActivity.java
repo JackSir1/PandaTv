@@ -3,6 +3,7 @@ package com.example.administrator.pandatv.module.chinaLive.activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.widget.ImageView;
 
 import com.example.administrator.pandatv.R;
 import com.example.administrator.pandatv.base.BaseActivity;
@@ -18,17 +19,20 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by lizhuofang on 2017/7/14.
  */
-public class FankuiANDHelpActivity extends BaseActivity implements BDLChinaLiveContract.View{
+public class FankuiANDHelpActivity extends BaseActivity implements BDLChinaLiveContract.View {
 
     @BindView(R.id.userfankui_tablayout)
     TabLayout tablayout;
     @BindView(R.id.userfankui_viewpager)
     ViewPager viewpager;
     MyLivechinaAdapter adapter;
+    @BindView(R.id.livechina_user_return)
+    ImageView livechinaUserReturn;
     private List<String> mListName;
     private List<BaseFragment> fragments;
 
@@ -47,7 +51,7 @@ public class FankuiANDHelpActivity extends BaseActivity implements BDLChinaLiveC
         fragments.add(new MeetquestFra());
         fragments.add(new AlwaysquestFra());
         tablayout.setTabMode(TabLayout.MODE_FIXED);
-        adapter = new MyLivechinaAdapter(getSupportFragmentManager(), mListName,fragments);
+        adapter = new MyLivechinaAdapter(getSupportFragmentManager(), mListName, fragments);
         viewpager.setAdapter(adapter);
         tablayout.setupWithViewPager(viewpager);
 
@@ -98,5 +102,10 @@ public class FankuiANDHelpActivity extends BaseActivity implements BDLChinaLiveC
     @Override
     public void setPresenter(BDLChinaLiveContract.Presenter presenter) {
 
+    }
+
+    @OnClick(R.id.livechina_user_return)
+    public void onClick() {
+        finish();
     }
 }

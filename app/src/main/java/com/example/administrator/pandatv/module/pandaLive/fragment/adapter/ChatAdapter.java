@@ -16,7 +16,6 @@ public class ChatAdapter extends BaseAdapter<Watch.Bean> {
     public ChatAdapter(Context context, List<Watch.Bean> datas) {
         super(context, R.layout.pandalive_live_chat_item, datas);
     }
-
     @Override
     public void convert(ViewHolder holder, Watch.Bean listBean) {
         holder.setText(R.id.watch_item_author,listBean.getAuthor());
