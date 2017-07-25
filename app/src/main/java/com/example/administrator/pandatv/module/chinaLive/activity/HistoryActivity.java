@@ -96,7 +96,7 @@ public class HistoryActivity extends BaseActivity implements View.OnClickListene
 //                        for (int i = 0; i < his_array.size(); i++) {
 //                            his_array.get(i).setFlg_bulen(true);
 //                        }
-//                        his_array.size();
+//                        his_ array.size();
 //                        livechinaDelete.setText("删除" + number);
 //                    }
 //                } else {
